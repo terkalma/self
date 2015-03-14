@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def name
+    "#{first_name.capitalize}, #{last_name.capitalize}"
+  end
+
   private
   def has_company_email_address
     address = Mail::Address.new email
