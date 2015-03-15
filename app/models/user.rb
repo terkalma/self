@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     "#{first_name.capitalize}, #{last_name.capitalize}"
   end
 
+  def events(date)
+    Event.at(date).joins(user_project: :user).where('users.id = ?', id)
+  end
+
   private
   def has_company_email_address
     address = Mail::Address.new email
