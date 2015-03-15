@@ -1,3 +1,9 @@
-<h2>Log in</h2>
+<div class="row">
+  <div class="sol-sm-12">
+    <div class="text-center">
+      <%= link_to image_tag('google-signin.png', alt: 'Sign In'),
+                  omniauth_authorize_path(resource_name, :google_oauth2) %>
+    </div>
+  </div>
+</div>
 
-<%= render "devise/shared/links" %>
