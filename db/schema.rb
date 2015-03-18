@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150315213301) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "events", force: :cascade do |t|
     t.text     "description"
     t.integer  "user_project_id",                        null: false
@@ -20,7 +23,7 @@ ActiveRecord::Schema.define(version: 20150315213301) do
     t.integer  "minutes",         default: 0,            null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
-    t.date     "worked_at",       default: '2015-03-15', null: false
+    t.date     "worked_at",       default: '2015-03-18', null: false
   end
 
   create_table "projects", force: :cascade do |t|
@@ -30,8 +33,8 @@ ActiveRecord::Schema.define(version: 20150315213301) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "projects", ["name"], name: "index_projects_on_name"
-  add_index "projects", ["slug"], name: "index_projects_on_slug"
+  add_index "projects", ["name"], name: "index_projects_on_name", using: :btree
+  add_index "projects", ["slug"], name: "index_projects_on_slug", using: :btree
 
   create_table "user_projects", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -40,9 +43,9 @@ ActiveRecord::Schema.define(version: 20150315213301) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "user_projects", ["project_id"], name: "index_user_projects_on_project_id"
-  add_index "user_projects", ["user_id", "project_id"], name: "index_user_projects_on_user_id_and_project_id", unique: true
-  add_index "user_projects", ["user_id"], name: "index_user_projects_on_user_id"
+  add_index "user_projects", ["project_id"], name: "index_user_projects_on_project_id", using: :btree
+  add_index "user_projects", ["user_id", "project_id"], name: "index_user_projects_on_user_id_and_project_id", unique: true, using: :btree
+  add_index "user_projects", ["user_id"], name: "index_user_projects_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",               default: "",    null: false
@@ -61,6 +64,6 @@ ActiveRecord::Schema.define(version: 20150315213301) do
     t.string   "last_name",           default: "N/A", null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
