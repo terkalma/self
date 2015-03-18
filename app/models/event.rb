@@ -1,10 +1,8 @@
 class Event < ActiveRecord::Base
-  belongs_to :user_project
-  include Aggregate
+  belongs_to :user
+  belongs_to :project
 
-  def project
-    user_project.project
-  end
+  include Aggregate
 
   def duration
     hours.hours + minutes.minutes

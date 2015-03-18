@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :user_projects
   has_many :projects, through: :user_projects
+  has_many :events
 
   devise :database_authenticatable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
@@ -11,10 +12,6 @@ class User < ActiveRecord::Base
 
   def name
     "#{first_name.capitalize}, #{last_name.capitalize}"
-  end
-
-  def events(date)
-    Event.at(date).joins(user_project: :user).where('users.id = ?', id)
   end
 
   private

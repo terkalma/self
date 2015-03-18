@@ -1,0 +1,19 @@
+<div class="modal fade" id="createEvent" tabindex="-1" role="dialog" aria-labelledby="createEventLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">What did you do?</h4>
+      </div>
+      <div class="modal-body">
+        <%= bootstrap_form_for Event.new do |f| %>
+          <%= f.text_area :description %>
+          <%= f.number_field :hours, in: 1..12, step: 1 %>
+          <%= f.number_field :minutes, in: 0..45, step: 15 %>
+          <%= f.submit "Submit" %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

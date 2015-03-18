@@ -1,4 +1,4 @@
-<div class="panel panel-primary">
+<div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title"><%= title %></h3>
   </div>
@@ -7,6 +7,8 @@
     <% @events.each do |event| %>
       <%= render partial: 'welcome/partials/event', locals: { event: event } %>
     <% end %>
+
+    <%= render partial: 'welcome/partials/new_event' %>
   </div>
 
   <div class="panel-footer">
