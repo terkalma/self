@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   def has_company_email_address
     address = Mail::Address.new email
     unless address.domain == "#{Figaro.env.email_domain}.com"
-      errors.add(:email, "You're not welcomed here with a #{address.domain} email domain.")
+      errors.add(:email, "You're not welcome here with a #{address.domain} email domain.")
     end
   end
 end
