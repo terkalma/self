@@ -4,14 +4,14 @@ class EventsController < ApplicationController
     begin
       Event.create permitted_params.merge user_id: current_user.id
       flash[:notice] = 'Event created successfully!'
-    rescue => e
-      flash[:alert] = "Something went wrong... (#{e.message})"
+    rescue
+      flash[:alert] = 'Something went wrong...'
     end
 
-    redirect_to root_path
+    redirect_to root_path(date: permitted_params[:worked_at])
   end
 
   def permitted_params
-    params.require(:event).permit(:hours, :minutes, :description, :project_id)
+    params.require(:event).permit(:hours, :minutes, :description, :project_id, :worked_at)
   end
 end

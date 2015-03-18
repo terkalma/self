@@ -2,7 +2,6 @@ class WelcomeController < ApplicationController
   before_filter :set_date
 
   def index
-    @events = current_user.events.at @date
   end
 
   private
