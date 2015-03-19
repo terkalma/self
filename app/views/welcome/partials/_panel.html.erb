@@ -4,14 +4,14 @@
   </div>
 
   <div class="panel-body">
-    <% @events.each do |event| %>
+    <% events_at(date).each do |event| %>
       <%= render partial: 'welcome/partials/event', locals: { event: event } %>
     <% end %>
 
-    <%= render partial: 'welcome/partials/new_event' %>
+    <%= render partial: 'welcome/partials/new_event', locals: { date: date } %>
   </div>
 
   <div class="panel-footer">
-    Total: <%= hours_worked %>
+    Total: <%= hours_worked date %>
   </div>
 </div>
