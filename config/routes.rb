@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  resources :events, only: [:create]
+  resources :events, only: [:create, :update]
 end

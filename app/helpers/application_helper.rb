@@ -1,10 +1,10 @@
 module ApplicationHelper
   def alert_class
-    alert ? 'bg-danger' : ''
+    alert ? 'bg-danger' : 'hide'
   end
 
   def notice_class
-    notice ? 'bg-success' : ''
+    notice ? 'bg-success' : 'hide'
   end
 
   def app_title
