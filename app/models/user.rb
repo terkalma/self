@@ -9,12 +9,20 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   validate :has_company_email_address
+  before_save :set_admin_flag
 
   def name
     "#{first_name.capitalize}, #{last_name.capitalize}"
   end
 
   private
+  def set_admin_flag
+    admins = Figaro.env.admins.split(',').map &:strip
+    address = Mail::Address.new email
+
+    self.admin = admins.include? address.local
+  end
+
   def has_company_email_address
     address = Mail::Address.new email
     unless address.domain == "#{Figaro.env.email_domain}.com"

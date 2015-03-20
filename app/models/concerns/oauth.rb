@@ -15,4 +15,9 @@ module Oauth
       end
     end
   end
+
+  def admins
+    list = Figaro.env.admins.split /,/
+    list.map(&:strip)
+  end
 end
