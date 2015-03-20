@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :events, only: [:create, :update]
+
+  namespace :admin do
+    get '/' => 'dashboard#index', as: :dashboard
+  end
 end
