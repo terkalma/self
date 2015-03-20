@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
     address = Mail::Address.new email
 
     self.admin = admins.include? address.local
+
+    self
   end
 
   def has_company_email_address
