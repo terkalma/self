@@ -36,7 +36,7 @@ class Admin::ProjectsController < ApplicationController
     begin
       project = Project.find_by_slug params[:slug]
       UserProject.where(project_id: project.id, user_id: params[:user_id]).delete_all
-      
+
       flash[:notice] = 'Person successfully removed'
     rescue
       flash[:alert] = 'Unable to remove the person from the project'

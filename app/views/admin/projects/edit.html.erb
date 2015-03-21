@@ -3,11 +3,11 @@
     <div class="panel panel-default">
       <div class="panel-heading"><%= @project.name.capitalize %></div>
 
-      <div class="panel-body">
+      <table class="table">
         <% @project.users.each do |user| %>
           <%= render partial: 'user_info', locals: { user: user } %>
         <% end %>
-      </div>
+      </table>
 
       <div class="panel-footer">
         <div style="text-align: center;">

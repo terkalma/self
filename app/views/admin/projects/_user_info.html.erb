@@ -1,11 +1,11 @@
-<div class="row" style="margin-bottom: 5px;">
-  <div class="col-xs-4">
+<tr>
+  <td class="col-xs-4" style="vertical-align: middle;">
     <h4 class="list-group-item-heading"><%= user.name %></h4>
-  </div>
+  </td>
 
-  <div class="col-xs-4 col-xs-offset-4" style="text-align: right;">
+  <td style="text-align: right;">
     <%= link_to remove_user_admin_projects_path(user_id: user.id, slug: @project.slug), remove_user_options do %>
       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
     <% end %>
-  </div>
-</div>
+  </td>
+<tr>
