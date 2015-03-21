@@ -1,4 +1,4 @@
-<%= bootstrap_form_for @project,  url: { action: :update } do |f| %>
+<%= bootstrap_form_for @project,  url: { action: :add_user } do |f| %>
   <%= f.hidden_field :slug %>
   <%= f.collection_select :user_ids, @users_to_add, :id, :name %>
   <%= f.submit 'Submit' %>

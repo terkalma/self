@@ -17,19 +17,36 @@ class Admin::ProjectsController < ApplicationController
   end
 
   def update
+
+  end
+
+  def add_user
     begin
-      project = Project.find_by_slug permitted_params[:slug]
-      project.user_ids += [permitted_params[:user_ids]]
+      project = Project.find_by_slug add_user_params[:slug]
+      project.user_ids += [add_user_params[:user_ids]]
       flash[:notice] = 'Person successfully added'
     rescue
       flash[:alert] = 'Unable to add the person to the project'
     end
 
-    redirect_to action: :edit, id: permitted_params[:slug]
+    redirect_to action: :edit, id: add_user_params[:slug]
+  end
+
+  def remove_user
+    begin
+      project = Project.find_by_slug params[:slug]
+      UserProject.where(project_id: project.id, user_id: params[:user_id]).delete_all
+      
+      flash[:notice] = 'Person successfully removed'
+    rescue
+      flash[:alert] = 'Unable to remove the person from the project'
+    end
+
+    redirect_to action: :edit, id: params[:slug]
   end
 
   private
-  def permitted_params
+  def add_user_params
     params.require(:project).permit(:slug, :user_ids)
   end
 end
