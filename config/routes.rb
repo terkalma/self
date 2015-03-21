@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'dashboard#index', as: :dashboard
 
-    resources :projects, except: [:show] do
+    resources :projects, except: [:show, :new, :update] do
       collection do
         patch :add_user
         patch :remove_user

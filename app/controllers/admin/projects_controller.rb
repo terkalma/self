@@ -1,23 +1,25 @@
 class Admin::ProjectsController < ApplicationController
+
   def index
     @projects = Project.all
   end
 
-  def new
-    @project = Project.new
-  end
-
   def create
+    begin
+      project = Project.create(create_project_params)
+      flash[:notice] = 'Project created successfully'
 
+      redirect_to action: :edit, id: project.slug
+    rescue
+      flash[:alert] = 'Unable to create project'
+
+      redirect_to action: index
+    end
   end
 
   def edit
     @project = Project.find_by_slug params[:id]
     @users_to_add = User.where.not(id: @project.users.pluck(:id))
-  end
-
-  def update
-
   end
 
   def add_user
@@ -36,7 +38,6 @@ class Admin::ProjectsController < ApplicationController
     begin
       project = Project.find_by_slug params[:slug]
       UserProject.where(project_id: project.id, user_id: params[:user_id]).delete_all
-
       flash[:notice] = 'Person successfully removed'
     rescue
       flash[:alert] = 'Unable to remove the person from the project'
@@ -48,5 +49,9 @@ class Admin::ProjectsController < ApplicationController
   private
   def add_user_params
     params.require(:project).permit(:slug, :user_ids)
+  end
+
+  def create_project_params
+    params.require(:project).permit(:name)
   end
 end
