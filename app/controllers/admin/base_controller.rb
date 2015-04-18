@@ -1,14 +1,16 @@
-class Admin::BaseController < ApplicationController
-  before_filter :authenticate_admin
+module Admin
+  class BaseController < ApplicationController
+    before_filter :authenticate_admin
 
-  def authenticate_admin
-    unless current_user.admin?
-      redirect_to root_path
+    def authenticate_admin
+      unless current_user.admin?
+        redirect_to root_path
+      end
     end
-  end
 
-  def current_admin
-    current_user
+    def current_admin
+      current_user
+    end
+    helper_method :current_admin
   end
-  helper_method :current_admin
 end

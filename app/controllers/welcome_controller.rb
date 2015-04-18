@@ -6,10 +6,6 @@ class WelcomeController < ApplicationController
 
   private
   def set_date
-    begin
-      @date = Date.strptime params[:date]
-    rescue
-      @date = Date.today
-    end
+    @date = Date.strptime(params[:date]) rescue Date.today
   end
 end

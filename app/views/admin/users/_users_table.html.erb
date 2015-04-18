@@ -1,0 +1,19 @@
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>User</th>
+    <th>Email</th>
+    <th>Joined Us</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.name, edit_admin_user_path(user) %></td>
+      <td><%= user.email %></td>
+      <td><%= user.created_at %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

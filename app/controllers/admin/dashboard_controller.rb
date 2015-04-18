@@ -1,4 +1,6 @@
-class Admin::DashboardController < Admin::BaseController
-  def index
+module Admin
+  class DashboardController < BaseController
+    def index
+    end
   end
 end

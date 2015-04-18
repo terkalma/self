@@ -14,5 +14,7 @@ Rails.application.routes.draw do
         patch :remove_user
       end
     end
+
+    resources :users, except: [:new, :create]
   end
 end
