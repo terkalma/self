@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+  <div class="panel-heading"><%= @user.name %></div>
+
+  <% if @user.projects.any? %>
+    <div class="distancer">
+      <div class="panel panel-default">
+
+        <div class="panel-heading">Projects</div>
+
+        <% @user.projects.each do |project| %>
+          <li class="list-group-item"><%= project.name %></li>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
