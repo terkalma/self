@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   belongs_to :user
-  belongs_to :project, dependent: :nullify
+  belongs_to :project
 
   include Aggregate
 
