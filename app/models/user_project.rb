@@ -5,6 +5,5 @@ class UserProject < ActiveRecord::Base
   validates_presence_of :user_id, :project_id
 
   include Payable
-
-  accepts_nested_attributes_for :rates
+  accepts_nested_attributes_for :rates, reject_if: :all_blank
 end

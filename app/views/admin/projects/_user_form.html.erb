@@ -1,12 +1,20 @@
 <%= bootstrap_form_for user_project, url: { action: :add_user }, remote: true do |f| %>
   <%= f.hidden_field :project_id %>
   <%= f.collection_select :user_id, users, :id, :name %>
-  <%= f.fields_for :rates, user_project_rates do |rate| %>
-    <%= rate.number_field :hourly_rate %>
-    <%= rate.number_field :hourly_rate_ot %>
-    <%= rate.text_field :available_from, class: 'datepicker' %>
-    <%= rate.text_field :available_until, class: 'datepicker' %>
-  <% end %>
+
+  <div class="form-group">
+    <%= check_box_tag :userRateToggle %>
+    <%= label_tag :userRateToggle, 'Differ rate to User default' %>
+  </div>
+
+  <div id="userRate">
+    <%= f.fields_for :rates, user_project_rates do |rate| %>
+      <%= rate.number_field :hourly_rate %>
+      <%= rate.number_field :hourly_rate_ot %>
+      <%= rate.text_field :available_from, class: 'datepicker' %>
+      <%= rate.text_field :available_until, class: 'datepicker' %>
+    <% end %>
+  </div>
 
   <%= f.submit 'Submit' %>
 <% end %>
