@@ -1,6 +1,9 @@
 module Admin
   class ProjectsController < BaseController
 
+    add_breadcrumb 'Admin', :admin_dashboard_path
+    add_breadcrumb 'Projects', :admin_projects_path
+
     def index
       @projects = Project.all
     end
@@ -21,6 +24,8 @@ module Admin
     def edit
       @project = Project.find_by_slug params[:id]
       @users_to_add = User.where.not(id: @project.users.pluck(:id))
+
+      add_breadcrumb "Editing Project: #{@project.name}", edit_admin_project_path(@project)
     end
 
     def add_user

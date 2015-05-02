@@ -37,6 +37,8 @@ gem 'bootstrap_form'
 
 gem 'friendly_id', '~> 5.1.0'
 
+gem 'breadcrumbs_on_rails'
+
 gem 'puma'
 
 # Use ActiveModel has_secure_password

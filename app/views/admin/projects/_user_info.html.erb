@@ -1,6 +1,6 @@
 <tr>
   <td class="col-xs-4" style="vertical-align: middle;">
-    <h4 class="list-group-item-heading"><%= user.name %></h4>
+    <h4 class="list-group-item-heading"><%= link_to user.name, edit_admin_user_path(user.id) %></h4>
   </td>
 
   <td style="text-align: right;">
