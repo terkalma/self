@@ -1,0 +1,6 @@
+<% if @success %>
+  window.location = window.location;
+<% else %>
+  $('#addUser .modal-body')
+          .html('<%= escape_javascript render(partial: 'user_form', locals: user_form_params) %>');
+<% end %>

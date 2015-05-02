@@ -1,13 +1,13 @@
 FactoryGirl.define do
 
   trait :active do
-    available_from { 1.day.ago }
-    available_until { 1.day.from_now }
+    available_from { 10.day.ago.to_date }
+    available_until { 10.day.from_now.to_date }
   end
 
   trait :expired do
-    available_from { 2.days.ago }
-    available_until { 1.day.ago }
+    available_from { 20.days.ago.to_date }
+    available_until { 10.day.ago.to_date }
   end
 
   factory :rate do

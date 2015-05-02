@@ -31,7 +31,7 @@ RSpec.describe Rate, type: :model do
   it 'should expire old rates, once a new one is added' do
     rate = FactoryGirl.create :active_rate_for_user
 
-    FactoryGirl.create :rate, available_from: 1.hour.ago, payable: rate.payable
+    FactoryGirl.create :rate, available_from: 1.day.ago.to_date, payable: rate.payable
 
     expect(rate.reload.available_until.past?).to be_truthy
   end
@@ -39,11 +39,20 @@ RSpec.describe Rate, type: :model do
   it 'should not allow the creation of a rate with earlier available_from than the latest on' do
     rate = FactoryGirl.create :active_rate_for_user
 
-    expect(FactoryGirl.build :rate, available_from: 3.days.ago, payable: rate.payable).not_to be_valid
+    expect(FactoryGirl.build :rate, available_from: 15.days.ago.to_date, payable: rate.payable).not_to be_valid
   end
 
   it 'should validate presence of rates' do
     should validate_presence_of(:hourly_rate)
     should validate_presence_of(:hourly_rate_ot)
+  end
+
+  it 'should validate presence of available_from' do
+    should validate_presence_of(:available_from)
+  end
+
+  it 'should be inclusive when checking for active' do
+    rate = FactoryGirl.create :active_rate_for_user, available_from: Date.today
+    expect(rate.payable.payable?).to be_truthy
   end
 end

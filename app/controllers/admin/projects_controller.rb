@@ -23,27 +23,30 @@ module Admin
 
     def edit
       @project = Project.find_by_slug params[:id]
-      @users_to_add = User.where.not(id: @project.users.pluck(:id))
-
       add_breadcrumb "Editing Project: #{@project.name}", edit_admin_project_path(@project)
     end
 
     def add_user
-      begin
-        project = Project.find_by_slug add_user_params[:slug]
-        project.user_ids += [add_user_params[:users]]
-        flash[:notice] = 'Person successfully added'
-      rescue
-        flash[:alert] = 'Unable to add the person to the project'
-      end
+      @user_project = UserProject.new add_user_params
+      @success = @user_project.save
 
-      redirect_to action: :edit, id: add_user_params[:slug]
+      respond_to do |format|
+        format.js
+        format.html do
+          if @success
+            flash[:notice] = 'Person successfully added'
+          else
+            flash[:alert] = 'Unable to add person to the project'
+          end
+          redirect_to edit_admin_project_path(@user_project.project)
+        end
+      end
     end
 
     def remove_user
       begin
         project = Project.find_by_slug params[:slug]
-        UserProject.where(project_id: project.id, user_id: params[:user_id]).delete_all
+        UserProject.where(project_id: project.id, user_id: params[:user_id]).destroy_all
         flash[:notice] = 'Person successfully removed'
       rescue
         flash[:alert] = 'Unable to remove the person from the project'
@@ -54,7 +57,8 @@ module Admin
 
     private
     def add_user_params
-      params.require(:project).permit(:slug, :users)
+      rates_attributes = [:hourly_rate, :hourly_rate_ot, :available_from, :available_until]
+      params.require(:user_project).permit(:user_id, :project_id, rates_attributes: rates_attributes)
     end
 
     def create_project_params

@@ -4,15 +4,22 @@ module Payable
   extend ActiveSupport::Concern
 
   included do
-    has_many :rates, as: :payable
+    has_many :rates, as: :payable, dependent: :destroy
   end
 
   def current_rate
-    rates.active.first
+    case self
+    when UserProject
+      rates.active.first || user.current_rate
+    when User
+      rates.active.first
+    else
+      raise NotImplementedError
+    end
   end
 
   #
-  # @param time [Time] time when the we're curios about the rate
+  # @param time [Date] time when the we're curios about the rate
   #
   def rate_at(time)
     rates.active_at(time).first

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
     resources :projects, except: [:show, :new, :update] do
       collection do
-        patch :add_user
+        post :add_user
         patch :remove_user
       end
     end

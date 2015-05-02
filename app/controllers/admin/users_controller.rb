@@ -10,6 +10,11 @@ module Admin
 
     def edit
       @user = User.find params[:id]
+
+      unless @user.payable?
+        flash.now[:alert] = "#{@user.name} does not have a base rate. Please add one."
+      end
+
       add_breadcrumb "Editing User: #{@user.name}", edit_admin_user_path(@user.id)
     end
   end

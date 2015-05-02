@@ -3,11 +3,9 @@
     <div class="panel panel-default">
       <div class="panel-heading"><%= @project.name.capitalize %></div>
 
-      <table class="table">
-        <% @project.users.each do |user| %>
-          <%= render partial: 'user_info', locals: { user: user } %>
-        <% end %>
-      </table>
+      <% @project.user_projects.includes(:user).each do |user_project| %>
+        <%= render partial: 'user_info', locals: { user: user_project.user, user_project: user_project } %>
+      <% end %>
 
       <div class="panel-footer">
         <div style="text-align: center;">

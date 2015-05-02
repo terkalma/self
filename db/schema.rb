@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150501123127) do
+ActiveRecord::Schema.define(version: 20150502173927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20150501123127) do
     t.decimal  "hourly_rate_ot",  precision: 10, scale: 2
     t.integer  "payable_id"
     t.string   "payable_type"
-    t.datetime "available_from"
-    t.datetime "available_until"
+    t.date     "available_from"
+    t.date     "available_until"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

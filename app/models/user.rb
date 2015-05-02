@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  has_many :user_projects
+  has_many :user_projects, dependent: :destroy
   has_many :projects, through: :user_projects
-  has_many :events
+  has_many :events, dependent: :destroy
 
   include Oauth
   include Payable

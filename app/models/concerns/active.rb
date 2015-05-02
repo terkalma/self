@@ -5,8 +5,8 @@ module Active
 
   included do
     scope :active_at, ->(t) do
-      where('available_from < ?', t).where('available_until IS NULL OR available_until > ?', t).order :available_from
+      where('available_from <= ?', t).where('available_until IS NULL OR available_until > ?', t).order :available_from
     end
-    scope :active, -> { active_at Time.now }
+    scope :active, -> { active_at Date.today }
   end
 end

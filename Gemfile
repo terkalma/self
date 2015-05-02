@@ -33,13 +33,15 @@ gem 'therubyracer'
 # bootstrap
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'bootstrap_form'
-
+gem 'bootstrap-datepicker-rails'
 
 gem 'friendly_id', '~> 5.1.0'
 
 gem 'breadcrumbs_on_rails'
 
 gem 'puma'
+
+gem 'hashie'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
