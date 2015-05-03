@@ -15,7 +15,7 @@
 <% content_for :custom_modal_id, 'goToProjects' %>
 <% content_for :panel_title, "Projects for: #{@user.name}" %>
 
-<%= render file: 'admin/base/panel' %>
+<%= render file: 'application/panel' %>
 
 <% content_for :list_items, nil, flush: true do %>
   <!-- Making sure block is not empty -->
@@ -28,8 +28,8 @@
 <% content_for :custom_modal_id, 'addRate', flush: true %>
 
 <% content_for :custom_modal, nil, flush: true do %>
-  <%= render partial: 'admin/base/modal', locals: { resource_name: 'Rate', resource_id: 'Rate', body: 'rate_form' } %>
+  <%= render partial: 'application/modal', locals: { resource_name: 'Rate', resource_id: 'Rate', body: 'rate_form' } %>
 <% end %>
 
 
-<%= render file: 'admin/base/panel' %>
+<%= render file: 'application/panel' %>

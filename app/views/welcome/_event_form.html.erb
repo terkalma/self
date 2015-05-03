@@ -1,0 +1,12 @@
+<%= bootstrap_form_for event, namespace: event.persisted? ? "edit_event_#{event.id}" : 'new_event' do |f| %>
+  <%= f.hidden_field :worked_at, value: @date %>
+  <%= f.hidden_field :user_id %>
+  <%= f.text_area :description %>
+  <%= f.number_field :hours, in: 1..12, step: 1, prepend: '+' %>
+  <%= f.number_field :minutes, in: 0..45, step: 15, prepend: '+' %>
+  <%= f.collection_select :project_id, current_user.projects, :id, :name %>
+  <%= f.form_group :ot do %>
+    <%= f.check_box :ot, label: 'Overtime' %>
+  <% end %>
+  <%= f.submit 'Submit' %>
+<% end %>

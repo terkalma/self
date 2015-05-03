@@ -8,8 +8,8 @@
 <% content_for :custom_modal_id, 'addUser' %>
 
 <% content_for :custom_modal do %>
-  <%= render partial: 'admin/base/modal',
+  <%= render partial: 'application/modal',
              locals: { resource_name: 'User', resource_id: 'User', body: 'user_form', form_params: user_form_params } %>
 <% end %>
 
-<%= render file: 'admin/base/panel' %>
+<%= render file: 'application/panel' %>

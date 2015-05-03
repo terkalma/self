@@ -12,11 +12,9 @@ module Admin
       begin
         project = Project.create(create_project_params)
         flash[:notice] = 'Project created successfully'
-
         redirect_to action: :edit, id: project.slug
       rescue
         flash[:alert] = 'Unable to create project'
-
         redirect_to action: index
       end
     end

@@ -1,8 +1,8 @@
 <%= bootstrap_form_for rate_resource, url: { action: :add_rate }, remote: true do |f| %>
   <%= f.hidden_field :payable_id %>
   <%= f.hidden_field :payable_type %>
-  <%= f.number_field :hourly_rate %>
-  <%= f.number_field :hourly_rate_ot %>
+  <%= f.number_field :hourly_rate, step: :any %>
+  <%= f.number_field :hourly_rate_ot, step: :any %>
   <%= f.text_field :available_from, class: 'datepicker' %>
   <%= f.text_field :available_until, class: 'datepicker' %>
 

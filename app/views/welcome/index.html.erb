@@ -1,6 +1,22 @@
+<% content_for :list_items do %>
+  <!-- Making sure this is not empty -->
+  <% events_at(@date).each do |event| %>
+    <%= render partial: 'event_info', locals: { event: event } %>
+  <% end %>
+<% end %>
 
-<div class="row">
-  <div class="col-md-4 col-md-offset-4 col-sm-offset-3 col-sm-6">
-    <%= render partial: 'welcome/partials/panel', locals: { date: @date } %>
-  </div>
-</div>
+<% content_for :panel_title, "#{title}. Total: #{hours_worked @date}" %>
+
+<% content_for :custom_modal_id, 'addEvent' %>
+
+<% content_for :custom_modal do %>
+  <%= render partial: 'application/modal',
+             locals: {
+                     resource_name: 'Event',
+                     resource_id: 'Event',
+                     body: 'event_form',
+                     form_params: { event: current_user.events.new }
+             } %>
+<% end %>
+
+<%= render file: 'application/panel' %>

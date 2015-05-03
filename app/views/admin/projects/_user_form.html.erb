@@ -9,8 +9,8 @@
 
   <div id="userRate">
     <%= f.fields_for :rates, user_project_rates do |rate| %>
-      <%= rate.number_field :hourly_rate %>
-      <%= rate.number_field :hourly_rate_ot %>
+      <%= rate.number_field :hourly_rate, step: :any %>
+      <%= rate.number_field :hourly_rate_ot, step: :any %>
       <%= rate.text_field :available_from, class: 'datepicker' %>
       <%= rate.text_field :available_until, class: 'datepicker' %>
     <% end %>

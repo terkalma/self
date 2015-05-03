@@ -1,0 +1,13 @@
+<a href="#" class="list-group-item" data-toggle="modal" data-target="#addEvent<%= event.id %>">
+  <h4 class="list-group-item-heading"><%= project_name(event) %></h4>
+  <p class="list-group-item-text"><%= event.description %></p>
+  <p class="list-group-item-text"><%= event_duration(event) %></p>
+</a>
+
+<%= render partial: 'application/modal',
+           locals: {
+                   resource_name: "Event#{event.id}",
+                   resource_id: "Event#{event.id}",
+                   body: 'event_form',
+                   form_params: { event: event }
+           } %>
