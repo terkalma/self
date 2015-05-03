@@ -1,21 +1,15 @@
-<div class="row">
-  <div class="col-md-offset-3 col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading"><%= @project.name.capitalize %></div>
+<% content_for :list_items do %>
+  <% @project.user_projects.includes(:user).each do |user_project| %>
+    <%= render partial: 'user_info', locals: { user: user_project.user, user_project: user_project } %>
+  <% end %>
+<% end %>
 
-      <% @project.user_projects.includes(:user).each do |user_project| %>
-        <%= render partial: 'user_info', locals: { user: user_project.user, user_project: user_project } %>
-      <% end %>
+<% content_for :panel_title, resource_name %>
+<% content_for :custom_modal_id, 'addUser' %>
 
-      <div class="panel-footer">
-        <div style="text-align: center;">
-          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addUser">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-          </button>
-        </div>
-      </div>
+<% content_for :custom_modal do %>
+  <%= render partial: 'admin/base/modal',
+             locals: { resource_name: 'User', resource_id: 'User', body: 'user_form', form_params: user_form_params } %>
+<% end %>
 
-      <%= render partial: 'add_user' %>
-    </div>
-  </div>
-</div>
+<%= render file: 'admin/base/panel' %>

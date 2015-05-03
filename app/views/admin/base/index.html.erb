@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= collection_title  %></div>
+      <%= render partial: 'table' %>
+      <div class="panel-footer">
+        <div style="text-align: center;">
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add<%= resource_title.to_cc %>">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: 'modal',
+           locals: { resource_name: resource_title, resource_id: resource_title.to_cc, body: 'resource_form' } %>
