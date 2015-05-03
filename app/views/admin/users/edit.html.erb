@@ -25,7 +25,7 @@
 <% end %>
 
 <% content_for :panel_title, "Rates for: #{@user.name}", flush: true %>
-<% content_for :custom_modal_id, 'addRate' %>
+<% content_for :custom_modal_id, 'addRate', flush: true %>
 
 <% content_for :custom_modal, nil, flush: true do %>
   <%= render partial: 'admin/base/modal', locals: { resource_name: 'Rate', resource_id: 'Rate', body: 'rate_form' } %>
