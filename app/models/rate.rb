@@ -1,9 +1,9 @@
 class Rate < ActiveRecord::Base
   include Active
 
-  belongs_to :payable, polymorphic: true
+  belongs_to :payable, polymorphic: true, inverse_of: :rates
 
-  validates_presence_of :hourly_rate, :hourly_rate_ot, :available_from, :payable_type, :payable_id
+  validates_presence_of :hourly_rate, :hourly_rate_ot, :available_from, :payable
   validates_numericality_of :hourly_rate, greater_than: 0
   validates_numericality_of :hourly_rate_ot, greater_than_or_equal_to: :hourly_rate
   validate :ensure_latest_available_from, :ensure_available_until_after_available_from
@@ -32,7 +32,7 @@ class Rate < ActiveRecord::Base
 
     rate = Rate.where(payable: payable).where('available_from > ?', available_from).order(:available_from).first
 
-    self.available_until = rate.available_from if rate
+    self.available_until = rate.available_from if rate.present?
 
     true
   end

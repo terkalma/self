@@ -4,7 +4,7 @@ module Payable
   extend ActiveSupport::Concern
 
   included do
-    has_many :rates, as: :payable, dependent: :destroy
+    has_many :rates, as: :payable, dependent: :destroy, inverse_of: :payable
   end
 
   def current_rate

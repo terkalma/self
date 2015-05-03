@@ -57,7 +57,7 @@ module Admin
 
     private
     def add_user_params
-      rates_attributes = [:hourly_rate, :hourly_rate_ot, :available_from, :available_until]
+      rates_attributes = [ :hourly_rate, :hourly_rate_ot, :available_from, :available_until ]
       params.require(:user_project).permit(:user_id, :project_id, rates_attributes: rates_attributes)
     end
 
