@@ -3,7 +3,7 @@ class Rate < ActiveRecord::Base
 
   belongs_to :payable, polymorphic: true
 
-  validates_presence_of :hourly_rate, :hourly_rate_ot, :available_from
+  validates_presence_of :hourly_rate, :hourly_rate_ot, :available_from, :payable_type, :payable_id
   validates_numericality_of :hourly_rate, greater_than: 0
   validates_numericality_of :hourly_rate_ot, greater_than_or_equal_to: :hourly_rate
   validate :ensure_latest_available_from, :ensure_available_until_after_available_from
@@ -27,7 +27,13 @@ class Rate < ActiveRecord::Base
 
   def update_available_until
     Rate.where(payable: payable)
-        .where('available_until IS NULL OR available_until > ?', available_from)
+        .where('available_from < ? AND (available_until IS NULL OR available_until > ?)',available_from, available_from)
         .update_all available_until: available_from
+
+    rate = Rate.where(payable: payable).where('available_from > ?', available_from).order(:available_from).first
+
+    self.available_until = rate.available_from if rate
+
+    true
   end
 end

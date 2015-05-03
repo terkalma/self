@@ -15,6 +15,10 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :users, except: [:new, :create]
+    resources :users, except: [:new, :create] do
+      collection do
+        post :add_rate
+      end
+    end
   end
 end

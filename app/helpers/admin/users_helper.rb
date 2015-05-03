@@ -1,5 +1,6 @@
 module Admin::UsersHelper
-  def resource_name
-    @user.name rescue 'John Doe'
+
+  def rate_resource
+    @rate ||= @user.rates.new
   end
 end

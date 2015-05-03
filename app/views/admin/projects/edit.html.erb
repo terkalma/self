@@ -4,7 +4,7 @@
   <% end %>
 <% end %>
 
-<% content_for :panel_title, resource_name %>
+<% content_for :panel_title, @project.name.capitalize %>
 <% content_for :custom_modal_id, 'addUser' %>
 
 <% content_for :custom_modal do %>

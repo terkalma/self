@@ -9,10 +9,6 @@ module Admin::ProjectsHelper
     }
   end
 
-  def resource_name
-    @project.title.capitalize rescue 'Project'
-  end
-
   def users_to_add(project=nil)
     project ||= (@project || @user_project.project)
     User.where.not(id: project.users.pluck(:id))
