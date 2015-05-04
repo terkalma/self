@@ -16,9 +16,7 @@ module Aggregate
   end
 
   def compute_amount
-    rate = current_rate
     hourly_rate = ot? ? rate.hourly_rate_ot : rate.hourly_rate rescue 0
-
     hourly_rate * duration_in_hours
   end
 

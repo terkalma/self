@@ -14,12 +14,8 @@ class Event < ActiveRecord::Base
     @user_project ||= UserProject.find_by_user_id_and_project_id user_id, project_id
   end
 
-  def current_rate
-    if user_project.present? && user_project.payable?
-      user_project.current_rate
-    elsif user.payable?
-      user.current_rate
-    end
+  def rate
+    user_project.rate_at(worked_at) || user.rate_at(worked_at) rescue user.rate_at(worked_at)
   end
 
   private
