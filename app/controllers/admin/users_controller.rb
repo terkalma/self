@@ -1,6 +1,9 @@
 module Admin
   class UsersController < BaseController
 
+    respond_to :html
+    respond_to :js, only: [ :add_rate ]
+
     add_breadcrumb 'Admin', :admin_dashboard_path
     add_breadcrumb 'Users', :admin_users_path
 
@@ -21,18 +24,7 @@ module Admin
     def add_rate
       @rate = Rate.new add_rate_params
       @success = @rate.save
-
-      respond_to do |format|
-        format.js
-        format.html do
-          if @success
-            flash[:notice] = 'Rate successfully added'
-          else
-            flash[:alert] = 'Unable to add rate to the person'
-          end
-          redirect_to edit_admin_user_path(@rate.user)
-        end
-      end
+      respond_with @rate, location: edit_admin_user_path(add_rate_params[:payable_id])
     end
 
     private

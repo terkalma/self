@@ -1,5 +1,7 @@
 module Admin
   class ProjectsController < BaseController
+    respond_to :html
+    respond_to :js, only: [ :add_user ]
 
     add_breadcrumb 'Admin', :admin_dashboard_path
     add_breadcrumb 'Projects', :admin_projects_path
@@ -27,18 +29,7 @@ module Admin
     def add_user
       @user_project = UserProject.new add_user_params
       @success = @user_project.save
-
-      respond_to do |format|
-        format.js
-        format.html do
-          if @success
-            flash[:notice] = 'Person successfully added'
-          else
-            flash[:alert] = 'Unable to add person to the project'
-          end
-          redirect_to edit_admin_project_path(@user_project.project)
-        end
-      end
+      respond_with @user_project, location: -> { edit_admin_user_path @user_project.project }
     end
 
     def remove_user

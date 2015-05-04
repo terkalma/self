@@ -35,8 +35,9 @@ gem 'bootstrap-sass', '~> 3.3.3'
 gem 'bootstrap_form'
 gem 'bootstrap-datepicker-rails'
 
-gem 'friendly_id', '~> 5.1.0'
 
+gem 'friendly_id', '~> 5.1.0'
+gem 'responders'
 gem 'breadcrumbs_on_rails'
 
 gem 'puma'

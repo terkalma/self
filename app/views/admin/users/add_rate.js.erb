@@ -1,6 +1,5 @@
 <% if @success %>
   window.location = window.location;
 <% else %>
-$('#addRate .modal-body')
-        .html('<%= escape_javascript render(partial: 'rate_form') %>');
+  $('#addRate .modal-body').html('<%= escape_javascript render(partial: 'rate_form') %>');
 <% end %>
