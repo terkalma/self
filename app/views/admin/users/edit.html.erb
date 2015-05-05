@@ -19,7 +19,7 @@
 
 <% content_for :list_items, nil, flush: true do %>
   <!-- Making sure block is not empty -->
-  <% @user.rates.each do |rate| %>
+  <% @user.rates.order(:available_from).each do |rate| %>
     <%= render partial: 'rate_info', locals: { rate: rate } %>
   <% end %>
 <% end %>
