@@ -44,20 +44,12 @@ gem 'puma'
 
 gem 'hashie'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
   gem 'shoulda-matchers'
+  gem 'codeclimate-test-reporter', require: nil
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
