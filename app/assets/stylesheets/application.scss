@@ -21,6 +21,6 @@
 
 body { padding-top: 70px; }
 
-.distancer {
-  padding: 10px;
-}
+.distancer { padding: 10px;}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button { padding: 0px !important; }

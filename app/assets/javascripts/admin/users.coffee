@@ -4,10 +4,8 @@ $ ->
     window.location = '/admin/projects'
 
   $('#userEventsTable').dataTable
-    pagingType: "full_numbers"
     processing: true
     serverSide: true
-    ajax: $('#userEventsTable').data('source')
-    responsive: true
+    ajax: $('#userEventsTable').data 'source'
     autoWidth: false
     order: [[ 4, 'desc' ]]

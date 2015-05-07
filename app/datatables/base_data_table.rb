@@ -4,7 +4,7 @@
 class BaseDataTable
   delegate :params, :h, :link_to, :number_to_currency, to: :@view
 
-  def initialize(view: , relation: nil)
+  def initialize(view:, relation: nil)
     @view = view
     @relation = relation
   end
