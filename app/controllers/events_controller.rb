@@ -1,5 +1,4 @@
 class EventsController < ApplicationController
-
   def create
     begin
       Event.create permitted_params

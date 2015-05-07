@@ -19,6 +19,10 @@ Rails.application.routes.draw do
       collection do
         post :add_rate
       end
+
+      member do
+        get :event_table, controller: :events
+      end
     end
   end
 end

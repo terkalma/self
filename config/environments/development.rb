@@ -27,6 +27,10 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  # don't ever do this on production. Just temporary workaround until
+  # I figure out what went wrong while intalling new +ruby+ version
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true

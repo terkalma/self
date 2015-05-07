@@ -1,3 +1,7 @@
+<% unless @user.events.empty? %>
+  <%= render partial: 'event_table' %>
+<% end %>
+
 <% content_for :list_items do %>
   <% if @user.projects.any? %>
     <% @user.projects.each do |project| %>
@@ -30,6 +34,5 @@
 <% content_for :custom_modal, nil, flush: true do %>
   <%= render partial: 'application/modal', locals: { resource_name: 'Rate', resource_id: 'Rate', body: 'rate_form' } %>
 <% end %>
-
 
 <%= render file: 'application/panel' %>
