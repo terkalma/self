@@ -2,7 +2,7 @@
 # Simple implementation for jquery Datable (https://datatables.net)
 #
 class BaseDataTable
-  delegate :params, :h, :link_to, :number_to_currency, to: :@view
+  delegate :params, :link_to, :number_to_currency, to: :@view
 
   def initialize(view:, relation: nil)
     @view = view
@@ -57,12 +57,16 @@ class BaseDataTable
 
   # search
 
+  def search_fields
+    header
+  end
+
   def search_query
     # This is PG specific at this point.
     keyword = params[:search][:value] rescue nil
 
     return '1=1' if keyword.blank?
-    header.map { |w| "#{w}::text ILIKE '%#{keyword}%'" }.join ' OR '
+    search_fields.map { |w| "#{w}::text ILIKE '%#{keyword}%'" }.join ' OR '
   end
 
   # sorting

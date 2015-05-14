@@ -24,5 +24,7 @@ Rails.application.routes.draw do
         get :event_table, controller: :events
       end
     end
+
+    resources :reports, only: [:index]
   end
 end

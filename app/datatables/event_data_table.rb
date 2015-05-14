@@ -3,7 +3,6 @@ class EventDataTable < BaseDataTable
     super view: view, relation:  relation || Event.joins('LEFT JOIN projects ON projects.id = events.project_id')
   end
 
-
   private
   def header
     %w[projects.name amount hours minutes worked_at]

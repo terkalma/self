@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   before_save :set_admin_flag
 
   def name
-    "#{first_name.capitalize}, #{last_name.capitalize}"
+    "#{first_name.capitalize} #{last_name.capitalize}"
   end
 
   private
