@@ -24,7 +24,8 @@ class Rate < ActiveRecord::Base
 
   private
   def update_events
-    user.events.where()
+    user.events.between(available_from, available_until).each(&:save)
+    true
   end
 
   def ensure_latest_available_from
