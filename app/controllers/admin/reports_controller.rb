@@ -3,11 +3,11 @@ module Admin
     before_filter :set_dates
 
     def index
-      rel = User.joins(:events).group('users.id').where('events.worked_at >= ? AND events.worked_at <= ?', @from, @to)
+      relation = Event.between(@from, @to).joins(:user).group('users.id')
 
       respond_to do |format|
         format.json do
-          render json: UserReportDataTable.new(view: view_context, relation: rel)
+          render json: UserReportDataTable.new(view: view_context, relation: relation)
         end
         format.html { redirect_to admin_dashboard_path }
       end

@@ -3,11 +3,10 @@ class UserReportDataTable < BaseDataTable
 
   def initialize(view:, relation: nil)
     if relation
-      super view: view, relation:  relation.select(select_fields)
+      super view: view, relation: relation.select(select_fields)
     else
-      super view: view, relation:  User.joins(:events).group('users.id').select(select_fields)
+      super view: view, relation: Event.joins(:user).group('users.id').select(select_fields)
     end
-
   end
 
   def as_json(*args)

@@ -14,7 +14,7 @@ module Payable
     when User
       rates.active.first
     else
-      raise NotImplementedError
+      raise NotImplementedError("#{self.class} does not have a rate logic")
     end
   end
 

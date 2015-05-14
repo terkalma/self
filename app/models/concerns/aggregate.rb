@@ -5,6 +5,7 @@ module Aggregate
 
   included do
     scope :at, ->(d) { where(worked_at: d) }
+    scope :between, ->(d1,d2) { where 'events.worked_at >= ? AND events.worked_at <= ?', d1, d2 }
   end
 
   def duration

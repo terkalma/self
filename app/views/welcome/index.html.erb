@@ -1,4 +1,7 @@
-<%= render partial: 'application/datepicker', locals: { url: root_path } %>
+<div class="datepicker-container row col-md-offset-4 col-md-4 col-xs-12 margin-bottom-20">
+  <%= render partial: 'application/datepicker_with_submit_btn', locals: { url: root_path,
+                                                                          placeholder: 'Check some other date...' } %>
+</div>
 
 <% content_for :list_items do %>
   <!-- Making sure this is not empty -->

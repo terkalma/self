@@ -4,8 +4,8 @@
             format: 'yyyy-mm-dd',
             'autoclose': true,
             'todayHighlight': true,
-            'todayBtn': true,
-            'disableTouchKeyboard': true
+            'disableTouchKeyboard': true,
+            'orientation': "top auto"
         });
     };
 })( jQuery );
