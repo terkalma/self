@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   def create
     begin
       event = Event.create permitted_params
-      Keen.publish :events, event.to_keen( action: 'create')
+      publish_keen collection: :events, event: event.to_keen( action: 'create')
       flash[:notice] = 'Event created successfully!'
     rescue
       flash[:alert] = 'Something went wrong...'
@@ -15,7 +15,7 @@ class EventsController < ApplicationController
     begin
       event = Event.find params[:id]
       event.update_attributes permitted_params
-      Keen.publish :events, event.to_keen( ation: 'edit')
+      publish_keen collection: :events, event: event.to_keen( ation: 'edit')
       flash[:notice] = 'Event updated successfully!'
     rescue
       flash[:alert] = 'Something went wrong...'
