@@ -27,7 +27,7 @@ $ ->
     true
 
 
-  $("#fromDate, #toDate").on "change", ->
+  $("#fromDate input, #toDate input").on "change", ->
     table.fnDraw()
     return
 
