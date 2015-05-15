@@ -11,6 +11,22 @@ $ ->
 
       return
 
+  $('#exportXls').on 'click', (e)->
+    $this = $(this)
+
+    to = $("#toDate input").val()
+    from = $("#fromDate input").val()
+    filter = $('#eventsTable_filter input').val()
+
+    $params = ['from=' + from, 'to=' + to, 'search_query=' + filter].join '&'
+
+    url = $(this).data('source') + '?' + $params
+
+    $this.attr 'href', url
+
+    true
+
+
   $("#fromDate, #toDate").on "change", ->
     table.fnDraw()
     return

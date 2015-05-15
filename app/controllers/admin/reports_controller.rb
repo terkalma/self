@@ -10,6 +10,7 @@ module Admin
           render json: UserReportDataTable.new(view: view_context, relation: relation)
         end
         format.html { redirect_to admin_dashboard_path }
+        format.xls { @data = ReportSheet.new(from: @from, to: @to, search_query: params[:search_query]) }
       end
     end
 

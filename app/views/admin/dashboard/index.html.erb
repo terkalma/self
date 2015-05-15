@@ -39,3 +39,10 @@
     </table>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 col-xs-12">
+    <%= link_to 'Export XLS', '#', class: 'btn btn-lg btn-success btn-block', role: 'button',
+                id: 'exportXls', data: { source: admin_reports_path(format: 'xls') } %>
+  </div>
+</div>
