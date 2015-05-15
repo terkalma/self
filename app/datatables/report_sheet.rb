@@ -27,7 +27,7 @@ class ReportSheet
       key = resource['user_email'].split(/@/).first
 
       if @data[key]
-        @data[key].merge resource['worked_at'] => resource['total_amount'].to_f.round(2)
+        @data[key].merge! resource['worked_at'] => resource['total_amount'].to_f.round(2)
       else
         @data[key] = { resource['worked_at'] => resource['total_amount'].to_f.round(2) }
       end
