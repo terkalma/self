@@ -7,9 +7,9 @@ class Rate < ActiveRecord::Base
   validates_numericality_of :hourly_rate, greater_than: 0
   validates_numericality_of :hourly_rate_ot, greater_than_or_equal_to: :hourly_rate
   validate :ensure_latest_available_from, :ensure_available_until_after_available_from
-  before_update :update_available_until, :update_events
-  before_create :update_available_until, :update_events
-
+  before_update :update_available_until
+  before_create :update_available_until
+  after_commit :update_events
   #
   # returns the +user+ for a +rate+. If the payable is not a user,
   # then it's the +payable+'s responsibility to return a user
@@ -24,7 +24,7 @@ class Rate < ActiveRecord::Base
 
   private
   def update_events
-    user.events.between(available_from, available_until || Date.tomorrow).each(&:save)
+    user.events.between(available_from, available_until).each(&:save)
     true
   end
 
