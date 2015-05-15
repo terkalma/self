@@ -18,6 +18,16 @@ class Event < ActiveRecord::Base
     user_project.rate_at(worked_at) || user.rate_at(worked_at) rescue user.rate_at(worked_at)
   end
 
+  def to_keen(options={})
+    options.merge(
+        user: user.to_keen,
+        project: project.to_keen,
+        hours: hours,
+        minutes: minutes,
+        worked_at: worked_at
+    )
+  end
+
   private
   def update_amount
     self.amount = compute_amount

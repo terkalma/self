@@ -16,6 +16,15 @@ class User < ActiveRecord::Base
     "#{first_name.capitalize} #{last_name.capitalize}"
   end
 
+  def to_keen
+    {
+      name: name,
+      email: email,
+      created_at: created_at,
+      ip: current_sign_in_ip
+    }
+  end
+
   private
   def set_admin_flag
     admins = Figaro.env.admins.split(',').map &:strip
