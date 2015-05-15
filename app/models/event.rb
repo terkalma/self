@@ -24,7 +24,10 @@ class Event < ActiveRecord::Base
         project: project.to_keen,
         hours: hours,
         minutes: minutes,
-        worked_at: worked_at
+        worked_at: worked_at,
+        overtime: ot,
+        description: description,
+        amount: amount
     )
   end
 
