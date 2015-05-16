@@ -1,6 +1,6 @@
 # Code climate reporting, Coverage is sent from CI
 require 'codeclimate-test-reporter'
-# CodeClimate::TestReporter.start
+CodeClimate::TestReporter.start
 
 require 'devise'
 require 'factory_girl'
