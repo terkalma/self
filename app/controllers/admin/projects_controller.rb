@@ -1,7 +1,7 @@
 module Admin
   class ProjectsController < BaseController
     respond_to :html
-    respond_to :js, only: [ :add_user ]
+    respond_to :js, only: [ :add_user, :create ]
 
     add_breadcrumb 'Admin', :admin_dashboard_path
     add_breadcrumb 'Projects', :admin_projects_path
@@ -11,14 +11,9 @@ module Admin
     end
 
     def create
-      begin
-        project = Project.create! create_project_params
-        flash[:notice] = 'Project created successfully'
-        redirect_to action: :edit, id: project.slug
-      rescue
-        flash[:alert] = 'Unable to create project'
-        redirect_to admin_projects_path
-      end
+      @project = Project.new create_project_params
+      @success = @project.save
+      respond_with @project, location: -> { admin_projects_path }
     end
 
     def edit
