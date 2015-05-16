@@ -5,12 +5,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   def publish_keen(collection: , event:)
-    server_info = {
-      ip: request.remote_ip,
-      host: request.host,
-    }
+    server_info = { host: request.host }
 
-    Keen.publish(collection, { server: server_info }.merge(event)) rescue nil
+    Keen.publish_async(collection, { server: server_info }.merge(event))
   end
 
 end
