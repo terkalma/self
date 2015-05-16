@@ -16,7 +16,7 @@
     <% end %>
   </div>
 
-  <%= f.submit 'Submit' %>
+  <%= f.submit 'Submit', data: { disable_with: :submit } %>
 <% end %>
 
 <%= javascript_tag do %>

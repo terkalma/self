@@ -17,6 +17,8 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
+gem 'nprogress-rails'
+
 gem 'figaro'
 
 gem 'therubyracer'
@@ -36,7 +38,6 @@ gem 'delayed_job_active_record'
 gem 'keen'
 gem 'em-http-request'
 gem 'puma'
-
 gem 'hashie'
 
 gem 'axlsx_rails'

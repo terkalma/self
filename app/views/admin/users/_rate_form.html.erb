@@ -6,7 +6,7 @@
   <%= f.text_field :available_from, class: 'datepicker' %>
   <%= f.text_field :available_until, class: 'datepicker' %>
 
-  <%= f.submit 'Submit' %>
+  <%= f.submit 'Submit', data: { disable_with: :submit } %>
 <% end %>
 
 <%= javascript_tag do %>
