@@ -1,0 +1,41 @@
+require 'axlsx_styler'
+
+workbook = xlsx_package.workbook
+
+workbook.add_worksheet(name: 'Report') do |sheet|
+  sheet.add_row
+
+  sheet.add_row [ '', 'From', @data.table_from ]
+  sheet.add_row [ '', 'To', @data.table_to ]
+
+  sheet.add_row
+
+  # adding header
+  sheet.add_row do |row|
+    row.add_cell ''
+
+    @data.users.each { |u| row.add_cell u }
+  end
+
+  @data.dates.each do |date|
+    sheet.add_row do |row|
+      row.add_cell date.to_date, type: :date
+
+      @data.users.each { |u| row.add_cell @data.data[u][date] || 0.0, type: :float }
+    end
+  end
+
+  table_start = sheet.rows.count - (@data.dates.count + 1)
+  table_header = "#{xls_index_for table_start, 1}:#{xls_index_for table_start, @data.dimensions.users }"
+
+  sheet.column_widths *([10] + [ 20 ] * @data.dimensions.users)
+
+  sheet.add_style table_header, b: true
+  sheet.add_style table_header, bg_color: '95AFBA'
+end
+
+workbook.apply_styles
+
+# use shared strings instead of inlineStrings
+# this is useful for Numbers, which only works with shared strings.
+xlsx_package.use_shared_strings = true

@@ -32,11 +32,15 @@ gem 'breadcrumbs_on_rails'
 
 gem 'will_paginate'
 
+gem 'delayed_job_active_record'
 gem 'keen'
 gem 'em-http-request'
 gem 'puma'
 
 gem 'hashie'
+
+gem 'axlsx_rails'
+gem 'axlsx_styler'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

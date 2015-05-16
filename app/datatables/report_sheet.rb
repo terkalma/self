@@ -1,4 +1,6 @@
 class ReportSheet
+  attr_accessor :to, :from
+
   #
   # @param to[Date]
   # @param from[Date]
@@ -10,12 +12,30 @@ class ReportSheet
     @search_query = search_query
   end
 
+  #
+  # Earliest useful date, given +@from+ could be far in the past
+  #
   def table_from
     @table_from ||= Event.joins(:user).between(@from, @to).where(search).minimum :worked_at
   end
 
+  #
+  # Latest useful date, given +@to+ could be far in the future
+  #
   def table_to
     @table_to ||= Event.joins(:user).between(@from, @to).where(search).maximum :worked_at
+  end
+
+  def dates
+    @dates ||= (table_from..table_to).map &:to_s
+  end
+
+  def users
+    data.keys
+  end
+
+  def dimensions
+    @dimensions ||= OpenStruct.new dates: dates.length, users: users.length
   end
 
   def data
