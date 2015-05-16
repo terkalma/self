@@ -5,6 +5,9 @@ class Event < ActiveRecord::Base
   validates_numericality_of :hours, greater_than_or_equal_to: 0, less_than_or_equal_to: 12
   validates_numericality_of :minutes, greater_than_or_equal_to: 0, less_than: 60
 
+  validates_numericality_of :minutes, greater_than_or_equal_to: 15, less_than: 60,
+                            if: :less_than_an_hour?, message: 'must be greater than or equal to 15 if total is less than an hour'
+
   before_create :update_amount
   before_update :update_amount
 
@@ -32,6 +35,10 @@ class Event < ActiveRecord::Base
   end
 
   private
+  def less_than_an_hour?
+    hours < 1
+  end
+
   def update_amount
     self.amount = compute_amount
   end

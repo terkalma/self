@@ -1,30 +1,30 @@
 class EventsController < ApplicationController
-  def create
-    begin
-      event = Event.create permitted_params
-      publish_keen collection: :events, event: event.to_keen( action: 'create')
-      flash[:notice] = 'Event created successfully!'
-    rescue
-      flash[:alert] = 'Something went wrong...'
-    end
+  respond_to :html, :js
 
-    redirect_to root_path(date: permitted_params[:worked_at])
+  after_filter :publish_event_to_keen
+
+  def create
+    @event = Event.new permitted_params
+    @success = @event.save
+    respond_with @event, location: -> { root_path(date: permitted_params[:worked_at]) }
   end
 
   def update
-    begin
-      event = Event.find params[:id]
-      event.update_attributes permitted_params
-      publish_keen collection: :events, event: event.to_keen( ation: 'edit')
-      flash[:notice] = 'Event updated successfully!'
-    rescue
-      flash[:alert] = 'Something went wrong...'
-    end
-
-    redirect_to root_path(date: permitted_params[:worked_at])
+    @event = Event.find params[:id]
+    @success = @event.update permitted_params
+    respond_with @event, location: -> { root_path(date: permitted_params[:worked_at]) }
   end
 
+  private
   def permitted_params
     params.require(:event).permit :hours, :minutes, :description, :project_id, :user_id, :worked_at, :ot
+  end
+
+  def publish_event_to_keen
+    if @event && @event.persisted?
+      publish_keen collection: :events, event: @event.to_keen( ation: params[:action])
+    end
+  rescue
+    # don't care about issues with +Keen+
   end
 end

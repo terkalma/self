@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
     server_info = { host: request.host }
     ensure_em
     Keen.try :publish_async, collection, { server: server_info }.merge(event)
+  rescue
+    # don't care about +Keen+ errors
   end
-
 end
