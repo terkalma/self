@@ -1,9 +1,9 @@
 <% if @success %>
   $('.modal.in').modal('toggle');
-  $('.list-group').append('<%= escape_javascript render(partial: 'welcome/event_info', locals: { event: @event.reload }) %>');
-<% else %>
-  $('.modal.in .modal-body')
-        .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @event }) %>');
-  $(document).trigger('ajax:complete');
+  $('.list-group').append('<%= escape_javascript render(partial: 'welcome/event_info', locals: { event: @event }) %>');
 <% end %>
+
+$('#addEvent').find('.modal-body')
+  .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @success ? current_user.events.new : @event }) %>');
+$(document).trigger('ajax:complete');
 
