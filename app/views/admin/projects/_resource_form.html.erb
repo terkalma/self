@@ -1,4 +1,4 @@
 <%= bootstrap_form_for @project || Project.new,  url: { action: :create }, remote: true do |f| %>
   <%= f.text_field :name %>
-  <%= f.submit 'Create', data: { disable_with: :submit } %>
+  <%= f.submit 'Create', data: { disable_with: 'Submitting...' } %>
 <% end %>
