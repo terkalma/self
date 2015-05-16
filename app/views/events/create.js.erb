@@ -1,6 +1,6 @@
 <% if @success %>
-  $('.modal.in').toggle();
-  $('.list-group').append('<%= escape_javascript render(partial: 'welcome/event_info', locals: { event: @event }) %>');
+  $('.modal.in').modal('toggle');
+  $('.list-group').append('<%= escape_javascript render(partial: 'welcome/event_info', locals: { event: @event.reload }) %>');
 <% else %>
   $('.modal.in .modal-body')
         .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @event }) %>');

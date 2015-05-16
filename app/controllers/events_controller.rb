@@ -11,6 +11,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find params[:id]
+    byebug
     @success = @event.update permitted_params
     respond_with @event, location: -> { root_path(date: permitted_params[:worked_at]) }
   end

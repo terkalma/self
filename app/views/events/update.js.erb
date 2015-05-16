@@ -1,5 +1,5 @@
 <% if @success %>
-  $('.modal.in').toggle()
+  $('.modal.in').modal('toggle');
   $('#eventInfo<%= @event.id %>')
           .replaceWith('<%= escape_javascript render(partial: 'welcome/event_info', locals: { event: @event }) %>');
 <% else %>
