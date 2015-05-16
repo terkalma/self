@@ -1,6 +1,6 @@
 # Code climate reporting, Coverage is sent from CI
 require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
+# CodeClimate::TestReporter.start
 
 require 'devise'
 require 'factory_girl'
@@ -52,6 +52,11 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
+
+  # turn off analytics
+  config.before :each do
+    allow(Keen).to receive(:publish_async)
+  end
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
