@@ -1,7 +1,6 @@
 <% if @success %>
-  NProgress.start();
   $('.modal.in').toggle();
-  window.location = window.location;
+  $('.list-group').append('<%= escape_javascript render(partial: 'welcome/event_info', locals: { event: @event }) %>');
 <% else %>
   $('.modal.in .modal-body')
         .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @event }) %>');
