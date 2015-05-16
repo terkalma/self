@@ -8,7 +8,7 @@
 <% end %>
 
 /*
- * Since we replace the element which was responsible for the request
- * We are responsible to handle callbacks. In this case it's enough to just fire an ajax:complete
+ * Since we replace the element, which was responsible for the request, we are responsible for triggers.
+ * In this case it's enough to just fire an ajax:complete
  */
 $(document).trigger('ajax:complete');
