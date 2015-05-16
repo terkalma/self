@@ -1,11 +1,15 @@
 (function( $ ){
     $.fn.customDatepicker = function(options) {
-        return this.datepicker($({
+        default_options = {
             format: 'yyyy-mm-dd',
-            'autoclose': true,
+                'autoclose': true,
             'todayHighlight': true,
             'disableTouchKeyboard': true,
             'orientation': "top auto"
-        }).extend(options || {}));
+        };
+
+        for (var attrname in options) { default_options[attrname] = options[attrname]; };
+
+        return this.datepicker(default_options);
     };
 })( jQuery );
