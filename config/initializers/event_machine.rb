@@ -1,1 +1,1 @@
-# Thread.new { EventMachine.run }
+Thread.new { EventMachine.run }
