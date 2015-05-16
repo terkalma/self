@@ -1,4 +1,6 @@
 <% if @success %>
+  NProgress.start();
+  $('.modal.in').toggle();
   window.location = window.location;
 <% else %>
   $('.modal.in .modal-body')
