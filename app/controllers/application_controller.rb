@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
 
   def publish_keen(collection: , event:)
     server_info = { host: request.host }
-
-    Keen.publish_async(collection, { server: server_info }.merge(event))
+    ensure_em
+    Keen.publish(collection, { server: server_info }.merge(event))
   end
 
 end
