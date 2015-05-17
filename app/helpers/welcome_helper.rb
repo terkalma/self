@@ -18,4 +18,14 @@ module WelcomeHelper
   def hours_worked(date=@date)
     distance_of_time_in_words events_at(date).total
   end
+
+  def remove_event_options
+    {
+        method: :delete,
+        data: { confirm: 'Are you sure?' },
+        role: 'button',
+        class: 'btn btn-default',
+        style: 'float: right;'
+    }
+  end
 end
