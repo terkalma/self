@@ -1,0 +1,7 @@
+<% if @success %>
+  $('.modal.in').modal('toggle');
+  window.location = window.location;
+<% else %>
+  $('#addProject').find('.modal-body')
+          .html('<%= escape_javascript render(partial: 'project_form', locals: project_form_params) %>');
+<% end %>

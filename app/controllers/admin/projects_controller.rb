@@ -24,18 +24,16 @@ module Admin
     def add_user
       @user_project = UserProject.new add_user_params
       @success = @user_project.save
-      respond_with @user_project, location: -> { edit_admin_user_path @user_project.project }
+      respond_with @user_project, location: -> { edit_admin_project_path @user_project.project }
     end
 
     def remove_user
-      begin
-        project = Project.find_by_slug params[:slug]
-        UserProject.where(project_id: project.id, user_id: params[:user_id]).destroy_all
-        flash[:notice] = 'Person successfully removed'
-      rescue
-        flash[:alert] = 'Unable to remove the person from the project'
-      end
-
+      project = Project.find_by_slug params[:slug]
+      UserProject.where(project_id: project.id, user_id: params[:user_id]).destroy_all
+      flash[:notice] = 'Person successfully removed'
+    rescue
+      flash[:alert] = 'Unable to remove the person from the project'
+    ensure
       redirect_to action: :edit, id: params[:slug]
     end
 

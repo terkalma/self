@@ -33,4 +33,14 @@ module ApplicationHelper
   def app_title
     Figaro.env.app_title || 'App Name'
   end
+
+  def remove_options(options = {})
+    options.merge(
+        method: :patch,
+        data: { confirm: 'Are you sure?' },
+        role: 'button',
+        class: 'btn btn-default',
+        style: 'float: right;'
+    )
+  end
 end

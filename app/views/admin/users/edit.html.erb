@@ -3,23 +3,22 @@
 <% end %>
 
 <% content_for :list_items do %>
-  <% if @user.projects.any? %>
-    <% @user.projects.each do |project| %>
-      <div class="list-group-item">
-        <h4 class="list-group-item-heading"><%= link_to project.name, edit_admin_project_path(project) %></h4>
-      </div>
-    <% end %>
-  <% else %>
-    <div class="list-group-item">
-      <h4>User currently not associated with any project. Check projects here: <%= link_to 'Projects', admin_projects_path %></h4>
-    </div>
+  <!-- Making sure block is not empty -->
+  <% @user.user_projects.includes(:project).each do |user_project| %>
+    <%= render partial: 'project_info', locals: { project: user_project.project, user_project: user_project } %>
   <% end %>
 <% end %>
 
-<% content_for :custom_modal_id, 'goToProjects' %>
+<% content_for :custom_modal_id, 'addProject' %>
+
+<% content_for :custom_modal do %>
+  <%= render partial: 'application/modal',
+             locals: { resource_name: 'Project', resource_id: 'Project', body: 'project_form', form_params: project_form_params } %>
+<% end %>
+
 <% content_for :panel_title, "Projects for: #{@user.name}" %>
 
-<%= render file: 'application/panel' %>
+<%= render file: 'application/panel', locals: { list_group_id: 'projectsForUser' } %>
 
 <% content_for :list_items, nil, flush: true do %>
   <!-- Making sure block is not empty -->
@@ -35,4 +34,4 @@
   <%= render partial: 'application/modal', locals: { resource_name: 'Rate', resource_id: 'Rate', body: 'rate_form' } %>
 <% end %>
 
-<%= render file: 'application/panel' %>
+<%= render file: 'application/panel', locals: { list_group_id: 'ratesForUser' } %>

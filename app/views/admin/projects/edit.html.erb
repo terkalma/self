@@ -12,4 +12,4 @@
              locals: { resource_name: 'User', resource_id: 'User', body: 'user_form', form_params: user_form_params } %>
 <% end %>
 
-<%= render file: 'application/panel' %>
+<%= render file: 'application/panel', locals: { list_group_id: 'usersForProject' } %>

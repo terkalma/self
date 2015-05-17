@@ -1,13 +1,13 @@
-<div class="list-group-item">
+<div class="list-group-item" data-turbolinks-temporary id="projectForUser<%= project.id %>">
   <div class="row">
     <div class="col-xs-10">
-      <h4 class="list-group-item-heading"><%= link_to user.name, edit_admin_user_path(user.id) %></h4>
+      <h4 class="list-group-item-heading"><%= link_to project.name, edit_admin_project_path(project) %></h4>
       <p class="list-group-item-text">Hourly Rate: <%= project_details(user_project).hourly_rate %></p>
       <p class="list-group-item-text">Hourly Rate OT: <%= project_details(user_project).hourly_rate_ot %></p>
     </div>
 
     <div class="col-xs-2">
-      <%= link_to remove_user_admin_projects_path(user_id: user.id, slug: @project.slug), remove_options do %>
+      <%= link_to remove_project_admin_user_path(@user, project_id: project.id), remove_options do %>
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
       <% end %>
     </div>

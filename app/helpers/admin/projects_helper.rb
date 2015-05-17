@@ -1,21 +1,11 @@
 module Admin::ProjectsHelper
-  def remove_user_options
-    {
-        method: :patch,
-        data: { confirm: 'Are you sure?' },
-        role: 'button',
-        class: 'btn btn-default',
-        style: 'float: right;'
-    }
-  end
-
   def users_to_add(project=nil)
     project ||= (@project || @user_project.project)
-    User.where.not(id: project.users.pluck(:id))
+    User.where.not id: project.users.pluck(:id)
   end
 
   def user_project
-    @user_project ||= @project.user_projects.new
+    @user_project ||= (@project || @user).user_projects.new rescue UserProject.new
   end
 
   def user_project_rates
@@ -24,10 +14,6 @@ module Admin::ProjectsHelper
     else
       user_project.rates
     end
-  end
-
-  def user_form_params
-    { users: users_to_add, user_project: user_project, user_project_rates: user_project_rates }
   end
 
   #
@@ -46,5 +32,9 @@ module Admin::ProjectsHelper
     end
 
     @rates[user_project.id] = ret
+  end
+
+  def user_form_params
+    { users: users_to_add, user_project: user_project, user_project_rates: user_project_rates }
   end
 end

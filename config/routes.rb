@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       end
 
       member do
+        patch :remove_project
+        post :add_project
         get :event_table, controller: :events
       end
     end
