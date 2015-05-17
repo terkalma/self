@@ -1,8 +1,8 @@
-$ ->
-  $(document).on 'click', '[data-target=#goToProjects]', (e)->
-    e.preventDefault()
-    window.location = '/admin/projects'
+$(document).on 'click', '[data-target=#goToProjects]', (e)->
+  e.preventDefault()
+  window.location = '/admin/projects'
 
+$(document).on 'ready page:load', ->
   $('#userEventsTable').dataTable
     processing: true
     serverSide: true

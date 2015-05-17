@@ -2,7 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$ ->
-  $(document).on 'change', '#userRateToggle', (e) ->
-    $('#userRate').find('input').val ''
-    $('#userRate').toggleClass 'hide'
+$(document).on 'change', '#userRateToggle', (e) ->
+  $('#userRate').find('input').val ''
+  $('#userRate').toggleClass 'hide'

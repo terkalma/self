@@ -1,4 +1,4 @@
-$ ->
+ready = ->
   table = $('#eventsTable').dataTable
     processing: true
     serverSide: true
@@ -31,4 +31,7 @@ $ ->
     table.fnDraw()
     return
 
-  $('.datepicker').customDatepicker()
+  $('.datepicker').customDatepicker {}
+
+$(document).ready ready
+$(document).on 'page:load', ready
