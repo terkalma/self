@@ -35,12 +35,12 @@ module ApplicationHelper
   end
 
   def remove_options(options = {})
-    options.merge(
+    {
         method: :patch,
         data: { confirm: 'Are you sure?' },
         role: 'button',
         class: 'btn btn-default',
         style: 'float: right;'
-    )
+    }.merge options
   end
 end

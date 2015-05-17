@@ -13,7 +13,6 @@ module Admin
 
     def edit
       @user = User.find params[:id]
-      
       unless @user.payable?
         flash.now[:alert] = "#{@user.name} does not have a base rate. Please add one."
       end
