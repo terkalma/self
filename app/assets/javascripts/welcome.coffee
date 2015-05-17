@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on 'ready page:load', ->
-  $('.datepicker').customDatepicker {}
+  $('.datepicker-container input.datepicker').customDatepicker {}
 
   $('.datepicker-trigger').on 'click', (e)->
     e.preventDefault()
