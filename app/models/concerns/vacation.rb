@@ -25,6 +25,6 @@ module Vacation
     from = 0.hour.ago.beginning_of_year
     to = 0.hour.ago.end_of_year
 
-    VacationRequest.approved.where('vacation_from >= ?', from).where('vacation_to <= ?', to).map(&:length).sum
+    vacation_requests.approved.where('vacation_from >= ?', from).where('vacation_to <= ?', to).map(&:length).sum
   end
 end
