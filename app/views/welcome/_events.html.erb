@@ -1,0 +1,23 @@
+<% content_for :list_items, flush: true do %>
+  <!-- Making sure this is not empty -->
+  <% events_at(@date).order(:created_at).each do |event| %>
+    <%= render partial: 'welcome/event_info', locals: { event: event } %>
+  <% end %>
+<% end %>
+
+<% content_for :panel_title, "#{events_title}", flush: true %>
+
+<% content_for :custom_modal_id, 'addEvent', flush: true %>
+
+<% content_for :custom_modal, flush: true do %>
+  <%= render partial: 'application/modal',
+             locals: {
+                     resource_name: 'Event',
+                     resource_id: 'Event',
+                     resource_title: 'New Event',
+                     body: 'welcome/event_form',
+                     form_params: { event: current_user.events.new }
+             } %>
+<% end %>
+
+<%= render file: 'application/panel', locals: { list_group_id: 'eventsForUser' } %>

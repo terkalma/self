@@ -1,0 +1,23 @@
+<!-- VACATION -->
+<% content_for :panel_title, "Paid Vacation Days Left: #{current_user.vacation_days_left}", flush: true %>
+
+<% content_for :list_items, nil, flush: true do %>
+  <!-- Making sure block is not empty -->
+  <% current_user.vacation_requests.this_year.each do |vacation| %>
+    <%= render partial: 'welcome/vacation_info', locals: { vacation: vacation } %>
+  <% end %>
+<% end %>
+
+<% content_for :custom_modal_id, 'addVacation', flush: true %>
+
+<% content_for :custom_modal, nil, flush: true do %>
+  <%= render partial: 'application/modal',
+             locals: {
+                     resource_name: 'Vacation Request',
+                     resource_id: 'Vacation',
+                     body: 'welcome/vacation_form',
+                     form_params: { vacation: current_user.vacation_requests.new }
+             } %>
+<% end %>
+
+<%= render file: 'application/panel', locals: { list_group_id: 'vacationsForUser' } %>

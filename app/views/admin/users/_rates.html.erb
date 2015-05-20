@@ -1,0 +1,15 @@
+<% content_for :list_items, nil, flush: true do %>
+  <!-- Making sure block is not empty -->
+  <% @user.rates.order(:available_from).each do |rate| %>
+    <%= render partial: 'rate_info', locals: { rate: rate } %>
+  <% end %>
+<% end %>
+
+<% content_for :panel_title, "Rates for: #{@user.name}", flush: true %>
+<% content_for :custom_modal_id, 'addRate', flush: true %>
+
+<% content_for :custom_modal, nil, flush: true do %>
+  <%= render partial: 'application/modal', locals: { resource_name: 'Rate', resource_id: 'Rate', body: 'rate_form' } %>
+<% end %>
+
+<%= render file: 'application/panel', locals: { list_group_id: 'ratesForUser' } %>

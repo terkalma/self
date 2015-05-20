@@ -1,14 +1,1 @@
-<% if @success %>
-  $('.modal.in').modal('toggle');
-  $('#eventInfo<%= @event.id %>')
-          .replaceWith('<%= escape_javascript render(partial: 'welcome/event_info', locals: { event: @event }) %>');
-<% else %>
-  $('.modal.in .modal-body')
-          .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @event }) %>');
-<% end %>
-
-/*
- * Since we replace the element, which was responsible for the request, we are responsible for triggers.
- * In this case it's enough to just fire an ajax:complete
- */
-$(document).trigger('ajax:complete');
+<%= render file: 'events/create' %>

@@ -1,0 +1,10 @@
+<%= bootstrap_form_for vacation, url: { controller: :vacation_requests, action: :create }, remote: true do |f| %>
+  <%= f.hidden_field :user_id %>
+  <%= f.text_field :vacation_from, class: 'datepicker' %>
+  <%= f.text_field :vacation_to, class: 'datepicker' %>
+  <%= f.submit 'Submit', data: { disable_with: 'Submitting...' } %>
+<% end %>
+
+<%= javascript_tag do %>
+  $('#new_vacation_request input.datepicker').customDatepicker({});
+<% end %>

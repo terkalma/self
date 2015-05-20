@@ -1,0 +1,18 @@
+<div class="list-group-item" id="vacationInfo<%= vacation.id %>">
+  <div class="row">
+    <div class='col-xs-12'>
+      <a href="#" class="btn btn-block <%= vacation_class vacation %>">
+        <h4 class="list-group-item-heading"><%= vacation.length %> days</h4>
+        <p class="list-group-item-text"><%= vacation.vacation_from.strftime '%B %d, %Y' %></p>
+        <p class="list-group-item-text"><%= vacation.vacation_to.strftime '%B %d, %Y' %></p>
+      </a>
+    </div>
+    <% unless vacation.approved? %>
+      <div class="closing-button">
+        <%= link_to vacation_request_path(vacation.id), remove_options(method: :delete) do %>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -5,11 +5,13 @@ class User < ActiveRecord::Base
 
   include Oauth
   include Payable
+  include Vacation
 
   devise :database_authenticatable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   validate :has_company_email_address?
+  validates_numericality_of :vacation_limit, greater_than_or_equal_to: 0
   before_save :set_admin_flag
 
   def name

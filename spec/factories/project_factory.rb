@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :project do
     name { Faker::Name.last_name }
+    slug { name.parameterize }
 
     factory :project_with_users do
       transient do

@@ -34,3 +34,12 @@ body { padding-top: 70px; }
 .list-group-item {
   a { color: #555; &:hover { text-decoration: none; }}
 }
+
+.approve-button, .closing-button {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+
+.approve-button { right: 55px; }
+

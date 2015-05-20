@@ -1,9 +1,14 @@
 <% if @success %>
   $('.modal.in').modal('toggle');
-  $('.list-group').append('<%= escape_javascript render(partial: 'welcome/event_info', locals: { event: @event }) %>');
+  $('#eventsForUser').closest('.row').replaceWith('<%= escape_javascript render(partial: 'welcome/events') %>');
+<% else %>
+  $('.modal.in .modal-body')
+        .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @event }) %>');
 <% end %>
 
-$('#addEvent').find('.modal-body')
-  .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @success ? current_user.events.new : @event }) %>');
+/*
+ * Since we replace the element, which was responsible for the request, we are responsible for triggers.
+ * In this case it's enough to just fire an ajax:complete
+ */
 $(document).trigger('ajax:complete');
 

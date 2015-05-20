@@ -17,14 +17,12 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    begin
-      @event = Event.find params[:id]
-      @event.destroy
-      flash[:notice] = 'Event successfully removed'
-    rescue
-      flash[:alert] = 'Unable to remove event!'
-    end
-
+    @event = Event.find params[:id]
+    @event.destroy
+    flash[:notice] = 'Event successfully removed'
+  rescue
+    flash[:alert] = 'Unable to remove event!'
+  ensure
     redirect_to root_path(date: @event.worked_at)
   end
 

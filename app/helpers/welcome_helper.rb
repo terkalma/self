@@ -1,6 +1,6 @@
 module WelcomeHelper
-  def title
-    "Work on #{@date.strftime('%a %b %d %Y')}"
+  def events_title
+    "Work on #{@date.strftime('%a, %b %d %Y')}, Total: #{hours_worked}"
   end
 
   def event_duration(event)

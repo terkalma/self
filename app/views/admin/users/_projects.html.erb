@@ -1,0 +1,17 @@
+<% content_for :list_items do %>
+  <!-- Making sure block is not empty -->
+  <% @user.user_projects.includes(:project).each do |user_project| %>
+    <%= render partial: 'project_info', locals: { project: user_project.project, user_project: user_project } %>
+  <% end %>
+<% end %>
+
+<% content_for :custom_modal_id, 'addProject' %>
+
+<% content_for :custom_modal do %>
+  <%= render partial: 'application/modal',
+             locals: { resource_name: 'Project', resource_id: 'Project', body: 'project_form', form_params: project_form_params } %>
+<% end %>
+
+<% content_for :panel_title, "Projects for: #{@user.name}" %>
+
+<%= render file: 'application/panel', locals: { list_group_id: 'projectsForUser' } %>

@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-offset-3 col-md-6 col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4><%= "Paid Vacation Days Left: #{@user.vacation_days_left}" %></h4></div>
+
+      <div class="list-group" id=vacationForUser data-turbolinks-temporary>
+        <% @user.vacation_requests.pending.each do |vacation| %>
+          <div class="list-group-item" id="vacationInfo<%= vacation.id %>">
+            <div class="row">
+              <div class='col-xs-12'>
+                <a href="#" class="btn btn-block <%= vacation_class vacation %>">
+                  <h4 class="list-group-item-heading"><%= vacation.length %> days</h4>
+                  <p class="list-group-item-text"><%= vacation.vacation_from.strftime '%B %d, %Y' %></p>
+                  <p class="list-group-item-text"><%= vacation.vacation_to.strftime '%B %d, %Y' %></p>
+                </a>
+              </div>
+
+              <div class="approve-button">
+                <%= link_to accept_vacation_admin_user_path(@user, vacation_id: vacation.id), remove_options(method: :post) do %>
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                <% end %>
+              </div>
+
+              <div class="closing-button">
+                <%= link_to decline_vacation_admin_user_path(@user, vacation_id: vacation.id), remove_options(method: :post) do %>
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

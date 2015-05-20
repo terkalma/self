@@ -42,6 +42,24 @@ module Admin
       redirect_to action: :edit, id: params[:id]
     end
 
+    def accept_vacation
+      VacationRequest.find(params[:vacation_id]).approved!
+      flash[:notice] = 'Vacation request successfully approved'
+    rescue
+      flash[:alert] = 'Unable to approve vacation request!'
+    ensure
+      redirect_to edit_admin_user_path(params[:id])
+    end
+
+    def decline_vacation
+      VacationRequest.find(params[:vacation_id]).declined!
+      flash[:notice] = 'You decline a vacation request!'
+    rescue
+      flash[:alert] = 'Unable to decline vacation request :)'
+    ensure
+      redirect_to edit_admin_user_path(params[:id])
+    end
+
     private
     def add_project_params
       rates_attributes = [ :hourly_rate, :hourly_rate_ot, :available_from, :available_until ]

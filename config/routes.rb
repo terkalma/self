@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :events, only: [:create, :update, :destroy]
+  resources :vacation_requests, only: [:create, :update, :destroy]
 
   namespace :admin do
     get '/' => 'dashboard#index', as: :dashboard
@@ -23,6 +24,8 @@ Rails.application.routes.draw do
       member do
         patch :remove_project
         post :add_project
+        post :accept_vacation
+        post :decline_vacation
         get :event_table, controller: :events
       end
     end

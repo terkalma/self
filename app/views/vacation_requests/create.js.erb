@@ -1,0 +1,9 @@
+<% if @success %>
+  $('.modal.in').modal('toggle');
+  $('#vacationsForUser').closest('.row').replaceWith('<%= escape_javascript render(partial: 'welcome/vacations') %>');
+<% else %>
+  $('#addVacation').find('.modal-body')
+        .html('<%= escape_javascript render(partial: 'welcome/vacation_form', locals: { vacation: @vacation_request }) %>');
+<% end %>
+
+$(document).trigger('ajax:complete');
