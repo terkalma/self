@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :authenticate!
+  before_action :authenticate_user!
   before_filter :set_date
 
   def publish_keen(collection: , event:)
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   rescue
     # don't care about +Keen+ errors
   end
-  
+
   private
   def set_date
     @date = Date.strptime(params[:date]) rescue Date.today
