@@ -1,6 +1,6 @@
 ready = ->
   fromDate = $('#fromDate').find 'input'
-  toDate = $('#fromDate').find 'input'
+  toDate = $('#toDate').find 'input'
   tableSelector = $('#eventsTable')
 
   table = tableSelector.dataTable
