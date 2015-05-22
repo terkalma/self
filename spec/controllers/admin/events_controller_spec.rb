@@ -9,7 +9,7 @@ RSpec.describe Admin::EventsController, type: :controller do
         expect(subject.current_user).to be_an_instance_of User
 
         get :event_table, id: subject.current_user.id, format: :json
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to root_path(date: Date.today)
       end
     end
 
