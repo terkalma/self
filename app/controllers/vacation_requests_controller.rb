@@ -5,7 +5,7 @@ class VacationRequestsController < ApplicationController
   def create
     @vacation_request = VacationRequest.new create_vacation_params
     @success = @vacation_request.save
-    respond_with @vacation_request, location: -> { root_path }
+    respond_with @vacation_request, location: -> { root_path date: @date }
   end
 
   def destroy
@@ -15,7 +15,7 @@ class VacationRequestsController < ApplicationController
   rescue
     flash[:alert] = 'Unable to remove vacation request!'
   ensure
-    redirect_to root_path
+    redirect_to root_path date: @date
   end
 
   private

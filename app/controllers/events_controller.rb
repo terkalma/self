@@ -7,12 +7,14 @@ class EventsController < ApplicationController
   def create
     @event = Event.new permitted_params
     @success = @event.save
+    @date = @event.worked_at
     respond_with @event, location: -> { root_path(date: permitted_params[:worked_at]) }
   end
 
   def update
     @event = Event.find params[:id]
     @success = @event.update permitted_params
+    @date = @event.worked_at
     respond_with @event, location: -> { root_path(date: permitted_params[:worked_at]) }
   end
 
