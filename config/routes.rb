@@ -31,8 +31,5 @@ Rails.application.routes.draw do
     end
 
     resources :reports, only: [:index]
-
   end
-
-  resources :clients
 end
