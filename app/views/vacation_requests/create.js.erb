@@ -1,5 +1,7 @@
 <% if @success %>
-  $('.modal.in').modal('toggle');
+  $('.modal.in').modal('hide');
+  $('body').removeClass('modal-open');
+  $('.modal-backdrop').remove();
   $('#vacationsForUser').closest('.row').replaceWith('<%= escape_javascript render(partial: 'welcome/vacations') %>');
 <% else %>
   $('#addVacation').find('.modal-body')

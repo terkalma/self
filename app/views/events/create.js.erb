@@ -1,5 +1,8 @@
 <% if @success %>
-  $('.modal.in').modal('toggle');
+  $('.modal.in').modal('hide');
+  $('body').removeClass('modal-open');
+  $('.modal-backdrop').remove();
+
   $('#eventsForUser').closest('.row').replaceWith('<%= escape_javascript render(partial: 'welcome/events') %>');
 <% else %>
   $('.modal.in .modal-body')
