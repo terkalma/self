@@ -35,7 +35,7 @@ class EventsController < ApplicationController
 
   def publish_event_to_keen
     if @event && (@event.persisted? || @event.destroyed?)
-      publish_keen collection: :events, event: @event.to_keen( ation: params[:action])
+      publish_keen collection: :events, event: @event.to_keen( action: params[:action])
     end
   rescue
     # don't care about issues with +Keen+
