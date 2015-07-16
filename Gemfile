@@ -15,6 +15,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'audited-activerecord', '~> 4.0'
+
+# 102 / 95 - 4
 
 gem 'figaro'
 

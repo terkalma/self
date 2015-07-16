@@ -11,6 +11,8 @@ class Event < ActiveRecord::Base
   before_create :update_amount
   before_update :update_amount
 
+  audited associated_with: :project
+
   include Aggregate
 
   def user_project
