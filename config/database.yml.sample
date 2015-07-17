@@ -27,3 +27,5 @@ test:
 production:
   <<: *default
   database: clever_cal
+  username: <%= ENV['db_dev_username'] %>
+  password: <%= ENV['db_dev_password'] %>

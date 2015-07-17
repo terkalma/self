@@ -17,8 +17,6 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'audited-activerecord', '~> 4.0'
 
-# 102 / 95 - 4
-
 gem 'figaro'
 
 gem 'therubyracer'
@@ -41,17 +39,23 @@ gem 'hashie'
 
 gem 'axlsx_rails'
 gem 'axlsx_styler'
+gem 'daemons'
 
-group :development, :test do
+group :development do
+  gem 'web-console', '~> 2.0'
+  gem 'byebug'
   gem 'puma'
+end
+
+group :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
   gem 'shoulda-matchers'
-  gem 'codeclimate-test-reporter', require: nil
-
-  gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
+end
+
+group :development, :test do
+  gem 'codeclimate-test-reporter', require: nil
 end
 
