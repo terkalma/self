@@ -48,14 +48,13 @@ group :development do
 end
 
 group :test do
+  gem 'codeclimate-test-reporter', require: nil
+end
+
+group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
   gem 'shoulda-matchers'
   gem 'spring'
 end
-
-group :development, :test do
-  gem 'codeclimate-test-reporter', require: nil
-end
-
