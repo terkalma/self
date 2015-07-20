@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150720123740) do
+ActiveRecord::Schema.define(version: 20150720141227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20150720123740) do
     t.date     "worked_at",                            default: '2015-03-18', null: false
     t.integer  "user_id"
     t.integer  "project_id"
-    t.decimal  "amount",      precision: 10, scale: 3, default: 0.0
+    t.decimal  "amount",      precision: 14, scale: 6, default: 0.0
     t.boolean  "ot",                                   default: false
   end
 
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 20150720123740) do
   add_index "projects", ["slug"], name: "index_projects_on_slug", using: :btree
 
   create_table "rates", force: :cascade do |t|
-    t.decimal  "hourly_rate",     precision: 10, scale: 3
-    t.decimal  "hourly_rate_ot",  precision: 10, scale: 3
+    t.decimal  "hourly_rate",     precision: 12, scale: 4
+    t.decimal  "hourly_rate_ot",  precision: 12, scale: 4
     t.integer  "payable_id"
     t.string   "payable_type"
     t.date     "available_from"
