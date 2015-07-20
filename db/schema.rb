@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20150720123740) do
     t.date     "worked_at",                            default: '2015-03-18', null: false
     t.integer  "user_id"
     t.integer  "project_id"
-    t.decimal  "amount",      precision: 10, scale: 2, default: 0.0
+    t.decimal  "amount",      precision: 10, scale: 3, default: 0.0
     t.boolean  "ot",                                   default: false
   end
 
