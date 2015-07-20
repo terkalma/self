@@ -44,7 +44,7 @@ class UserReportDataTable < BaseDataTable
     [
       link_to(resource['user_name'], edit_admin_user_path(resource['user_id'])),
       number_to_currency(resource['total_amount']),
-      "#{resource['total_hours'].to_f.round 2} hours"
+      "#{resource['total_hours'].to_f.round 3} hours"
     ]
   end
 end

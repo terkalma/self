@@ -55,4 +55,12 @@ RSpec.describe Rate, type: :model do
     rate = FactoryGirl.create :active_rate_for_user, available_from: Date.today
     expect(rate.payable.payable?).to be_truthy
   end
+
+  it 'should be able to set rate with scale: 3' do
+    rate = FactoryGirl.create :active_rate_for_user, available_from: Date.today, hourly_rate: 5.125, hourly_rate_ot: 5.125
+    rate = rate.reload
+
+    expect(rate.hourly_rate).to eq BigDecimal('5.125')
+    expect(rate.hourly_rate_ot).to eq BigDecimal('5.125')
+  end
 end
