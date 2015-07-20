@@ -7,7 +7,13 @@ module Admin
     add_breadcrumb 'Projects', :admin_projects_path
 
     def index
-      @projects = Project.all
+      respond_to do |format|
+        format.json do
+          render json: ProjectDataTable.new(view: view_context, relation: Project)
+        end
+
+        format.html {}
+      end
     end
 
     def create

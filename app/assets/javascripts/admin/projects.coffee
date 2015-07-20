@@ -5,3 +5,15 @@
 $(document).on 'change', '#userRateToggle', (e) ->
   $('#userRate').find('input').val ''
   $('#userRate').toggleClass 'hide'
+
+
+ready = ->
+  $('#projectsTable').dataTable
+    processing: true
+    serverSide: true
+    ajax: $('#projectsTable').data 'source'
+    autoWidth: false
+    order: [[ 1, 'desc' ]]
+
+$(document).ready ready
+$(document).on 'page:load', ready

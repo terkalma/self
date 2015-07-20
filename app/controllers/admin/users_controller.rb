@@ -8,7 +8,13 @@ module Admin
     add_breadcrumb 'Users', :admin_users_path
 
     def index
-      @users = User.all
+      respond_to do |format|
+        format.json do
+          render json: UserDataTable.new(view: view_context, relation: User)
+        end
+
+        format.html {}
+      end
     end
 
     def edit
