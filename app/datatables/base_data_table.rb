@@ -41,12 +41,15 @@ class BaseDataTable
     @collection ||= fetch_collection
   end
 
+  def fetch_collection_without_page
+    @relation.where(search_query).order("#{sort_column} #{sort_direction}")
+  end
+
   def fetch_collection
-    @relation.where(search_query).order("#{sort_column} #{sort_direction}").page(page).per_page per_page
+    fetch_collection_without_page.page(page).per_page per_page
   end
 
   # pagination
-
   def page
     params[:start].to_i / per_page + 1
   end
@@ -56,7 +59,6 @@ class BaseDataTable
   end
 
   # search
-
   def search_fields
     header
   end
@@ -70,7 +72,6 @@ class BaseDataTable
   end
 
   # sorting
-
   def default_sort_column
     header.first
   end

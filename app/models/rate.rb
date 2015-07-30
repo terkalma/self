@@ -4,7 +4,7 @@ class Rate < ActiveRecord::Base
   belongs_to :payable, polymorphic: true, inverse_of: :rates
 
   validates_presence_of :hourly_rate, :hourly_rate_ot, :available_from, :payable
-  validates_numericality_of :hourly_rate, greater_than: 0
+  validates_numericality_of :hourly_rate, greater_than_or_equal_to: 0
   validates_numericality_of :hourly_rate_ot, greater_than_or_equal_to: :hourly_rate
   validate :ensure_latest_available_from, :ensure_available_until_after_available_from
   before_update :update_available_until
