@@ -4,6 +4,16 @@ class EventsController < ApplicationController
 
   after_filter :publish_event_to_keen
 
+  def index
+    respond_to do |format|
+      format.json do
+        collection = current_user.events.joins 'LEFT JOIN projects ON projects.id = events.project_id'
+        render json: EventDataTable.new(view: view_context, relation: collection)
+      end
+      format.html { redirect_to root_path }
+    end
+  end
+
   def create
     @event = Event.new permitted_params
     @success = @event.save
