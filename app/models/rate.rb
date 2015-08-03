@@ -31,7 +31,7 @@ class Rate < ActiveRecord::Base
   def ensure_latest_available_from
     rate = Rate.where(payable: payable).active.first
 
-    if rate && available_from && available_from < rate.available_from
+    if rate && available_from && available_from <= rate.available_from
       errors.add :available_from, "There's a rate set for a later time: #{rate.available_from.asctime}"
     end
   end

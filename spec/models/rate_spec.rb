@@ -63,4 +63,20 @@ RSpec.describe Rate, type: :model do
     expect(rate.hourly_rate).to eq BigDecimal('5.125')
     expect(rate.hourly_rate_ot).to eq BigDecimal('5.125')
   end
+
+  it 'should be latest available_from (<)' do
+    user = FactoryGirl.create :user
+    FactoryGirl.create :active_rate, payable: user, available_from: 7.days.ago
+    rate = FactoryGirl.build :active_rate, payable: user
+
+    expect(rate).not_to be_valid
+  end
+
+  it 'should be latest available_from (==)' do
+    user = FactoryGirl.create :user
+    FactoryGirl.create :active_rate, payable: user
+    rate = FactoryGirl.build :active_rate, payable: user
+
+    expect(rate).not_to be_valid
+  end
 end

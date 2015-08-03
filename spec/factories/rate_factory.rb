@@ -22,6 +22,7 @@ FactoryGirl.define do
       association :payable, factory: :user
     end
 
+    factory :active_rate, traits: [:active]
     factory :active_rate_for_user, traits: [ :rate_for_user, :active ]
     factory :active_rate_for_user_project, traits: [ :rate_for_user_project, :active ]
     factory :expired_rate_for_user, traits: [ :rate_for_user, :expired ]
