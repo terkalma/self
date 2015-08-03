@@ -6,10 +6,12 @@ class Event < ActiveRecord::Base
   validates_numericality_of :minutes, greater_than_or_equal_to: 0, less_than: 60
 
   validates_numericality_of :minutes, greater_than_or_equal_to: 15, less_than: 60,
-                            if: :less_than_an_hour?, message: 'must be greater than or equal to 15 if total is less than an hour'
+                            if: :less_than_an_hour?, message: 'must be greater than or equal to 15 if total is less than an hour!'
 
+  validates_numericality_of :minutes, equal_to: 0, if: :has_worked_a_lot?, message: 'should not work more than 12 hours!'
   before_create :update_amount
   before_update :update_amount
+  validate :ensure_less_than_a_day
 
   audited associated_with: :project
 
@@ -39,6 +41,16 @@ class Event < ActiveRecord::Base
   private
   def less_than_an_hour?
     hours < 1
+  end
+
+  def has_worked_a_lot?
+    hours == 12
+  end
+
+  def ensure_less_than_a_day
+    unless user.events.at(worked_at).total + duration < 24.hours
+      errors.add :hours, "Can't exceed 24 in a day!"
+    end
   end
 
   def update_amount

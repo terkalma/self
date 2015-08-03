@@ -19,7 +19,10 @@ RSpec.describe Admin::EventsController, type: :controller do
       let(:user) do
         user = FactoryGirl.create :user_with_projects, project_count: 1
         FactoryGirl.create :active_rate_for_user, payable: user
-        FactoryGirl.create_list :event, 7, user: user, project: user.projects.first
+
+        7.times do |i|
+          FactoryGirl.create :event, user: user, project: user.projects.first, worked_at: i.days.ago
+        end
         user
       end
 
