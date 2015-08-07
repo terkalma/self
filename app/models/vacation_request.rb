@@ -72,7 +72,7 @@ class VacationRequest < ActiveRecord::Base
       errors.add :vacation_to, r.overlapping_error
     end
 
-    if r = container(requests)
+    if r = contained(requests)
       errors.add :vacation_to, r.overlapping_error
       errors.add :vacation_from, r.overlapping_error
     end
