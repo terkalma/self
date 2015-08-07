@@ -12,7 +12,8 @@ class VacationRequest < ActiveRecord::Base
 
   before_validation :compute_length
   validates_presence_of :vacation_to, :vacation_from
-  validate :not_empty, :vacation_limit, :vacation_dates_in_same_year, :non_overlapping
+  validate :not_empty, :non_overlapping
+  validate :vacation_limit, :vacation_dates_in_same_year, if: :paid?
 
   def unpaid?
     !paid?
@@ -41,8 +42,6 @@ class VacationRequest < ActiveRecord::Base
   end
 
   def vacation_dates_in_same_year
-    return true if unpaid?
-
     unless vacation_from.year == vacation_to.year
       errors.add :vacation_to, 'The two dates are not in the same year.'\
        'Please split the request as they belong to different reporting periods'
@@ -50,8 +49,6 @@ class VacationRequest < ActiveRecord::Base
   end
 
   def vacation_limit
-    return true if unpaid? # no limit validation for unpaid vacations.
-
     available = user.vacation_limit - user.days_on_vacation_this_year
     if length > available
       error_msg = "The vacation length exceeds the number of requestable days(#{available})"
