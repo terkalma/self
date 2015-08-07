@@ -30,6 +30,8 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'responders'
 gem 'breadcrumbs_on_rails'
 
+gem 'mandrill-api'
+
 gem 'will_paginate'
 
 gem 'delayed_job_active_record'
