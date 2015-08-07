@@ -48,6 +48,17 @@ module Admin
       redirect_to action: :edit, id: params[:id]
     end
 
+    #
+    # [TODO] add some error handling here.
+    #
+    def set_limit
+      vacation_limit = VacationLimit.find_or_initialize_by(user_id: params[:id], year: Date.today.year)
+      vacation_limit.limit = params[:user][:vacation_limit].to_i
+      vacation_limit.save
+
+      redirect_to edit_admin_user_path params[:id]
+    end
+
     def accept_vacation
       VacationRequest.find(params[:vacation_id]).approved!
       flash[:notice] = 'Vacation request successfully approved'

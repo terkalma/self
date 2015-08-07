@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
       member do
         patch :remove_project
+        patch :set_limit
         post :add_project
         post :accept_vacation
         post :decline_vacation

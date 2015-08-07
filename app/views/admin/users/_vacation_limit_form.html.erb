@@ -1,0 +1,4 @@
+<%= bootstrap_form_for @user, layout: :inline, url: { action: :set_limit }, html: {style: 'display: inline;'} do |f| %>
+  <%= f.number_field :vacation_limit, hide_label: true %>
+  <%= f.submit 'Go!' %>
+<% end %>
