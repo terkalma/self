@@ -8,6 +8,6 @@ module Clockwork
     "#{job}".constantize.perform_later
   end
 
-  every 1.day, 'WarnUsersJob', at: '17:00', tz: 'CET'
+  every 1.day, 'WarnUsersJob', at: '19:00', tz: 'CET'
 
 end
