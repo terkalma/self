@@ -2,6 +2,9 @@
   <%= f.hidden_field :user_id %>
   <%= f.text_field :vacation_from, class: 'datepicker' %>
   <%= f.text_field :vacation_to, class: 'datepicker' %>
+  <%= f.form_group :paid do %>
+    <%= f.check_box :paid, label: 'Paid' %>
+  <% end %>
   <%= f.submit 'Submit', data: { disable_with: 'Submitting...' } %>
 <% end %>
 
