@@ -48,7 +48,9 @@ class Event < ActiveRecord::Base
   end
 
   def ensure_less_than_a_day
-    unless user.events.at(worked_at).total + duration < 24.hours
+    excluded_ids = self.persisted? ? [id] : []
+
+    unless user.events.at(worked_at).where.not(id: excluded_ids).total + duration < 24.hours
       errors.add :hours, "Can't exceed 24 in a day!"
     end
   end
