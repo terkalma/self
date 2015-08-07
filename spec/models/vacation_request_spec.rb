@@ -51,16 +51,21 @@ RSpec.describe VacationRequest, type: :model do
     end
   end
 
-  it 'should allow 10 free days/year by default for a user' do
-    user = FactoryGirl.create :user
-    expect(user.vacation_limit).to eq 10
-  end
-
   it 'should not be allowed to request more days than available' do
     user = FactoryGirl.create :user
     vacation_request = FactoryGirl.build :vacation_request, from: date, to: date + 20.days, user: user
 
     expect(vacation_request).not_to be_valid
+  end
+
+  it 'should be allowed to request many days after increasing the limit' do
+    user = FactoryGirl.create :user
+    vacation_request = FactoryGirl.build :vacation_request, from: date, to: date + 20.days, user: user
+
+    expect(vacation_request).not_to be_valid
+
+    user.vacation_limits.create year: date.year, limit: 20
+    expect(vacation_request).to be_valid
   end
 
   describe :overlap do

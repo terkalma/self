@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150807165908) do
+ActiveRecord::Schema.define(version: 20150807184431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,17 @@ ActiveRecord::Schema.define(version: 20150807165908) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
+  create_table "vacation_limits", force: :cascade do |t|
+    t.integer  "year",       null: false
+    t.integer  "limit",      null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "vacation_limits", ["user_id", "year"], name: "index_vacation_limits_on_user_id_and_year", unique: true, using: :btree
+  add_index "vacation_limits", ["user_id"], name: "index_vacation_limits_on_user_id", using: :btree
 
   create_table "vacation_requests", force: :cascade do |t|
     t.date     "vacation_from",                null: false
