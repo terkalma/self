@@ -31,6 +31,7 @@ gem 'responders'
 gem 'breadcrumbs_on_rails'
 
 gem 'mandrill-api'
+gem 'clockwork'
 
 gem 'will_paginate'
 

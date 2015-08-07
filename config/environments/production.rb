@@ -78,6 +78,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
 
-  config.action_mailer.default_url_options = { host: 'calendar.my-poll.com' }
+  config.action_mailer.default_url_options = { host: Figaro.env.HOST_FOR_AM }
   config.action_mailer.perform_deliveries = true
 end
