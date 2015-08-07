@@ -8,6 +8,6 @@ module Clockwork
     "#{job}".constantize.perform_later
   end
 
-  every 1.day, 'WarnUsersJob', at: '19:00', tz: 'CET'
+  every 1.day, 'WarnUsersJob', at: '19:00', tz: 'CET', if: lambda { |t| (1..5).include? t.strftime('%w').to_i }
 
 end
