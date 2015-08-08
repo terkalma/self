@@ -1,0 +1,14 @@
+<h4> Hello, </h4>
+
+<p> A vacation has been requested. </p>
+<p> You can evaluate it <%= link_to 'here', "#{edit_admin_user_url(@vacation_request.user_id)}#vacationWrapper" %>
+
+<p><%= '=' * 50 %></p>
+
+<h4>Details:</h4>
+
+<h4>User: <%= @vacation_request.user.email %></h4>
+<h4>From: <%= @vacation_request.vacation_from %></h4>
+<h4>To: <%= @vacation_request.vacation_to %></h4>
+<h4>Number of Days: <%= @vacation_request.length %></h4>
+<h4>Type: <%= @vacation_request.human_type %></h4>
