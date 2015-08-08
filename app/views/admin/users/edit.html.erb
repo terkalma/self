@@ -1,8 +1,7 @@
-<% unless @user.events.empty? %>
-  <%= render partial: 'event_table' %>
-<% end %>
-
-
 <%= render partial: 'projects' %>
 <%= render partial: 'rates' %>
 <%= render partial: 'vacations' %>
+
+<% unless @user.events.empty? %>
+  <%= render partial: 'event_table' %>
+<% end %>
