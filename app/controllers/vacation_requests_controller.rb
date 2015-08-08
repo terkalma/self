@@ -5,7 +5,7 @@ class VacationRequestsController < ApplicationController
   def create
     @vacation_request = VacationRequest.new create_vacation_params
     @success = @vacation_request.save
-    AdminMailer.vacation_request(@vacation_request.id).deliver_later
+    AdminMailer.vacation_request(@vacation_request.id).deliver_later if @success
     respond_with @vacation_request, location: -> { root_path date: @date }
   end
 
