@@ -15,6 +15,22 @@ class VacationRequest < ActiveRecord::Base
   validate :not_empty, :non_overlapping
   validate :vacation_limit, :vacation_dates_in_same_year, if: :paid?
 
+  def approved_with_event_creation!
+    transaction do
+      approved_without_event_creation!
+      paid? && (vacation_from..vacation_to).each do |worked_at|
+        Event.create(
+            worked_at: worked_at,
+            user_id: user_id,
+            hours: 8,
+            description: "#{human_type} vacation",
+            gefroren: true
+        )
+      end
+    end
+  end
+  alias_method_chain :approved!, :event_creation
+
   def unpaid?
     !paid?
   end

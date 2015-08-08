@@ -37,4 +37,12 @@ RSpec.describe Event, type: :model do
     event.hours = 5
     expect(event).not_to be_valid
   end
+
+  it 'should not be able to edit frozen event' do
+    event = FactoryGirl.create :event, hours: 12, user: user
+    expect(event).to be_valid
+
+    event.update_column :gefroren, true
+    expect(event).not_to be_valid
+  end
 end

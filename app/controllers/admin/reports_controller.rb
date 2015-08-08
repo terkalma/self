@@ -20,7 +20,7 @@ module Admin
     private
     def set_dates
       @from = Date.parse(params[:from]) rescue Date.new
-      @to = Date.parse(params[:to]) rescue Date.tomorrow
+      @to = Date.parse(params[:to]) rescue Date.today + 1.year
     end
   end
 end

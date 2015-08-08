@@ -8,18 +8,22 @@
       </a>
     </div>
     <div class="col-xs-2">
-      <%= link_to event_path(event.id), remove_options(method: :delete) do %>
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      <% unless event.gefroren? %>
+        <%= link_to event_path(event.id), remove_options(method: :delete) do %>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        <% end %>
       <% end %>
     </div>
   </div>
 
-  <%= render partial: 'application/modal',
-             locals: {
-                     resource_name: "Event#{event.id}",
-                     resource_id: "Event#{event.id}",
-                     resource_title: 'Event',
-                     body: 'welcome/event_form',
-                     form_params: { event: event }
-             } %>
+  <% unless event.gefroren? %>
+    <%= render partial: 'application/modal',
+               locals: {
+                       resource_name: "Event#{event.id}",
+                       resource_id: "Event#{event.id}",
+                       resource_title: 'Event',
+                       body: 'welcome/event_form',
+                       form_params: { event: event }
+               } %>
+  <% end %>
 </div>

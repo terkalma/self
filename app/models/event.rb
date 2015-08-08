@@ -11,7 +11,7 @@ class Event < ActiveRecord::Base
   validates_numericality_of :minutes, equal_to: 0, if: :has_worked_a_lot?, message: 'should not work more than 12 hours!'
   before_create :update_amount
   before_update :update_amount
-  validate :ensure_less_than_a_day
+  validate :ensure_not_frozen, :ensure_less_than_a_day
 
   audited associated_with: :project
 
@@ -38,6 +38,12 @@ class Event < ActiveRecord::Base
     )
   end
 
+  def destroy
+    raise "Can't destroy frozen event. Are you doing funky stuff?" if gefroren?
+
+    super
+  end
+
   private
   def less_than_an_hour?
     hours < 1
@@ -48,10 +54,19 @@ class Event < ActiveRecord::Base
   end
 
   def ensure_less_than_a_day
-    excluded_ids = self.persisted? ? [id] : []
+    excluded_ids = persisted? ? [id] : []
 
     unless user.events.at(worked_at).where.not(id: excluded_ids).total + duration < 24.hours
       errors.add :hours, "Can't exceed 24 in a day!"
+    end
+  end
+
+  def ensure_not_frozen
+    error_msg = "Can't change this!"
+
+    if persisted? && gefroren?
+      errors.add :project_id, error_msg
+      errors.add :hours, error_msg
     end
   end
 
