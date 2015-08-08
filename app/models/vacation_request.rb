@@ -54,11 +54,12 @@ class VacationRequest < ActiveRecord::Base
       error_msg = 'The period requested does not contain any working days'
       errors.add :vacation_from, error_msg
       errors.add :vacation_to, error_msg
+      return false
     end
   end
 
   def vacation_dates_in_same_year
-    unless vacation_from.year == vacation_to.year
+    if length > 0 && vacation_from.year != vacation_to.year
       errors.add :vacation_to, 'The two dates are not in the same year.'\
        'Please split the request as they belong to different reporting periods'
     end
