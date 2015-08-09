@@ -15,5 +15,7 @@ ready = ->
     autoWidth: false
     order: [[ 1, 'desc' ]]
 
+  $('select').select2()
+
 $(document).ready ready
 $(document).on 'page:load', ready

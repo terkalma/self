@@ -8,3 +8,6 @@ $(document).on 'ready page:load', ->
     columnDefs: [
       className: "visible-lg", "targets": [ 3, 4 ]
     ]
+
+
+  $('select').select2()

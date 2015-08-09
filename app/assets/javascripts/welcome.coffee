@@ -9,3 +9,5 @@ $(document).on 'ready page:load', ->
     e.preventDefault()
     $this = $(this)
     window.location = $this.data('target') + '?date=' + $('.datepicker-container input.datepicker').val()
+
+  $('select').select2()

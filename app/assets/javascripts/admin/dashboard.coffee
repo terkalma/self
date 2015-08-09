@@ -2,6 +2,7 @@ ready = ->
   fromDate = $('#fromDate').find 'input'
   toDate = $('#toDate').find 'input'
   tableSelector = $('#eventsTable')
+  $('select').select2()
 
   table = tableSelector.dataTable
     processing: true

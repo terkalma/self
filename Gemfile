@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'turbolinks', git: 'https://github.com/rails/turbolinks', ref: '3c36267'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'select2-rails'
 
 gem 'devise'
 gem 'omniauth'
