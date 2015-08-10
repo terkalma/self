@@ -20,7 +20,7 @@ class VacationRequest < ActiveRecord::Base
       approved_without_event_creation!
       paid? && (vacation_from..vacation_to).each do |worked_at|
 
-        if (1..6).include? worked_at.wday
+        if (1..5).include? worked_at.wday
           Event.create(
               worked_at: worked_at,
               user_id: user_id,
