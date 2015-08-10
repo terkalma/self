@@ -17,6 +17,8 @@ class Event < ActiveRecord::Base
 
   include Aggregate
 
+  scope :gefroren, -> { where gefroren: true }
+
   def user_project
     @user_project ||= UserProject.find_by_user_id_and_project_id user_id, project_id
   end
@@ -40,7 +42,6 @@ class Event < ActiveRecord::Base
 
   def destroy
     raise "Can't destroy frozen event. Are you doing funky stuff?" if gefroren?
-
     super
   end
 
