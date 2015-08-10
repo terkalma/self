@@ -3,7 +3,7 @@ class VacationRequest < ActiveRecord::Base
 
   enum status: { pending: 0, approved: 1, declined: 2 }
 
-  scope :active_at, ->(d) { approved.where('vacation_from >= ?', d).where('vacation_to <= ?', d) }
+  scope :active_at, ->(d) { approved.where('vacation_from <= ?', d).where('vacation_to >= ?', d) }
   scope :active, -> { active_at(Date.today) }
   scope :this_year, -> { where('vacation_from >= ?', 0.hours.ago.beginning_of_year).order('vacation_from DESC') }
   scope :not_declined, -> { where.not status: statuses[:declined] }
@@ -16,6 +16,8 @@ class VacationRequest < ActiveRecord::Base
   validate :vacation_limit, :vacation_dates_in_same_year, if: :paid?
 
   def approved_with_event_creation!
+    return if approved?
+
     transaction do
       approved_without_event_creation!
       paid? && (vacation_from..vacation_to).each do |worked_at|

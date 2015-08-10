@@ -5,7 +5,9 @@ class WarnUsersJob < ActiveJob::Base
     today = Date.today
 
     User.find_each do |user|
-      UserMailer.warning(user.id).deliver_later if user.projects.any? && user.events.at(today).empty?
+      if user.projects.any? && user.events.at(today).empty? && !user.on_vacation?
+        UserMailer.warning(user.id).deliver_later
+      end
     end
   end
 end
