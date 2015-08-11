@@ -12,6 +12,9 @@
 
     <div class="container-fluid">
         <%= render 'layouts/messages' %>
+        <% if flash[:partial] %>
+          <%= render partial: flash[:partial] %>
+        <% end %>
 
         <%= yield :breadcrumb %>
 

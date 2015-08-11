@@ -1,0 +1,11 @@
+
+<div class="alert bg-danger">
+  The following people have pending vacation requests: <br>
+
+  <% @vacation_requests && @vacation_requests.each do |vr| %>
+    <ul>
+      <li><%= link_to vr.user.name, edit_admin_user_path(vr.user) %></li>
+    </ul>
+  <% end %>
+</div>
+
