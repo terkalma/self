@@ -7,13 +7,6 @@ module ApplicationHelper
     end
   end
 
-  def xls_index_for(row, col)
-    c = 'A'
-    col.to_i.times { c.succ! }
-
-    "#{c}#{row.to_i + 1}"
-  end
-
   def resource_title
     collection_title.singularize
   end

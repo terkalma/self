@@ -2,39 +2,39 @@ require 'axlsx_styler'
 
 workbook = xlsx_package.workbook
 
-workbook.add_worksheet(name: 'Report') do |sheet|
+workbook.add_worksheet(name: 'Details') do |sheet|
   sheet.add_row
 
   sheet.add_row [ '', 'From', @data.table_from ]
   sheet.add_row [ '', 'To', @data.table_to ]
 
   sheet.add_row
+end
 
-  # adding header
-  sheet.add_row do |row|
-    row.add_cell ''
+workbook.add_worksheet(name: 'Report') do |sheet|
+  sheet.add_row [ '' ] + @data.dates.map(&:to_date)
 
-    @data.users.each { |u| row.add_cell u }
-  end
-
-  @data.dates.each do |date|
+  @data.users.each_with_index do |user, i|
     sheet.add_row do |row|
-      row.add_cell date.to_date, type: :date
+      row.add_cell user
 
-      @data.users.each { |u| row.add_cell @data.data[u][date] || 0.0, type: :float }
+      @data.dates.each { |d| row.add_cell @data.data[user][d] || 0.0, type: :float }
+
+      row.add_cell xlsx_sum(xlsx_range i+1, 1, i+1, @data.dimensions.dates)
+      row.add_cell
+
     end
   end
 
-  table_start = sheet.rows.count - (@data.dates.count + 1)
-  table_header = "#{xls_index_for table_start, 1}:#{xls_index_for table_start, @data.dimensions.users }"
+  sheet.add_row
+  sheet.add_row
+  sheet.add_row do |row|
+    row.add_cell 'Total:'
+    row.add_cell xlsx_sum(xlsx_range 1, @data.dimensions.dates+1, @data.dimensions.users, @data.dimensions.dates+1)
+  end
 
-  sheet.column_widths *([10] + [ 20 ] * @data.dimensions.users)
-
-  sheet.add_style table_header, b: true
-  sheet.add_style table_header, bg_color: '95AFBA'
+  sheet.column_widths *([ 20 ] + [ 10 ] * @data.dimensions.dates)
 end
-
-workbook.apply_styles
 
 # use shared strings instead of inlineStrings
 # this is useful for Numbers, which only works with shared strings.
