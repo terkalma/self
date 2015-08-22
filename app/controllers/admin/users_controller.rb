@@ -60,7 +60,8 @@ module Admin
     end
 
     def accept_vacation
-      VacationRequest.find(params[:vacation_id]).approved_by! current_admin
+      vr = VacationRequest.find(params[:vacation_id]).approved_by! current_admin
+      AdminMailer.vacation_request_evaluated(vr.id).deliver_later
       flash[:notice] = 'Vacation request successfully approved'
     rescue
       flash[:alert] = 'Unable to approve vacation request!'
@@ -69,7 +70,8 @@ module Admin
     end
 
     def decline_vacation
-      VacationRequest.find(params[:vacation_id]).declined!
+      vr = VacationRequest.find(params[:vacation_id]).declined_by! current_admin
+      AdminMailer.vacation_request_evaluated(vr.id).deliver_later
       flash[:notice] = 'You decline a vacation request!'
     rescue
       flash[:alert] = 'Unable to decline vacation request :)'
