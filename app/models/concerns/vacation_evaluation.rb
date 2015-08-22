@@ -33,12 +33,14 @@ module VacationEvaluation
   end
 
   def evaluate_by!(admin)
-    return unless admin.admin?
+    return self unless admin.admin?
 
     transaction do
       self.admin = admin
       yield
     end
+
+    self
   end
 
   def unpaid?

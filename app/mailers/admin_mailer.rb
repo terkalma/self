@@ -7,8 +7,8 @@ class AdminMailer < ApplicationMailer
 
   def vacation_request_evaluated(vr_id)
     @vacation_request = VacationRequest.find vr_id
-    @user = VacationRequest.user
-    @admin = VacationRequest.admin
+    @user = @vacation_request.user
+    @admin = @vacation_request.admin
 
     mail to: [Figaro.env.email_address_vacation, @user.email], subject: 'Vacation has been evaluated!'
   end
