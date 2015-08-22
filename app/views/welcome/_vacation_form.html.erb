@@ -2,6 +2,7 @@
   <%= f.hidden_field :user_id %>
   <%= f.text_field :vacation_from, class: 'datepicker' %>
   <%= f.text_field :vacation_to, class: 'datepicker' %>
+  <%= f.text_area :reason, rows: 3 %>
   <%= f.form_group :paid do %>
     <%= f.check_box :paid, label: 'Paid' %>
   <% end %>

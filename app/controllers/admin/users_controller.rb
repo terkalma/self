@@ -60,7 +60,7 @@ module Admin
     end
 
     def accept_vacation
-      VacationRequest.find(params[:vacation_id]).approved!
+      VacationRequest.find(params[:vacation_id]).approved_by! current_admin
       flash[:notice] = 'Vacation request successfully approved'
     rescue
       flash[:alert] = 'Unable to approve vacation request!'

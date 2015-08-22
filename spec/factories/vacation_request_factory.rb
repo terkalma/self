@@ -14,6 +14,8 @@ FactoryGirl.define do
   end
 
   factory :vacation_request do
+
+    reason { 'Vacation Has Been Requested!' }
     user
     approved
     vacation_period

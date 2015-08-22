@@ -13,7 +13,7 @@ class UserReportDataTable < BaseDataTable
     {
       draw: params[:draw].to_i,
       recordsTotal: User.joins(:events).pluck('users.id').uniq.count,
-      recordsFiltered: data.count,
+      recordsFiltered: fetch_collection_without_page.to_a.size,
       aaData: data
     }
   end

@@ -114,4 +114,37 @@ RSpec.describe VacationRequest, type: :model do
       expect(v2).not_to be_valid
     end
   end
+
+  describe :admin do
+    let :admin do
+      admin = FactoryGirl.create :user
+      admin.update_column :admin, true
+
+      admin
+    end
+
+    it 'should record admin' do
+      allow(Time).to receive(:now) { date }
+
+      vacation_request = FactoryGirl.create :vacation_request,
+                                            from: date,
+                                            to: date + 4.days,
+                                            user: admin,
+                                            status: :pending
+      vacation_request.approved_by! admin
+
+      expect(vacation_request.admin).to eq admin
+
+      vacation_request = FactoryGirl.create :vacation_request,
+                                            from: date + 6.days,
+                                            to: date + 9.days,
+                                            user: admin,
+                                            status: :pending
+      vacation_request.declined_by! admin
+
+      expect(vacation_request.admin).to eq admin
+
+      expect(admin.evaluated_vacation_requests.count).to eq 2
+    end
+  end
 end

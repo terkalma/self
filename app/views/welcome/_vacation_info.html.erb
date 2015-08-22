@@ -5,6 +5,7 @@
         <h4 class="list-group-item-heading"><%= vacation.length %> days (<%= vacation.human_type %>)</h4>
         <p class="list-group-item-text"><%= vacation.vacation_from.strftime '%B %d, %Y' %></p>
         <p class="list-group-item-text"><%= vacation.vacation_to.strftime '%B %d, %Y' %></p>
+        <p class="list-group-item-text"><%= vacation.reason %></p>
       </a>
     </div>
     <% unless vacation.approved? %>

@@ -21,6 +21,6 @@ class VacationRequestsController < ApplicationController
 
   private
   def create_vacation_params
-    params.require(:vacation_request).permit :vacation_from, :vacation_to, :paid, :user_id
+    params.require(:vacation_request).permit :vacation_from, :vacation_to, :paid, :user_id, :reason
   end
 end
