@@ -11,13 +11,13 @@
               <%= render partial: 'admin/users/vacation_info', locals: { vacation: vacation } %>
 
               <div class="approve-button">
-                <%= link_to accept_vacation_admin_user_path(@user, vacation_id: vacation.id), remove_options(method: :post) do %>
+                <%= link_to accept_admin_vacation_requests_path(vacation_id: vacation.id), remove_options(method: :post) do %>
                   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 <% end %>
               </div>
 
               <div class="closing-button">
-                <%= link_to decline_vacation_admin_user_path(@user, vacation_id: vacation.id), remove_options(method: :post) do %>
+                <%= link_to decline_admin_vacation_requests_path(vacation_id: vacation.id), remove_options(method: :post) do %>
                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 <% end %>
               </div>

@@ -16,6 +16,13 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :vacation_requests, only: [] do
+      collection do
+        post :accept
+        post :decline
+      end
+    end
+
     resources :users, except: [:new, :create] do
       collection do
         post :add_rate
@@ -25,8 +32,6 @@ Rails.application.routes.draw do
         patch :remove_project
         patch :set_limit
         post :add_project
-        post :accept_vacation
-        post :decline_vacation
         get :event_table, controller: :events
       end
     end

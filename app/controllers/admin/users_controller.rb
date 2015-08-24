@@ -13,8 +13,19 @@ module Admin
           render json: UserDataTable.new(view: view_context, relation: User)
         end
 
-        format.html {}
+        format.html { }
       end
+    end
+
+    #
+    # [TODO] add some error handling here.
+    #
+    def set_limit
+      vacation_limit = VacationLimit.find_or_initialize_by(user_id: params[:id], year: Date.today.year)
+      vacation_limit.limit = params[:user][:vacation_limit].to_i
+      vacation_limit.save
+
+      redirect_to edit_admin_user_path params[:id]
     end
 
     def edit
@@ -46,37 +57,6 @@ module Admin
       flash[:alert] = 'Unable to remove project'
     ensure
       redirect_to action: :edit, id: params[:id]
-    end
-
-    #
-    # [TODO] add some error handling here.
-    #
-    def set_limit
-      vacation_limit = VacationLimit.find_or_initialize_by(user_id: params[:id], year: Date.today.year)
-      vacation_limit.limit = params[:user][:vacation_limit].to_i
-      vacation_limit.save
-
-      redirect_to edit_admin_user_path params[:id]
-    end
-
-    def accept_vacation
-      vr = VacationRequest.find(params[:vacation_id]).approved_by! current_admin
-      AdminMailer.vacation_request_evaluated(vr.id).deliver_later
-      flash[:notice] = 'Vacation request successfully approved'
-    rescue
-      flash[:alert] = 'Unable to approve vacation request!'
-    ensure
-      redirect_to edit_admin_user_path(params[:id])
-    end
-
-    def decline_vacation
-      vr = VacationRequest.find(params[:vacation_id]).declined_by! current_admin
-      AdminMailer.vacation_request_evaluated(vr.id).deliver_later
-      flash[:notice] = 'You decline a vacation request!'
-    rescue
-      flash[:alert] = 'Unable to decline vacation request :)'
-    ensure
-      redirect_to edit_admin_user_path(params[:id])
     end
 
     private
