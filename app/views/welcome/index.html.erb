@@ -27,3 +27,5 @@
     </table>
   </div>
 </div>
+
+<%= react_component('Day', date: @date.to_s, url: events_url(date: @date, format: :json), pollInterval: 2000) %>
