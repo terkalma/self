@@ -7,6 +7,7 @@ class EventsController < ApplicationController
   def index
     respond_to do |format|
       format.json do
+
         render json: {
                    projects: Project.events_for_projects(user: current_user, date: @date),
                    date: @date
