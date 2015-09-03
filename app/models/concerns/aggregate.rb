@@ -48,7 +48,7 @@ module Aggregate
       events.pluck(:worked_at).uniq.each { |e| dates[e] = true }
 
       {
-          date: date,
+          current_date: date,
           dates: dates
       }
     end
