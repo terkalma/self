@@ -1,0 +1,22 @@
+<h4>Yo <%= @user.name %></h4>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Amount</th>
+  </tr>
+
+  <tbody>
+  <% (@from..@to).each do |date| %>
+    <tr>
+      <td><%= date.to_s %></td>
+      <td>$<%= @user.events.at(date).total_amount.to_s %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h4>Total: $<%= @user.events.between(@from, @to).total_amount.to_s %></h4>
+
+<h4>I'M GIVING AWAY BEERS FOR EMAIL TEMPLATES</h4>
+<h4>ALSO THERE"S A LOT OF HANGING REACT WORK. SO STEP UP!!</h4>

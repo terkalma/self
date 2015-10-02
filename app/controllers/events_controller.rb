@@ -7,6 +7,19 @@ class EventsController < ApplicationController
   def index
     respond_to do |format|
       format.json do
+        render json: {
+                   projects: Project.events_for_projects(user: current_user, date: @date),
+                   date: @date
+               }
+      end
+
+      format.html { redirect_to root_path }
+    end
+  end
+
+  def data_table
+    respond_to do |format|
+      format.json do
         collection = current_user.events.joins 'LEFT JOIN projects ON projects.id = events.project_id'
         render json: EventDataTable.new(view: view_context, relation: collection)
       end

@@ -29,6 +29,19 @@ class VacationRequest < ActiveRecord::Base
     "This request is overlapping with an existing one (#{vacation_from}-#{vacation_to})"
   end
 
+  def as_json(*args)
+    {
+        created_at: created_at,
+        updated_at: updated_at,
+        approved_by: admin.try(:name),
+        length: length,
+        vacation_from: vacation_from,
+        vacation_to: vacation_to,
+        reason: reason,
+        status: status
+    }
+  end
+
   private
   def compute_length
     return true unless vacation_from && vacation_to

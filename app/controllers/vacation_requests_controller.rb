@@ -2,6 +2,20 @@ class VacationRequestsController < ApplicationController
   respond_to :html
   respond_to :js, only: [:create]
 
+  def index
+    respond_to do |format|
+      format.json do
+        render json: {
+                      vacation_requests: VacationRequest.statuses.keys.map do |status|
+                          { status =>  current_user.vacation_requests.this_year.send(status) }
+                      end.reduce(:merge)
+               }
+      end
+
+      format.html { redirect_to root_path }
+    end
+  end
+
   def create
     @vacation_request = VacationRequest.new create_vacation_params
     @success = @vacation_request.save
