@@ -2,13 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
 
   root 'welcome#index'
-  
+
   resources :events, only: [:create, :update, :destroy, :index] do
     collection do
-      get :data_table
-    end
-
-    member do
       get :data_table
     end
   end
