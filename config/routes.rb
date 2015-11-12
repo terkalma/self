@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :vacation_requests, only: [] do
+    resources :vacation_requests, only: [:index] do
       collection do
         post :accept
         post :decline

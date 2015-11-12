@@ -1,0 +1,23 @@
+<%= bootstrap_form_tag(url: admin_vacation_requests_path, layout: :inline, method: :get, html: {class:'vacation-filter'}) do |f| %>
+  <%= f.text_field :from_date, value: @from_date, hide_label: true, class: 'datepicker' %>
+  <%= f.text_field :to_date, value: @to_date, hide_label: true, class: 'datepicker' %>
+  <%= f.submit :filter %>
+<% end %>
+
+<table class="table table-bordered" id="vacation-requests-table">
+  <tr>
+    <th>Name</th>
+    <% (from_date..to_date).each do |date| %>
+      <th><%= date.strftime('%d/%m') %></th>
+    <% end %>
+  </tr>
+
+  <% User.vacation_alert(from: from_date, to: to_date, key: :name).each do |user, alerts| %>
+    <tr>
+      <td><%= user %></td>
+      <% (alerts).each do |_, value| %>
+        <td class="<%=vacation_alert_map value %>"></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

@@ -2,6 +2,14 @@ module Admin
   class VacationRequestsController < BaseController
 
     around_filter :evaluate_vacation_request, only: [:accept, :decline]
+    include DateParser
+
+    add_breadcrumb 'Admin', :admin_dashboard_path
+    add_breadcrumb 'Vacations', :admin_vacation_requests_path
+
+    def index
+
+    end
 
     def accept
       @vacation_request.approved_by! current_admin

@@ -4,7 +4,9 @@ class VacationRequest < ActiveRecord::Base
 
   enum status: { pending: 0, approved: 1, declined: 2 }
 
-  scope :active_at, ->(d) { approved.where('vacation_from <= ?', d).where('vacation_to >= ?', d) }
+  scope :at, ->(d) { where('vacation_from <= ?', d).where('vacation_to >= ?', d) }
+  scope :active_at, ->(d) { approved.at(d) }
+  scope :pending_at, -> (d) { pending.at(d) }
   scope :active, -> { active_at(Date.today) }
   scope :this_year, -> { where('vacation_from >= ?', 0.hours.ago.beginning_of_year).order('vacation_from DESC') }
   scope :not_declined, -> { where.not status: statuses[:declined] }
