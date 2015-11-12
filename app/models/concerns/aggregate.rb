@@ -40,8 +40,9 @@ module Aggregate
       ((date - r.days)..(date + r.days)).inject({}) { |h, d| h[d] = at(d).all || []; h }
     end
 
-    def date_stats_from_beginning_of_month(date)
+    def date_stats_from_beginning_of_month(date, user)
       events = Event.where('worked_at >= ? AND worked_at <= ?', date.beginning_of_month, date.end_of_month)
+                    .where(user: user)
       dates = Hash.new
 
       (date.beginning_of_month..date.end_of_month).each { |d| dates[d] = false }
