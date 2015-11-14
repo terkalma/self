@@ -53,5 +53,18 @@ module Aggregate
           dates: dates
       }
     end
+
+    def date_stats_from_beginning_of_month2(date, user)
+      events = Event.where('worked_at >= ? AND worked_at <= ?', date.beginning_of_month, date.end_of_month)
+                    .where(user: user)
+      dates = Hash.new
+
+      (date.beginning_of_month..date.end_of_month).each { |d| dates[d] = false }
+      events.pluck(:worked_at).uniq.each { |e| dates[e] = true }
+
+       return dates
+
+    end
+
   end
 end

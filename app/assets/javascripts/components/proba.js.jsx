@@ -1,4 +1,4 @@
-var Calendar = React.createClass({
+var Proba = React.createClass({
   render: function() {
     var greeting;
     if (this.props.name == "John") {

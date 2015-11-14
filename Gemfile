@@ -44,6 +44,7 @@ gem 'daemons'
 
 gem 'react-rails', '~> 1.0'
 gem 'materialize-sass'
+gem 'material-ui-rails', '~> 0.0.2'
 
 group :development do
   gem 'web-console', '~> 2.0'
