@@ -19,6 +19,7 @@
 //= require react_ujs
 //= require components
 //= require select2
+//= require underscore
 //= require_tree .
 
 $(document).ready(function(){

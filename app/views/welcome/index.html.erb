@@ -1,3 +1,5 @@
+
+
 <h1>Hello bello</h1>
 
 <div class="calendar-container">
@@ -68,4 +70,4 @@
     </table>
 </div>
 
-<%= react_component('Calendar') %>
+<%= react_component('Calendar',  url: root_path(format: 'json', date: @date)) %> 

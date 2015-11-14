@@ -53,5 +53,6 @@ module Aggregate
           dates: dates
       }
     end
+    
   end
 end
