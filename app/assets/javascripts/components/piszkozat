@@ -1,0 +1,45 @@
+<div>
+             {JSON.stringify(this.state.events.dates)}
+           </div>
+
+         var CalendarRender = React.createClass({
+
+  generateDataTable: function() {
+    var firstDay = new Date(this.props.currentDay);
+    var x = new Date(firstDay.setDate(1));
+
+    alert(x);
+    return (x); 
+  },
+
+  render: function() {
+       
+    return (<div className="today">
+        Hi! The first day of the month is {JSON.stringify(this.generateDataTable())}
+      </div>);
+  }
+})
+
+
+
+               for(var x in this.state.events.dates){
+        console.log(this.state.events.current_date);
+          if (this.state.events.dates[x] == true ) 
+            {
+              console.log(this.state.events.dates[x],x);}
+            }
+
+
+       cmponentWillMount: function() {
+      this.loadEventsFromServer();
+      alert('example 1');  
+    },
+
+
+    
+                    React.DOM.tr(null, 
+                        dayNames.map(function (cell) {
+                            return React.DOM.td({ className: "centered"}, null, cell);
+                        })
+                    )    
+                ),

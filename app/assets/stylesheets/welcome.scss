@@ -3,10 +3,22 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .calendar-container {
+
     width: 300px;
 
+    font-weight: bold;
+
     th, td {
+
         padding: 5px;
+
+        height: 30px;
+
+        width: 30px;
+
+        text-align: center;
+
+        cursor: default;
 
         &.right-align {
             text-align: right;
@@ -20,10 +32,33 @@
     span {
         width: 30px;
         height: 30px;
-        line-height: 32px;
+        line-height: 25px;
 
         &.has-event {
             color: #ffffff;
         }
     }
+}
+
+.worked-day {
+
+        background-color: #4CAF50;
+
+        color: white;
+
+}
+
+.current-day {
+
+        background-color: #F44336;
+
+        color: white;
+
+}
+
+.normal-day {
+
+        
+        background-color: #e5e5e5;
+
 }

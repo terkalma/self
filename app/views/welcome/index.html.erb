@@ -69,14 +69,5 @@
         </tbody>
     </table>
 </div>
-<%#=Event.date_stats_from_beginning_of_month(@date, current_user).to_json %>
-<%#=bbb = Event.date_stats_from_beginning_of_month2(@date, current_user)%>
-<%#= bbb.length%>
-<%#=arr = [true,true,false]%>
-<%#= react_component('Proba2', arr) %> 
-<%#= react_component('Proba2') %> 
-<%#= react_component('Calendar', name:"Joh") %> 
-<div id="calendar"></div>
-<div id="calendarbox"></div>
 
-<%= react_component('proba4',  url: root_path(format: 'json', date: @date)) %> 
+<%= react_component('Calendar',  url: root_path(format: 'json', date: @date)) %> 
