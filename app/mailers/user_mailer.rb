@@ -3,7 +3,8 @@ class UserMailer < ApplicationMailer
 
   def warning(user_id)
     @user = User.find user_id
-    
+    @preheader = "I know you're busy, but don't forget to log your hours."
+
     mail to: @user.email, subject: "Just a reminder (#{Time.now.asctime})"
   end
 
@@ -11,6 +12,7 @@ class UserMailer < ApplicationMailer
     @user = User.find user_id
     @from = Date.parse from
     @to = Date.parse to
+    @preheader = "Get Paid - Report!"
 
     mail to: @user.email, subject: 'Report - Someone pliiiiz help me with email templates and FE'
   end
