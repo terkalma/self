@@ -1,4 +1,29 @@
-<h1>Yo <%= @user.name %></h1>
-
-<h4>I know you're busy, but don't forget to log your hours: <%= root_url %></h4>
-<h4>Hope you're having an awesome day!</h4>
+<table class="fluid-row" width="638" align="center" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+    <tr><td height="30" style="font-size: 1px; line-height: 1px;"></td></tr>
+    <tr>
+        <td align="center">
+            <table class="container" width="600" align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;">
+                <tr>
+                    <td align="left" style="font-family: Arial, Helvetica, sans-serif; font-size: 18px; line-height: 20px; color: #000001; font-weight: bold;">Yo <%= @user.name %></td>
+                </tr>
+                <tr><td height="15" style="font-size: 1px; line-height: 1px;"></td></tr>
+                <tr>
+                    <td align="left" style="font-family: Arial, Helvetica, sans-serif; font-size: 18px; line-height: 20px; color: #000001; font-weight: bold;">I know you're busy, but don't forget to log your hours.</td>
+                </tr>
+                <tr><td height="30" style="font-size: 1px; line-height: 1px;"></td></tr>
+                <tr>
+                    <td align="center">
+                        <a href="http://calendar.my-poll.com" target="_blank" title="Calendobot">
+                            <%= link_to image_tag("clock.jpg", class: "fluid-image", alt: "Clock", width: "600", style: "border: 0; display: block;") %>
+                        </a>
+                    </td>
+                </tr>
+                <tr><td height="30" style="font-size: 1px; line-height: 1px;"></td></tr>
+                <tr>
+                    <td align="left" style="font-family: Arial, Helvetica, sans-serif; font-size: 18px; line-height: 20px; color: #000001; font-weight: bold;">Hope you're having an awesome day!</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr><td height="30" style="font-size: 1px; line-height: 1px;"></td></tr>
+</table>

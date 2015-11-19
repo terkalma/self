@@ -1,13 +1,123 @@
-<html>
-  <body>
-    <%= yield %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+    /****** EMAIL CLIENT RESET CSS ********/
+        /* Forces Outlook.com to display emails at full width */
+        .ExternalClass {width:100%;}
+        /* Forces Outlook.com to display normal line spacing */
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+            line-height: 100%;
+        }
+        /* Prevents Webkit and Windows Mobile platforms from changing default font sizes. */
+        body {
+            -webkit-text-size-adjust:none;
+            -ms-text-size-adjust:none;
+            margin:0;
+            padding:0;
+        }
+        table td {border-collapse:collapse;}
+    /****** END RESET CSS ********/
+    </style>
+</head>
+<body>
+<style type="text/css"  media="only screen and (max-width: 480px)">
+    @media screen and (max-width: 480px) {
+        .main-content-wrapper {
+            min-width: 320px !important;
+        }
+        #main-content,
+        #preheader {
+            width: 96% !important;
+        }
+        .container {
+            width: 90% !important;
+        }
+        .fluid-row,
+        .fluid-image {
+            width: 100% !important;
+        }
+        .mobile-hide {
+            display: none !important;
+        }
+    }
+</style>
+<table width="100%" align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;">
+    <tr><td height="25" style="font-size: 1px; line-height: 1px;"></td></tr>
+    <tr>
+        <td class="main-content-wrapper" align="center" style="min-width: 640px;">
+            <!-- MAIN CONTAINER -->
+            <table id="preheader" width="640" align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;">
+                <tr><td height="10" style="font-size: 1px; line-height: 1px;"></td></tr>
+                <tr>
+                    <td align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; line-height: 25px; color: #000001;"><%= @preheader %></td>
+                </tr>
+                <tr><td height="10" style="font-size: 1px; line-height: 1px;"></td></tr>
+            </table>
+            <table id="main-content" width="640" align="center" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border: 2px solid #2d9ad6; background-color: #f6f7f8;">
+                <tr>
+                    <td align="center">
+                        <!-- HEADER -->
+                        <table class="fluid-row" width="638" align="center" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border-bottom: 2px solid #2d9ad6;">
+                            <tr>
+                                <td align="center">
+                                    <%= link_to image_tag("top.png", class: "fluid-image", alt: "Top", width: "640", style: "border: 0; display: block;") %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <a href="http://calendar.my-poll.com" target="_blank" title="Calendobot">
+                                        <%= link_to image_tag("logo.png", class: "fluid-image", alt: "Calendobot", width: "240", style: "border: 0; display: block;") %>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr><td height="15" style="font-size: 1px; line-height: 1px;"></td></tr>
+                        </table>
 
-    <%= '=' * 50 %>
+                        <%= yield %>
 
-    <div>
-      Calendobot <br>
-      <%= root_url %> <br>
-      2015
-    </div>
-  </body>
+                        <table class="fluid-row" width="638" align="center" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border-top: 2px solid #2d9ad6;">
+                            <tr><td height="25" style="font-size: 1px; line-height: 1px;"></td></tr>
+                            <tr>
+                                <td align="center">
+                                    <table class="container" width="600" align="center" cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;">
+                                        <tr>
+                                            <td align="left" style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 14px; color: #000001; font-weight: bold;">
+                                                <a href="http://calendar.my-poll.com" style="text-decoration: none; color: #000001;" target="_blank" title="Calendobot">
+                                                    BWS Calendobot - 2015
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <%= link_to image_tag("bottom.png", class: "fluid-image", alt: "Bottom", width: "640", style: "border: 0; display: block;") %>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- END FOOTER -->
+                    </td>
+                </tr>
+            </table>
+            <!-- END MAIN CONTAINER -->
+        </td>
+    </tr>
+    <tr><td height="25" style="font-size: 1px; line-height: 1px;"></td></tr>
+</table>
+<!-- GMAIL APP FIX -->
+<div style="display:none; white-space:nowrap; font:15px courier; line-height:0;">
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+</div>
+<!-- END GMAIL APP FIX -->
+</body>
 </html>
