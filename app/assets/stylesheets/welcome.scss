@@ -37,9 +37,24 @@
 }
 
 .daily-events-container {
+    border-radius: 25px;
     float:left;
-    width: 500px;
-    height: 600px;
-    padding-left: 30px;
-    background-color: #dddddd;
+    width: 700px;
+    padding: 30px;
+    
+    font-weight: bold;
+
+    th, td {
+        
+    }
+
+    .duration {
+        text-align: center;
+        width: 90px;
+    }
+
+    .total {
+        text-align: right;
+        width: 120px;
+    }
 }
