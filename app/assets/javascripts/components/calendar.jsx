@@ -204,39 +204,43 @@ var SelectedDayEvents = React.createClass({
 
     render: function() {            
         if (this.state.activity) {
-            var projectNames = _.map(this.state.activity.projects, function (k, key) { return key; });
-            var projects = this.state.activity.projects;
-            //_.map(projects, function (k, key) { if (projects[key][0].total) console.log(projects[key][0].total) );
-            // var projects = _.map(this.state.activity.projects, function (k, key) { return k; });
+            var projectNames = _.map(this.state.activity.projects, function (k, key) { return key; })
+                projects = this.state.activity.projects,
+                currentDate = this.props.date.getFullYear()+'-'+this.props.date.getMonth()+'-'+this.props.date.getDate();
             console.log(projects);
-            console.log(projectNames);
 
-            for (var i=0; i<projectNames.length; i++){
-                for (var j=0; j<projects[projectNames[i]].length; j++){
-                    console.log(projects[projectNames[i]][j].description)
-                }
-            }
-        
             return ( 
                 React.DOM.div ( {className:"daily-events-container"}, null,
                     React.DOM.table(null,
                         React.DOM.tbody(null,
-                            _.map(projects, function (k, key) {
-                                return ( 
-                                    React.DOM.tr(null,
-                                        //row.map(function (cell) {
-                                            //return (React.DOM.td({className:"center"}, null, cell))
-                                            (React.DOM.td({className:"center"}, null, key))
-                                            //(React.DOM.td({className:"center"}, null, projects[key][0].total))
-                                        //})
-                                    )
-                                )
+                            React.DOM.tr(null,
+                                React.DOM.td({className:"center", colSpan : 3}, null, currentDate)),
+                            _.map(projects, function (project, projectName) {
+                                if (project.length > 0) {
+                                    return ([
+                                        React.DOM.tr(null,
+                                            React.DOM.td({className:"center", colSpan : 3}, null, projectName)), 
+                                        React.DOM.tr(null,
+                                                    React.DOM.td({className:"aaaa"}, null, "Task description"),
+                                                    React.DOM.td({className:"duration"}, null, "Task duration"),
+                                                    React.DOM.td({className:"total"}, null, "Total earned")
+                                                ), 
+                                        project.map(function (task) {
+                                            return (  
+                                                React.DOM.tr(null,
+                                                    React.DOM.td({className:"aaaa"}, null, task.description),
+                                                    React.DOM.td({className:"duration"}, null, task.duration),
+                                                    React.DOM.td({className:"total"}, null, task.total)
+                                                )
+                                            )
+                                        })
+                                    ])
+                                }
                             })
                         )
                     )                    
                 ) 
             )
-            //return React.DOM.div({className:"daily-events-container"}, null, JSON.stringify(this.state.activity))
         }
         else {   
             return <div>Loading...</div>;
