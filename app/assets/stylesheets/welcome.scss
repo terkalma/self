@@ -40,12 +40,21 @@
     border-radius: 25px;
     float:left;
     width: 700px;
-    padding: 30px;
+    margin: 30px;
+    padding: 10px;
+    background-color: #e8eff5;
     
     font-weight: bold;
 
-    th, td {
-        
+    td {
+        padding: 7px 5px;
+    }
+
+    .task-header {
+        background-color: #2196F3;
+        color: #ffffff;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
 
     .duration {
@@ -56,5 +65,17 @@
     .total {
         text-align: right;
         width: 120px;
+    }
+
+    .date {
+        color: #F44336;
+        padding-bottom: 15px;
+        text-align: center;
+        font-size: 17px;
+    }
+
+    .project-name {
+        text-align: center;
+        font-size: 18px;
     }
 }

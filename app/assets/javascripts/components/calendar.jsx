@@ -181,9 +181,9 @@ var SelectedDayEvents = React.createClass({
     },
 
     componentWillMount: function() {
-         var eventsUrl = '/events.json?date='+this.props.date.getFullYear()+'-'+(this.props.date.getMonth()+1)+'-'+this.props.date.getDate();
+        var eventsUrl = '/events.json?date='+this.props.date.getFullYear()+'-'+(this.props.date.getMonth()+1)+'-'+this.props.date.getDate();
          
-         this.loadEventsFromServer(eventsUrl);
+        this.loadEventsFromServer(eventsUrl);
     },
 
     componentWillReceiveProps: function(nextProps){
@@ -204,43 +204,56 @@ var SelectedDayEvents = React.createClass({
 
     render: function() {            
         if (this.state.activity) {
-            var projectNames = _.map(this.state.activity.projects, function (k, key) { return key; })
-                projects = this.state.activity.projects,
-                currentDate = this.props.date.getFullYear()+'-'+this.props.date.getMonth()+'-'+this.props.date.getDate();
-            console.log(projects);
+            var projects = this.state.activity.projects,
+                currentDate = this.props.date.getFullYear()+'-'+this.props.date.getMonth()+'-'+this.props.date.getDate(),
+                noActivity = true;
 
-            return ( 
-                React.DOM.div ( {className:"daily-events-container"}, null,
-                    React.DOM.table(null,
-                        React.DOM.tbody(null,
-                            React.DOM.tr(null,
-                                React.DOM.td({className:"center", colSpan : 3}, null, currentDate)),
-                            _.map(projects, function (project, projectName) {
-                                if (project.length > 0) {
-                                    return ([
-                                        React.DOM.tr(null,
-                                            React.DOM.td({className:"center", colSpan : 3}, null, projectName)), 
-                                        React.DOM.tr(null,
-                                                    React.DOM.td({className:"aaaa"}, null, "Task description"),
-                                                    React.DOM.td({className:"duration"}, null, "Task duration"),
-                                                    React.DOM.td({className:"total"}, null, "Total earned")
-                                                ), 
-                                        project.map(function (task) {
-                                            return (  
-                                                React.DOM.tr(null,
-                                                    React.DOM.td({className:"aaaa"}, null, task.description),
-                                                    React.DOM.td({className:"duration"}, null, task.duration),
-                                                    React.DOM.td({className:"total"}, null, task.total)
-                                                )
-                                            )
-                                        })
-                                    ])
-                                }
-                            })
+            _.map(projects, function (project, _) {
+                if (project.length > 0) {
+                    noActivity = false;
+                }
+            })
+            if (noActivity) {
+                return (React.DOM.div ({className:"daily-events-container"}, null, 
+                            React.DOM.p({className:"date"} ,null, currentDate),
+                            React.DOM.p({className:"project-name"}, null, 'You have nothing logged for this date.')
                         )
-                    )                    
+                )
+            }
+            else {
+                return (
+                    React.DOM.div ( {className:"daily-events-container"}, null,
+                        React.DOM.table(null,
+                            React.DOM.tbody(null,
+                                React.DOM.tr(null,
+                                    React.DOM.td({className:"date", colSpan : 3}, null, currentDate)),
+                                _.map(projects, function (project, projectName) {
+                                    if (project.length > 0) {
+                                        return ([
+                                            React.DOM.tr(null,
+                                                React.DOM.td({className:"project-name", colSpan : 3}, null, "Project: " + projectName)), 
+                                            React.DOM.tr({className:"task-header"}, null,
+                                                        React.DOM.td(null, "Task description"),
+                                                        React.DOM.td({className:"duration"}, null, "Task duration"),
+                                                        React.DOM.td({className:"total"}, null, "Total earned")
+                                                    ), 
+                                            project.map(function (task) {
+                                                return (  
+                                                    React.DOM.tr(null,
+                                                        React.DOM.td(null, task.description),
+                                                        React.DOM.td({className:"duration"}, null, task.duration),
+                                                        React.DOM.td({className:"total"}, null, task.total)
+                                                    )
+                                                )
+                                            })
+                                        ])
+                                    }
+                                })
+                            )
+                        )                    
+                    )
                 ) 
-            )
+            }
         }
         else {   
             return <div>Loading...</div>;
