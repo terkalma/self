@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   respond_to :html
   respond_to :js, only: [:create, :update]
+  rescue_from ActionController::InvalidAuthenticityToken, with: :handle_invalid_token
 
   after_filter :publish_event_to_keen
 
@@ -63,5 +64,9 @@ class EventsController < ApplicationController
     end
   rescue
     # don't care about issues with +Keen+
+  end
+
+  def handle_invalid_token(error)
+    render json: {error: error.message}, status: :unauthorized
   end
 end

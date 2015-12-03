@@ -145,7 +145,7 @@ var Calendar = React.createClass({
                             )
                         )
                     ),
-                    <SelectedDayEvents date = {this.state.events.currentDate} />
+                    <Day date = {this.state.events.currentDate} />
                 )
             )
         }

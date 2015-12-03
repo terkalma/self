@@ -18,8 +18,12 @@ class Project < ActiveRecord::Base
   end
 
   class << self
+    def empty
+      OpenStruct.new(id: nil, name: 'Project N/A')
+    end
+
     def events_for_projects(user:, date:)
-      user.projects.map do |project|
+      (user.projects.all + [Project.empty]).map do |project|
         events = user.events.at(date).where(project_id: project.id).map do |e|
           {
               duration: e.duration / 3600.0,
