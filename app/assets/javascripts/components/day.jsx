@@ -1,15 +1,17 @@
 var Day = React.createClass({
     propTypes: {
-        date: React.PropTypes.string
+        date: React.PropTypes.string,
+        eventsUrl: React.PropTypes.string
     },
 
     getInitialState: function(){
         return { activity: null };
     },
 
-    loadEventsFromServer: function(url) {
+    loadEventsFromServer: function(date) {
         $.ajax({
-            url: url,
+            url: this.props.eventsUrl,
+            data: {date: date},
             method: 'GET',
             dataType: 'json',
             cache: false,
@@ -23,17 +25,17 @@ var Day = React.createClass({
 
     },
 
-    componentWillMount: function() {
-        var eventsUrl = '/events.json?date='+this.props.date.getFullYear()+'-'+(this.props.date.getMonth()+1)+'-'+this.props.date.getDate();
+    formatDate: function(date) {
+        return (date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate())
+    },
 
-        this.loadEventsFromServer(eventsUrl);
+    componentWillMount: function() {
+        this.loadEventsFromServer(this.formatDate(this.props.date));
     },
 
     componentWillReceiveProps: function(nextProps){
-        var eventsUrl = '/events.json?date='+nextProps.date.getFullYear()+'-'+(nextProps.date.getMonth()+1)+'-'+nextProps.date.getDate();
-
         this.setState({activity: null});
-        this.loadEventsFromServer(eventsUrl);
+        this.loadEventsFromServer(this.formatDate(nextProps.date));
     },
 
     shouldComponentUpdate: function() {
@@ -43,7 +45,6 @@ var Day = React.createClass({
     render: function() {
         if (this.state.activity) {
             var projects = this.state.activity.projects,
-                currentDate = this.props.date.getFullYear()+'-'+this.props.date.getMonth()+'-'+this.props.date.getDate(),
                 noActivity = true;
 
             _.map(projects, function (project, _) {
@@ -54,7 +55,7 @@ var Day = React.createClass({
 
             if (noActivity) {
                 return (React.DOM.div ({className:"daily-events-container"}, null,
-                    React.DOM.p({className:"date"} ,null, currentDate),
+                    React.DOM.p({className:"date"} ,null, this.formatDate(this.props.date)),
                     React.DOM.p({className:"project-name"}, null, 'You have nothing logged for this date.')
                 )
                 )
@@ -63,31 +64,23 @@ var Day = React.createClass({
                 return (
                     React.DOM.div ( {className:"daily-events-container"}, null,
                         React.DOM.table(null,
+                            React.DOM.thead(null,
+                                React.DOM.tr(null,
+                                    React.DOM.th({className:"date", colSpan : 3}, null, this.formatDate(this.props.date))
+                                )
+                            ),
                             React.DOM.tbody(null,
                                 React.DOM.tr(null,
-                                    React.DOM.td({className:"date", colSpan : 3}, null, currentDate)),
-                                _.map(projects, function (project, projectName) {
-                                    if (project.length > 0) {
-                                        return ([
-                                            React.DOM.tr(null,
-                                                React.DOM.td({className:"project-name", colSpan : 3}, null, "Project: " + projectName)),
-                                            React.DOM.tr({className:"task-header"}, null,
-                                                React.DOM.td(null, "Task description"),
-                                                React.DOM.td({className:"duration"}, null, "Task duration"),
-                                                React.DOM.td({className:"total"}, null, "Total earned")
-                                            ),
-                                            project.map(function (task) {
+                                    React.DOM.td(null, 
+                                        _.map(projects, function (project, projectName) {
+                                            if (project.length > 0) {
                                                 return (
-                                                    React.DOM.tr(null,
-                                                        React.DOM.td(null, task.description),
-                                                        React.DOM.td({className:"duration"}, null, task.duration),
-                                                        React.DOM.td({className:"total"}, null, task.total)
-                                                    )
+                                                    <Project projectName={projectName} project={project} />
                                                 )
-                                            })
-                                        ])
-                                    }
-                                })
+                                            }
+                                        })
+                                    )
+                                )  
                             )
                         )
                     )

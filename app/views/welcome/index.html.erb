@@ -1,1 +1,1 @@
-<%= react_component('Calendar',  url: root_path(format: 'json', date: @date)) %> 
+<%= react_component('Calendar', eventsUrl: events_path(format: 'json'), url: root_path(format: 'json', date: @date)) %> 

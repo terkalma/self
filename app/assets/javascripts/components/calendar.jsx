@@ -1,6 +1,7 @@
 var Calendar = React.createClass({
     propTypes: {
-        url: React.PropTypes.string
+        url: React.PropTypes.string,
+        eventsUrl: React.PropTypes.string
     },
 
     getInitialState: function(){
@@ -145,7 +146,7 @@ var Calendar = React.createClass({
                             )
                         )
                     ),
-                    <Day date = {this.state.events.currentDate} />
+                    <Day date = {this.state.events.currentDate} eventsUrl = {this.props.eventsUrl}/>
                 )
             )
         }
