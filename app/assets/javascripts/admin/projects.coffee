@@ -18,7 +18,7 @@ ready = ->
   $('select').select2()
   $('.report-container .datepicker').customDatepicker {}
 
-  $('.report-container form').on 'submit', ->
+  $(document).on 'submit', '.report-container form', ->
     $(this).find('input').prop 'disabled', true
 
 $(document).ready ready
