@@ -16,6 +16,10 @@ ready = ->
     order: [[ 1, 'desc' ]]
 
   $('select').select2()
+  $('.report-container .datepicker').customDatepicker {}
+
+  $('.report-container form').on 'submit', ->
+    $(this).find('input').prop 'disabled', true
 
 $(document).ready ready
 $(document).on 'page:load', ready

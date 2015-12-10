@@ -14,7 +14,8 @@ class EventDataTable < BaseDataTable
       event.amount,
       event.hours,
       event.minutes,
-      event.worked_at.to_s
+      event.worked_at.to_s,
+      event.description
     ]
   end
 

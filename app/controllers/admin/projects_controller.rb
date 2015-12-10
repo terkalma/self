@@ -6,6 +6,10 @@ module Admin
     add_breadcrumb 'Admin', :admin_dashboard_path
     add_breadcrumb 'Projects', :admin_projects_path
 
+    before_filter :load_project, only: [:edit, :report, :remove_user]
+
+    include DateParser
+
     def index
       respond_to do |format|
         format.json do
@@ -16,6 +20,16 @@ module Admin
       end
     end
 
+    def report
+      respond_to do |format|
+        format.html do
+          redirect_to action: :edit, slug: @project.slug
+        end
+
+        format.js {}
+      end
+    end
+
     def create
       @project = Project.new create_project_params
       @success = @project.save
@@ -23,7 +37,6 @@ module Admin
     end
 
     def edit
-      @project = Project.find_by_slug params[:id]
       add_breadcrumb "Editing Project: #{@project.name}", edit_admin_project_path(@project)
     end
 
@@ -34,8 +47,7 @@ module Admin
     end
 
     def remove_user
-      project = Project.find_by_slug params[:slug]
-      UserProject.where(project_id: project.id, user_id: params[:user_id]).destroy_all
+      UserProject.where(project_id: @project.id, user_id: params[:user_id]).destroy_all
       flash[:notice] = 'Person successfully removed'
     rescue
       flash[:alert] = 'Unable to remove the person from the project'
@@ -51,6 +63,10 @@ module Admin
 
     def create_project_params
       params.require(:project).permit(:name)
+    end
+
+    def load_project
+      @project = Project.find_by_slug params[:slug]
     end
   end
 end

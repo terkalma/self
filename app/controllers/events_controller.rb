@@ -3,6 +3,7 @@ class EventsController < ApplicationController
   respond_to :js, only: [:create, :update]
 
   after_filter :publish_event_to_keen
+  before_filter :load_event, only: [:update, :destroy]
 
   def index
     respond_to do |format|
@@ -35,14 +36,12 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event = Event.find params[:id]
     @success = @event.update permitted_params
     @date = @event.worked_at
     respond_with @event, location: -> { root_path(date: permitted_params[:worked_at]) }
   end
 
   def destroy
-    @event = Event.find params[:id]
     @event.destroy
     flash[:notice] = 'Event successfully removed'
   rescue
@@ -52,6 +51,10 @@ class EventsController < ApplicationController
   end
 
   private
+  def load_event
+    @event = Event.find params[:id]
+  end
+
   def permitted_params
     params.require(:event).permit :hours, :minutes, :description, :project_id, :user_id, :worked_at, :ot
   end
