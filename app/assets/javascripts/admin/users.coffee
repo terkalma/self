@@ -10,4 +10,4 @@ $(document).on 'ready page:load', ->
     ]
 
 
-  $('select').select2()
+   $('select').select2()

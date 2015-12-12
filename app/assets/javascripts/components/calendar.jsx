@@ -16,6 +16,7 @@ var Calendar = React.createClass({
             cache: false,
             success: function(data) {
                 this.setState(this.mapData(data));
+                $(document).trigger('react.date-changed', {date: data.current_date});
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -40,7 +41,7 @@ var Calendar = React.createClass({
     },
 
     componentDidMount: function() {
-       this.loadDataFromServer(this.props.url);
+        this.loadDataFromServer(this.props.url);
     },
 
     generateDataTable: function() {
@@ -72,73 +73,48 @@ var Calendar = React.createClass({
 
     dayClicked: function(clickedDate) {
         var currentDate = this.state.events.currentDate,
-            newSelectedDateUrl = "/?date="+currentDate.getFullYear()+'-'+(currentDate.getMonth()+1)+'-'+clickedDate;;   
-            this.loadDataFromServer(newSelectedDateUrl);
+            newSelectedDateUrl = "/?date="+currentDate.getFullYear()+'-'+(currentDate.getMonth()+1)+'-'+clickedDate;
+        this.loadDataFromServer(newSelectedDateUrl);
     },
 
-    render: function(){ 
+    render: function(){
         if (this.state.events) {
-            var dayNames = ['Sun', 'Mon','Tue','Wed','Thu','Fri','Sat'],
-                monthNames = ["January", "February", "March", "April", "May", "June",
-                                "July", "August", "September", "October", "November", "December"],
-                dataTable = this.generateDataTable(),
+            var dataTable = this.generateDataTable(),
                 currentDate = this.state.events.currentDate,
                 currentDay = currentDate.getDate(),
                 currentMonth = currentDate.getMonth(),
                 currentYear = currentDate.getFullYear(),
-                hasWorkedAt = _.map(this.state.events.dates, function (k, _) { return k; }),
-                self = this;
-            return ( 
-                React.DOM.div(null,
-                    React.DOM.div({className: "calendar-container"}, null, 
-                        React.DOM.table(null, 
-                            React.DOM.thead(null,
-                                React.DOM.tr(null, 
-                                    React.DOM.th({className: "center", colSpan : 2}, null,
-                                        React.DOM.span({className:"waves-effect waves-light z-depth-1 hoverable circle blue valign has-event", onClick: self.prevMonth}, '<' )
-                                    ),
-                                    React.DOM.th({ className: "center", colSpan : 3}, null, 
-                                        React.DOM.span(null, monthNames[currentMonth] + ', ' + currentYear )
-                                    ),
-                                    React.DOM.th({ className: "center", colSpan : 2}, null,
-                                        React.DOM.span({className:"waves-effect waves-light z-depth-1 hoverable circle blue valign has-event", onClick: self.nextMonth}, '>' )
-                                    )
-                                ),    
-                                React.DOM.tr(null, 
-                                    dayNames.map(function (cell) {
-                                        return React.DOM.td(null, cell);
-                                    })
-                                )    
-                            ),
+                hasWorkedAt = _.map(this.state.events.dates, function (k, _) {
+                    return k;
+                }),
+                self = this,
+                calendar_day_key = 0;
+
+            return (
+                React.DOM.div({className: 'row s12 main-container'}, null,
+                    React.DOM.div({className: "calendar-container col s12 l5"}, null,
+                        React.DOM.table(null,
+                            <CalendarHeader
+                                key='calendar-header'
+                                month={currentMonth}
+                                year={currentYear}
+                                nextMonthHandler={self.nextMonth}
+                                prevMonthHandler={self.prevMonth}/>,
                             React.DOM.tbody(null,
                                 dataTable.map(function (row) {
+
+                                    var row_key = row.join();
+
                                     return (
-                                        React.DOM.tr(null, 
+                                        React.DOM.tr({key: row_key}, null,
                                             row.map(function (cell) {
-                                                if (cell == 0) {
-                                                    return React.DOM.td({ className: '' }, null, '');
-                                                } else if (cell == currentDay) {
-                                                    return ( 
-                                                        React.DOM.td({className: "center"}, null,
-                                                            React.DOM.span({ className: "waves-effect waves-light z-depth-1 hoverable circle red valign has-event", onClick: function() {self.dayClicked(cell)}}, null, cell)
-                                                        )
-                                                    )
-                                                } else {
-                                                    if (hasWorkedAt[cell - 1]){
-                                                        return (
-                                                            React.DOM.td({className: "center"}, null,
-                                                                React.DOM.span({className:"waves-effect waves-light z-depth-1 hoverable circle green valign has-event", onClick: function() {self.dayClicked(cell)}}, null, cell)
-                                                            )
-                                                        )
-                                                    }
-                                                    else {
-                                                        return (
-                                                            React.DOM.td({ className: "center" }, null,
-                                                                React.DOM.span({onClick: function() {self.dayClicked(cell)}}, null, cell)
-                                                            )
-                                                        )
-                                                    }
-                                                }
+                                                calendar_day_key += 1;
+                                                return <CalendarDay
+                                                    key={calendar_day_key}
+                                                    hasWorkedAt={hasWorkedAt[cell - 1]}
+                                                    isActive={(cell == currentDay)}
+                                                    onDayClicked={self.dayClicked}
+                                                    index={cell}/>
                                             })
                                         )
                                     );
@@ -146,12 +122,11 @@ var Calendar = React.createClass({
                             )
                         )
                     ),
-                    <Day date = {this.state.events.currentDate} eventsUrl = {this.props.eventsUrl}/>
+                    React.DOM.div({className: "s12 l7 col"}, null, <Day date = {this.state.events.currentDate} eventsUrl = {this.props.eventsUrl}/>)
                 )
             )
-        }
-        else {   
+        } else {
             return <div>Loading...</div>;
-        }  
+        }
     }
 });

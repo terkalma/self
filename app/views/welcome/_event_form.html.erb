@@ -1,12 +1,55 @@
-<%= bootstrap_form_for event, namespace: event.persisted? ? "edit_event_#{event.id}" : 'new_event', remote: true do |f| %>
-  <%= f.hidden_field :worked_at, value: @date || event.worked_at %>
-  <%= f.hidden_field :user_id %>
-  <%= f.text_area :description %>
-  <%= f.select :hours, (0..12).to_a %>
-  <%= f.select :minutes, (0...60).step(15).to_a %>
-  <%= f.collection_select :project_id, current_user.projects, :id, :name %>
-  <%= f.form_group :ot do %>
-    <%= f.check_box :ot, label: 'Overtime' %>
-  <% end %>
-  <%= f.submit 'Submit', data: { disable_with: 'Submitting...' } %>
-<% end %>
+<div class="daily-events-container">
+  <div class="row">
+    <p class="project-name">Add a new event</p>
+    <%= form_for event, html:{class: 'col s12'}, namespace: event.persisted? ? "edit_event_#{event.id}" : 'new_event', remote: true do |f| %>
+      <div id="date-input-container">
+        <%= react_component('DateInput', date: @date) %>
+      </div>
+      <%= f.hidden_field :user_id %>
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.text_area :description, class: "materialize-textarea validate #{validation_class(event, :description)}" %>
+          <%= f.label 'Description' %>
+          <%= validation_message(event, :description) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6" >
+          <%= f.number_field :hours, min: 0, max: 12, step: 1, class: "validate #{validation_class(event, :hours)}" %>
+          <%= f.label 'Hours' %>
+          <%= validation_message(event, :hours) %>
+        </div>
+
+        <div class="input-field col s6">
+          <%= f.select :minutes, (0...60).step(15).to_a, {}, {class: "validate #{validation_class(event, :minutes)}"} %>
+          <%= f.label 'Minutes' %>
+          <%= validation_message(event, :minutes) %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <%= f.collection_select :project_id, current_user.projects, :id, :name, {}, {class: "validate #{validation_class(event, :project_id)}"} %>
+          <%= f.label 'Project' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <%= f.check_box :ot, include_hidden: false, class: "validate #{validation_class(event, :ot)}" %>
+          <%= f.label :ot, class: 'label' do %>
+            Overtime
+          <% end %>
+          <%= validation_message(event, :ot) %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.submit 'Submit', data: { disable_with: 'Submitting...' }, class: 'btn' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

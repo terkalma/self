@@ -24,6 +24,11 @@ gem 'figaro'
 gem 'therubyracer'
 
 gem 'jquery-datatables-rails', '~> 3.3.0'
+gem 'turbolinks', github: 'rails/turbolinks'
+
+gem 'bootstrap-sass', '~> 3.3.3'
+gem 'bootstrap_form'
+gem 'bootstrap-datepicker-rails'
 
 gem 'friendly_id', '~> 5.1.0'
 gem 'responders'

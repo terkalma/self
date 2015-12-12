@@ -1,12 +1,10 @@
 <% if @success %>
-  $('.modal.in').modal('hide');
-  $('body').removeClass('modal-open');
-  $('.modal-backdrop').remove();
-
-  $('#eventsForUser').closest('.row').replaceWith('<%= escape_javascript render(partial: 'welcome/events') %>');
+  window.location = window.location
 <% else %>
-  $('.modal.in .modal-body')
+  $('#new-event-form-container')
         .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @event }) %>');
+  $('select').material_select('destroy');
+  $('select').material_select();
 <% end %>
 
 /*

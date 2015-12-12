@@ -1,6 +1,6 @@
 var Day = React.createClass({
     propTypes: {
-        date: React.PropTypes.string,
+        date: React.PropTypes.instanceOf(Date),
         eventsUrl: React.PropTypes.string
     },
 
@@ -75,7 +75,7 @@ var Day = React.createClass({
                                         _.map(projects, function (project, projectName) {
                                             if (project.length > 0) {
                                                 return (
-                                                    <Project projectName={projectName} project={project} />
+                                                    <Project key={projectName} projectName={projectName} project={project} />
                                                 )
                                             }
                                         })

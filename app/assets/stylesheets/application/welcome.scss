@@ -2,10 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.main-container {
+  margin-top: 30px;
+}
+
 .calendar-container {
-    float: left;
-    width: 350px;
-    height: 280px;
     font-weight: bold;
     
 
@@ -37,13 +38,10 @@
 }
 
 .daily-events-container {
+    width: 100%;
     border-radius: 25px;
-    float:left;
-    width: 700px;
-    margin: 30px;
-    padding: 10px;
     background-color: #e8eff5;
-    
+
     font-weight: bold;
 
     td {
@@ -78,4 +76,10 @@
         text-align: center;
         font-size: 18px;
     }
+}
+
+label.error {
+  color: red;
+  margin-top: 40px;
+  font-size: 12px;
 }
