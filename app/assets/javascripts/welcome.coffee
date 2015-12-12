@@ -10,4 +10,4 @@ $(document).on 'ready page:load', ->
   #   $this = $(this)
   #   window.location = $this.data('target') + '?date=' + $('.datepicker-container input.datepicker').val()
 
-  # $('select').select2()
+  # $('select').material_select()

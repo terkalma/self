@@ -2,7 +2,7 @@ ready = ->
   fromDate = $('#fromDate').find 'input'
   toDate = $('#toDate').find 'input'
   tableSelector = $('#eventsTable')
-  $('select').select2()
+  $('select').material_select()
 
   table = tableSelector.dataTable
     processing: true

@@ -78,4 +78,27 @@
         text-align: center;
         font-size: 18px;
     }
+
+    .label {
+        padding-bottom: 15px;
+    }
+
+    .overtime-checkbox {
+        position: relative !important;
+        left: 0 !important;
+        top: 20px;
+        visibility: visible !important;
+    }
+}
+
+.input-field {
+    .label {
+        top: -0.2rem;
+    }
+}
+
+.waves-button-input {
+    border: none;
+    background-color: #26a69a;
+    font-style: normal;
 }
