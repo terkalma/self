@@ -1,1 +1,3 @@
 <%= react_component('Calendar', eventsUrl: events_path(format: 'json'), url: root_path(format: 'json', date: @date)) %> 
+
+<%= render partial: 'welcome/event_form', locals: { event: current_user.events.new } %>

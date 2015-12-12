@@ -15,7 +15,7 @@ ready = ->
     autoWidth: false
     order: [[ 1, 'desc' ]]
 
-  $('select').select2()
+  $('select').material_select()
 
 $(document).ready ready
 $(document).on 'page:load', ready
