@@ -4,3 +4,4 @@
 
 $(document).on 'ready page:load', ->
   $('.vacation-filter .datepicker').customDatepicker {}
+  $('.holiday-form .datepicker').customDatepicker {}

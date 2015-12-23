@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       collection do
         post :accept
         post :decline
+        post :holiday
       end
     end
 

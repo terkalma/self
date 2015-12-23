@@ -1,0 +1,10 @@
+<div class="col-lg-3 col-sm-12">
+  <label class="error"><%= @holiday.full_error_message %></label>
+  <label class="success"><%= @holiday.success_message %></label>
+  <%= bootstrap_form_tag(url: holiday_admin_vacation_requests_path, method: :post, remote: true, html: {class:'holiday-form'}) do |f| %>
+    <%= f.text_field :from_date, value: @holiday.from_date, placeholder: 'From Date', hide_label: true, class: 'datepicker' %>
+    <%= f.text_field :to_date, value: @holiday.to_date, placeholder: 'To Date', hide_label: true, class: 'datepicker' %>
+    <%= f.text_area :message, value: @holiday.message, placeholder: 'Vacation Message (e.g.: Happy Holidays!!)', hide_label: true %>
+    <%= f.submit :Submit!, data: {disable_with: 'Submitting...', confirm: 'Are you sure?'} %>
+  <% end %>
+</div>

@@ -24,7 +24,8 @@ class Rate < ActiveRecord::Base
 
   private
   def update_events
-    user.events.between(available_from, available_until).each(&:save)
+    # bypass validation in order modify frozen events too.
+    user.events.between(available_from, available_until).each { |e| e.send(:update_amount); e.save(validate: false) }
     true
   end
 
