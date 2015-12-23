@@ -36,4 +36,18 @@ module ApplicationHelper
         style: 'float: right;'
     }.merge options
   end
+
+  def validation_class(object, column)
+    (object && object.errors[column].present?) ? 'invalid' : ''
+  end
+
+  def validation_message(object, column)
+    label = <<-HTML
+      <label class="validation error">
+        #{object && object.errors[column].join('. ')}
+      </label>
+    HTML
+
+    label.html_safe
+  end
 end
