@@ -37,7 +37,7 @@
     }
 }
 
-.daily-events-container {
+.vacation-requests-container, .daily-events-container {
     width: 100%;
     border-radius: 25px;
     background-color: #e8eff5;
@@ -79,24 +79,28 @@
         font-size: 18px;
     }
 
+}
+
+.vacation-requests-container {
+
     .vacation-date {
-        width: 20%;
+      width: 20%;
     }
 
     .vacation-duration {
-        width: 10%;
+      width: 10%;
     }
 
     .vacation-pending {
-        background-color: #ffeb3b;
+      background-color: #ffeb3b;
     }
 
     .vacation-approved {
-        background-color: #4CAF50;
+      background-color: #4CAF50;
     }
 
     .vacation-declined {
-        background-color: #F44336;
+      background-color: #F44336;
     }
 }
 

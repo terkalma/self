@@ -8,4 +8,18 @@ module VacationRequestsHelper
       'btn-danger'
     end
   end
+
+  def validation_class(vacation_request, column)
+    (vacation_request && vacation_request.errors[column].present?) ? 'invalid' : ''
+  end
+
+  def validation_message(vacation_request, column)
+    label = <<-HTML
+      <label class="validation error">
+        #{ vacation_request && vacation_request.errors[column].join('. ')}
+      </label>
+    HTML
+
+    label.html_safe
+  end
 end
