@@ -1,13 +1,40 @@
-<%= bootstrap_form_for vacation, url: { controller: :vacation_requests, action: :create }, remote: true do |f| %>
-  <%= f.hidden_field :user_id %>
-  <%= f.text_field :vacation_from, class: 'datepicker' %>
+<div class="daily-events-container">
   <div class="row">
+    <p class="project-name">Add a new vacation request</p>
+    <%= form_for vacation, html:{class: 'col s12'},  url: { controller: :vacation_requests, action: :create }, remote: true do |f| %>
+      <%= f.hidden_field :user_id %>
+      <div class="row">
         <div class="input-field col s12">
- 			<%= f.text_field :vacation_to, class: 'materialize-textarea' %>
-  <%= f.text_area :reason, rows: 3 %>
-  <%= f.form_group :paid do %>
-    <%= f.check_box :paid, label: 'Paid' %>
-  <% end %>
-  <%= f.submit 'Submit', data: { disable_with: 'Submitting...' } %>
-<% end %>
+          <%= f.text_field :vacation_from, class: 'datepicker' %>
+          <%= f.label 'Vacation from' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.text_field :vacation_to, class: 'datepicker' %>
+          <%= f.label 'Vacation to' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <%= f.text_area :reason, class: "materialize-textarea" %>
+            <%= f.label 'Reason' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <%= f.check_box :paid, include_hidden: false %>
+          <%= f.label :paid, class: 'label' do %>
+            Paid
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.submit 'Submit', data: { disable_with: 'Submitting...' }, class: 'btn' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 

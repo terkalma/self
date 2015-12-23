@@ -1,10 +1,8 @@
 <% if @success %>
-  $('.modal.in').modal('hide');
-  $('body').removeClass('modal-open');
-  $('.modal-backdrop').remove();
+  window.location = window.location
   $('#vacationsForUser').closest('.row').replaceWith('<%= escape_javascript render(partial: 'welcome/vacations') %>');
 <% else %>
-  $('#addVacation').find('.modal-body')
+  $('#new-vacation-form-container')
         .html('<%= escape_javascript render(partial: 'welcome/vacation_form', locals: { vacation: @vacation_request }) %>');
 <% end %>
 
