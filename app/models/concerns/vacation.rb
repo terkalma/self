@@ -12,6 +12,39 @@ module Vacation
     def vacationing
       self.where id: VacationRequest.active.pluck(:user_id).uniq
     end
+
+    def vacation_alert_at(date, key: :email)
+      Rails.cache.fetch "#{date}-#{VacationRequest.at(date).last.try(:updated_at)}" do
+        join_clause = <<-SQL
+          LEFT JOIN vacation_requests as vr ON (vr.user_id = users.id
+          AND vr.vacation_from <= '#{date}'
+          AND vr.vacation_to >= '#{date}'
+          AND vr.status <> #{VacationRequest.statuses[:declined]})
+        SQL
+
+        select_clause = <<-SQL
+          array_to_string(array_agg(distinct vr.status), ' ') as vacation_alert, users.*
+        SQL
+
+        joins(join_clause).group('users.id').select(select_clause).map do |u|
+            [(u.send(key) || 'default'), u.vacation_alert]
+        end
+      end
+    end
+
+    def vacation_alert(from:, to:, key: :email)
+      mapping = {}
+
+      (from..to).each do |date|
+        vacation_alert_at(date, key: key).reduce(mapping) do |mapping, user|
+          mapping[user[0]] ||= {}
+          mapping[user[0]][date.to_s] = user[1]
+          mapping
+        end
+      end
+
+      mapping
+    end
   end
 
   def vacation_limit
@@ -28,6 +61,13 @@ module Vacation
 
   def vacation_days_left
     vacation_limit - days_on_vacation_this_year
+  end
+
+  def vacation_status(date=Date.today)
+    return 'active' if vacation_requests.active_at(date).count > 0
+    return 'peding' if vacation_requests.pending_at(date).count > 0
+
+    'working'
   end
 
   #

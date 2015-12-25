@@ -18,17 +18,22 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'dashboard#index', as: :dashboard
 
-    resources :projects, except: [:show, :new, :update] do
+    resources :projects, param: :slug, sexcept: [:show, :new, :update] do
+      member do
+        get :report
+      end
+
       collection do
         post :add_user
         patch :remove_user
       end
     end
 
-    resources :vacation_requests, only: [] do
+    resources :vacation_requests, only: [:index] do
       collection do
         post :accept
         post :decline
+        post :holiday
       end
     end
 

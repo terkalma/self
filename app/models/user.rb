@@ -30,6 +30,19 @@ class User < ActiveRecord::Base
     }
   end
 
+  def report(project:, from:, to:)
+    query = <<-SQL
+      SELECT string_agg(e.description, '\n ') as description, e.worked_at FROM events as e
+      WHERE user_id = #{id} AND e.project_id = #{project.id.to_i}
+      AND worked_at >= '#{from.beginning_of_day.strftime '%Y-%m-%d %H:%M:%S'}'
+      AND worked_at <= '#{to.end_of_day.strftime '%Y-%m-%d %H:%M:%S'}'
+      GROUP BY e.worked_at
+      ORDER BY e.worked_at ASC
+    SQL
+
+    ActiveRecord::Base.connection.execute(query).to_a.select { |e| e['description'].present? }
+  end
+
   private
   def set_admin_flag
     admins = Figaro.env.admins.split(',').map &:strip

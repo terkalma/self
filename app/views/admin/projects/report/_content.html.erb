@@ -1,0 +1,12 @@
+<% @project.users.each do |user| %>
+  <% report = user.report(project: @project, from: @from_date, to: @to_date) %>
+  <% if report.any? %>
+    <hr>
+    <h3><%= user.name %></h3>
+
+    <% report.each do |line| %>
+      <h4><%= line['worked_at'] %></h4>
+      <h5><%= line['description'] %></h5>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,3 +1,7 @@
+<div class="row">
+  <%= render partial: 'admin/projects/report/index' %>
+</div>
+
 <% content_for :list_items do %>
   <% @project.user_projects.includes(:user).each do |user_project| %>
     <%= render partial: 'user_info', locals: { user: user_project.user, user_project: user_project } %>

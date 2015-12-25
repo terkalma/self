@@ -79,5 +79,6 @@ Rails.application.configure do
 
 
   config.action_mailer.default_url_options = { host: Figaro.env.HOST_FOR_AM }
+  config.action_mailer.asset_host = "http://#{Figaro.env.HOST_FOR_AM}"
   config.action_mailer.perform_deliveries = true
 end

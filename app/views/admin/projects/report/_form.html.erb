@@ -1,0 +1,5 @@
+<%= bootstrap_form_tag(url: report_admin_project_path(@project, format: :js), layout: :inline, method: :get, remote: true) do |f| %>
+  <%= f.text_field :from_date, value: @from_date, hide_label: true, class: 'datepicker', placeholder: :from %>
+  <%= f.text_field :to_date, value: @to_date, hide_label: true, class: 'datepicker', placeholder: :to %>
+  <%= f.submit 'Generate Report!' %>
+<% end %>
