@@ -1,0 +1,52 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+label.error {
+  color: $error-color;
+  margin-top: 40px;
+  font-size: 12px;
+}
+
+.card {
+  margin-top: 50px;
+  overflow: visible;
+}
+
+#calendar-modal {
+  background-color: transparent;
+  max-width: 400px;
+
+  .modal-content {
+    padding: 2%;
+
+    &.calendar-container {
+      width: 96%;
+      margin: 0 auto;
+
+      th, td {
+        cursor: default;
+      }
+
+      font-weight: bold;
+
+      span {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}
+
+
+.absolute-btn {
+  position: absolute;
+  right: 10px;
+  bottom: -18px;
+}
+
+.absolute-btn-large {
+  position: absolute;
+  right: 20px;
+  bottom: -27px;
+}

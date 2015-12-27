@@ -11,60 +11,17 @@
  * file per style scope.
  *
  *= require_self
- *= require_tree ./application
+ *= require application/main
  */
 
-@import "materialize/components/color";
-@import "materialize";
-
-// set base color of the templates
-$primary-color: color("blue") !default;
-$primary-color-light: false !default;
-$primary-color-dark: false !default;
-
-@if not $primary-color-light {
-    $primary-color-light: lighten($primary-color, 15%);
-}
-
-@if not $primary-color-dark {
-    $primary-color-dark: darken($primary-color, 15%);
-}
-
-$secondary-color: color("teal", "lighten-1") !default;
-$success-color: color("green", "base") !default;
-$error-color: color("red", "base") !default;
-
 .distancer { padding: 10px;}
-
-.dataTables_wrapper .dataTables_paginate .paginate_button { padding: 0px !important; }
-
 .margin-bottom-20 { margin-bottom: 20px; }
 .margin-top-20 { margin-top: 20px; }
 .center { text-align: center; }
 
-.list-group-item {
-  a { color: #555; &:hover { text-decoration: none; }}
-}
-
-.approve-button, .closing-button {
+.loading {
+  top: 50%;
+  left: 50%;
   position: absolute;
-  right: 15px;
-  top: 10px;
-}
-
-.approve-button { right: 55px; }
-
-p {
-  word-wrap: break-word;
-  white-space: normal;
-}
-
-.no-hover {
-    &:hover {
-        background: transparent;
-    }
-}
-
-.waves-effect.waves-blue .waves-ripple {
-    background-color: rgba(100, 181, 246, .65);
+  z-index: 1000;
 }

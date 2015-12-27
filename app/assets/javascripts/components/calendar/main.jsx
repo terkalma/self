@@ -81,52 +81,42 @@ var Calendar = React.createClass({
         if (this.state.events) {
             var dataTable = this.generateDataTable(),
                 currentDate = this.state.events.currentDate,
-                currentDay = currentDate.getDate(),
                 currentMonth = currentDate.getMonth(),
                 currentYear = currentDate.getFullYear(),
                 hasWorkedAt = _.map(this.state.events.dates, function (k, _) {
                     return k;
                 }),
-                self = this,
-                calendar_day_key = 0;
+                self = this;
 
             return (
-                React.DOM.div({className: 'row s12 main-container'}, null,
-                    React.DOM.div({className: "calendar-container col s12 l5"}, null,
-                        React.DOM.table(null,
-                            <CalendarHeader
-                                key='calendar-header'
-                                month={currentMonth}
-                                year={currentYear}
-                                nextMonthHandler={self.nextMonth}
-                                prevMonthHandler={self.prevMonth}/>,
-                            React.DOM.tbody(null,
-                                dataTable.map(function (row) {
-
-                                    var row_key = row.join();
-
-                                    return (
-                                        React.DOM.tr({key: row_key}, null,
-                                            row.map(function (cell) {
-                                                calendar_day_key += 1;
-                                                return <CalendarDay
-                                                    key={calendar_day_key}
-                                                    hasWorkedAt={hasWorkedAt[cell - 1]}
-                                                    isActive={(cell == currentDay)}
-                                                    onDayClicked={self.dayClicked}
-                                                    index={cell}/>
-                                            })
-                                        )
-                                    );
-                                })
-                            )
-                        )
-                    ),
-                    React.DOM.div({className: "s12 l7 col"}, null, <Day date = {this.state.events.currentDate} eventsUrl = {this.props.eventsUrl}/>)
-                )
+                <div className="row s12 main-container">
+                    <div id="calendar-modal" className="modal">
+                        <div className="modal-content calendar-container">
+                            <table className="centered">
+                                <CalendarHeader
+                                    key='calendar-header'
+                                    month={currentMonth}
+                                    year={currentYear}
+                                    nextMonthHandler={self.nextMonth}
+                                    prevMonthHandler={self.prevMonth}/>
+                                <CalendarBody
+                                    key='calendar-body'
+                                    currentDate={currentDate}
+                                    hasWorkedAt={hasWorkedAt}
+                                    onDayClicked={self.dayClicked}
+                                    dataTable={dataTable}/>
+                            </table>
+                        </div>
+                    </div>
+                    <div className="col s12">
+                        <Day
+                            date={this.state.events.currentDate}
+                            eventsUrl={this.props.eventsUrl}/>
+                    </div>
+                </div>
             )
         } else {
-            return <div>Loading...</div>;
+            return <Loading/>;
         }
     }
 });

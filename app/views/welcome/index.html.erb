@@ -6,3 +6,9 @@
 <div id="new-vacation-form-container">
   <%= render partial: 'welcome/vacation_form', locals: { vacation: current_user.vacation_requests.new } %>
 </div>
+
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="right-align btn-floating btn-large waves-effect waves-light red modal-trigger" href="#calendar-modal">
+    <i class="material-icons">today</i>
+  </a>
+</div>

@@ -19,8 +19,6 @@
 //= require_tree ./application
 
 $(document).ready(function(){
-    $('.menu-sidebar-collapse').click(function(e){
-        e.preventDefault();
-        $('#left-sidebar-nav').toggleClass('open');
-    });
+    $(".button-collapse").sideNav();
+    $('.modal-trigger').leanModal();
 });
