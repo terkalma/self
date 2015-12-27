@@ -25,6 +25,7 @@ var VacationRequests = React.createClass({
 
     componentDidUpdate: function() {
         $('ul.tabs').tabs();
+        $('.vacation-modal').leanModal();
     },
 
     componentWillMount: function() {
@@ -34,10 +35,11 @@ var VacationRequests = React.createClass({
     vacationRequestTab: function(status, requests) {
         var key = 0,
             presentedRequests = requests.map(function (request) {
+                key += 1;
                 return <Request key={status+key} className={"vacation-" + status} request={request}/>
             });
 
-        return <div id={status + "-vacations"} className="col s12">{presentedRequests}</div>
+        return <div id={status + "-vacations"} key={status} className="col s12">{presentedRequests}</div>
     },
 
     render: function() {
@@ -62,7 +64,8 @@ var VacationRequests = React.createClass({
                         </div>
                         {content}
                     </div>
-                    <a className="absolute-btn-large right-align btn-floating btn-large waves-effect waves-light blue">
+                    <a className="absolute-btn-large btn-floating vacation-modal btn-large waves-effect waves-light blue"
+                       href="#new-vacation-form-container">
                         <i className="material-icons">add</i>
                     </a>
                 </div>

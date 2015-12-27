@@ -38,6 +38,10 @@ var Day = React.createClass({
         this.loadEventsFromServer(this.formatDate(nextProps.date));
     },
 
+    componentDidUpdate: function() {
+        $('.event-modal').leanModal();
+    },
+
     render: function() {
         if (this.state.activity) {
             var projects = this.state.activity.projects,
@@ -59,7 +63,7 @@ var Day = React.createClass({
                     <div className="row">
                         {content}
                     </div>
-                    <a className="absolute-btn-large right-align btn-floating btn-large waves-effect waves-light blue">
+                    <a className="absolute-btn-large event-modal btn-floating btn-large waves-effect waves-light blue" href="#new-event-form-container">
                         <i className="material-icons">add</i>
                     </a>
                 </div>

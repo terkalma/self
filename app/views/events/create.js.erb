@@ -1,7 +1,7 @@
 <% if @success %>
   window.location = window.location
 <% else %>
-  $('#new-event-form-container')
+  $('#new-event-form-container .modal-content')
         .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @event }) %>');
   $('select').material_select('destroy');
   $('select').material_select();

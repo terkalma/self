@@ -1,8 +1,8 @@
 <% if @success %>
-  window.location = window.location
+  window.location = window.location;
   $('#vacationsForUser').closest('.row').replaceWith('<%= escape_javascript render(partial: 'welcome/vacations') %>');
 <% else %>
-  $('#new-vacation-form-container')
+  $('#new-vacation-form-container .modal-content')
         .html('<%= escape_javascript render(partial: 'welcome/vacation_form', locals: { vacation: @vacation_request }) %>');
 <% end %>
 

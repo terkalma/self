@@ -1,10 +1,16 @@
 <%= react_component('Calendar', eventsUrl: events_path(format: 'json'), url: root_path(format: 'json', date: @date)) %>
 <%= react_component('VacationRequests', requestsUrl: vacation_requests_path(format: 'json')) %>
-<div id="new-event-form-container">
-  <%= render partial: 'welcome/event_form', locals: { event: current_user.events.new } %>
+
+<div id="new-event-form-container" class="modal">
+  <div class="modal-content">
+    <%= render partial: 'welcome/event_form', locals: { event: current_user.events.new } %>
+  </div>
 </div>
-<div id="new-vacation-form-container">
-  <%= render partial: 'welcome/vacation_form', locals: { vacation: current_user.vacation_requests.new } %>
+
+<div id="new-vacation-form-container" class="modal">
+  <div class="modal-content">
+    <%= render partial: 'welcome/vacation_form', locals: { vacation: current_user.vacation_requests.new } %>
+  </div>
 </div>
 
 <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
