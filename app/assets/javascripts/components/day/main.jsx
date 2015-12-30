@@ -32,7 +32,7 @@ var Day = React.createClass({
     componentDidMount: function () {
         var self = this;
 
-        $(document).on('react.event_added', function() {
+        $(document).on('react.event_added, react.event_updated', function() {
             self.loadEventsFromServer(self.state.activity.date);
         });
     },
@@ -44,10 +44,6 @@ var Day = React.createClass({
     componentWillReceiveProps: function(nextProps) {
         this.replaceState(this.getInitialState());
         this.loadEventsFromServer(this.formatDate(nextProps.date));
-    },
-
-    componentDidUpdate: function() {
-        $('.event-modal').leanModal();
     },
 
     render: function() {
@@ -76,6 +72,7 @@ var Day = React.createClass({
                         <i className="material-icons">add</i>
                     </a>
                 </div>
+                <Modal/>
             </div>
         }
         else {

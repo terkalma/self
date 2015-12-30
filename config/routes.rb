@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  resources :events, only: [:create, :update, :destroy, :index] do
+  resources :events, only: [:create, :edit, :update, :destroy, :index] do
     collection do
       get :data_table
     end

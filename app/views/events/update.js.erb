@@ -1,1 +1,11 @@
-<%= render file: 'events/create' %>
+<% if @success %>
+  $('#event-form-container').closeModal();
+  $(document).trigger('react.event_updated');
+<% else %>
+  $('#event-form-container .modal-content')
+          .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @event }) %>');
+  $('#event-form-container select').material_select('destroy');
+  $('#event-form-container select').material_select();
+<% end %>
+
+window.ReactRailsUJS.mountComponents()

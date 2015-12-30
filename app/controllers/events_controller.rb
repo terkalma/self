@@ -30,6 +30,11 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    @event = Event.find params[:id]
+    render layout: false
+  end
+
   def create
     @event = Event.new permitted_params
     @success = @event.save
