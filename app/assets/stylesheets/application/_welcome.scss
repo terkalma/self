@@ -4,8 +4,26 @@
 
 label.error {
   color: $error-color;
-  margin-top: 40px;
+  margin-top: 85px;
   font-size: 12px;
+}
+
+.vacation-reason label.error{
+  margin-top: 110px;
+}
+
+.select-wrapper + label {
+  position: absolute;
+  top: 12px;
+}
+
+.input-field label {
+  font-size: 0.8rem;
+  -webkit-transform: translateY(-140%);
+  -moz-transform: translateY(-140%);
+  -ms-transform: translateY(-140%);
+  -o-transform: translateY(-140%);
+  transform: translateY(-140%);
 }
 
 .card {
@@ -25,6 +43,7 @@ label.error {
 
       th, td {
         cursor: default;
+        width: 14%;
       }
 
       font-weight: bold;
@@ -32,11 +51,11 @@ label.error {
       span {
         width: 30px;
         height: 30px;
+        line-height: 30px;
       }
     }
   }
 }
-
 
 .absolute-btn {
   position: absolute;
@@ -48,4 +67,22 @@ label.error {
   position: absolute;
   right: 20px;
   bottom: -27px;
+}
+
+@media (max-width: 500px) {
+  #calendar-modal {
+    width: 100%;
+
+    .modal-content {
+
+      &.calendar-container {
+        span {
+          font-size: 12px;
+          width: 22px;
+          height: 22px;
+          line-height: 22px;
+        }
+      }
+    }
+  }
 }

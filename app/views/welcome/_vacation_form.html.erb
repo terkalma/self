@@ -18,7 +18,9 @@
         <div class="input-field col s12">
             <%= f.text_area :reason, class: "materialize-textarea" %>
             <%= f.label 'Reason' %>
-            <%= validation_message(vacation, :reason) %>
+            <div class="vacation-reason">
+              <%= validation_message(vacation, :reason) %>
+            </div>
         </div>
       </div>
       <div class="row">
