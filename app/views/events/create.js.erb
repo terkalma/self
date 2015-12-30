@@ -1,5 +1,6 @@
 <% if @success %>
-  window.location = window.location
+  $(document).trigger('react.event_added');
+  $('#new-event-form-container').closeModal();
 <% else %>
   $('#new-event-form-container .modal-content')
         .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @event }) %>');
@@ -7,9 +8,4 @@
   $('select').material_select();
 <% end %>
 
-/*
- * Since we replace the element, which was responsible for the request, we are responsible for triggers.
- * In this case it's enough to just fire an ajax:complete
- */
-$(document).trigger('ajax:complete');
-
+window.ReactRailsUJS.mountComponents()

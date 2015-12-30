@@ -1,6 +1,5 @@
 <div class="daily-events-container">
   <div class="row">
-    <p class="project-name">Add a new event</p>
     <%= form_for event, html:{class: 'col s12'}, namespace: event.persisted? ? "edit_event_#{event.id}" : 'new_event', remote: true do |f| %>
       <div id="date-input-container">
         <%= react_component('DateInput', date: @date) %>
@@ -35,17 +34,14 @@
       </div>
 
       <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s9">
           <%= f.check_box :ot, include_hidden: false, class: "validate #{validation_class(event, :ot)}" %>
           <%= f.label :ot, class: 'label' do %>
             Overtime
           <% end %>
           <%= validation_message(event, :ot) %>
         </div>
-      </div>
-
-      <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s3">
           <%= f.submit 'Submit', data: { disable_with: 'Submitting...' }, class: 'btn' %>
         </div>
       </div>

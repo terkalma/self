@@ -3,5 +3,8 @@ $(document).ready ->
 
   $('.datepicker').pickadate({
     selectMonths: true,
-    selectYears: 2
+    selectYears: 2,
+    onStart: ->
+      $('.picker').appendTo('body')
   });
+

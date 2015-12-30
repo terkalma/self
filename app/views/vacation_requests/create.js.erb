@@ -1,9 +1,17 @@
 <% if @success %>
-  window.location = window.location;
-  $('#vacationsForUser').closest('.row').replaceWith('<%= escape_javascript render(partial: 'welcome/vacations') %>');
+  $(document).trigger('react.vacation_added');
+  $('#new-vacation-form-container').closeModal();
 <% else %>
   $('#new-vacation-form-container .modal-content')
         .html('<%= escape_javascript render(partial: 'welcome/vacation_form', locals: { vacation: @vacation_request }) %>');
+
+  $('.datepicker').pickadate({
+    selectMonths: true,
+    selectYears: 2,
+    onStart: function () {
+      $('.picker').appendTo('body');
+    }
+  });
 <% end %>
 
-$(document).trigger('ajax:complete');
+window.ReactRailsUJS.mountComponents()

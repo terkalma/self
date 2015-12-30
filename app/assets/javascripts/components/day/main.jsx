@@ -29,6 +29,14 @@ var Day = React.createClass({
         return (date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate())
     },
 
+    componentDidMount: function () {
+        var self = this;
+
+        $(document).on('react.event_added', function() {
+            self.loadEventsFromServer(self.state.activity.date);
+        });
+    },
+
     componentWillMount: function() {
         this.loadEventsFromServer(this.formatDate(this.props.date));
     },
@@ -61,6 +69,7 @@ var Day = React.createClass({
             return <div className="card z-depth-4">
                 <div className="card-content">
                     <div className="row">
+                        <h4 className="center">{this.state.activity.date}</h4>
                         {content}
                     </div>
                     <a className="absolute-btn-large event-modal btn-floating btn-large waves-effect waves-light blue" href="#new-event-form-container">

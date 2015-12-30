@@ -23,6 +23,14 @@ var VacationRequests = React.createClass({
 
     },
 
+    componentDidMount: function () {
+        var self = this;
+
+        $(document).on('react.vacation_added', function() {
+            self.loadRequestsFromServer();
+        });
+    },
+
     componentDidUpdate: function() {
         $('ul.tabs').tabs();
         $('.vacation-modal').leanModal();
