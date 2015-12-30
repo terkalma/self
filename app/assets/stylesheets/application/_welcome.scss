@@ -26,6 +26,14 @@ label.error {
   transform: translateY(-140%);
 }
 
+#vacation-card{
+  opacity: 0;
+}
+
+#day-card{
+  opacity: 0;
+}
+
 .card {
   margin-top: 50px;
   overflow: visible;

@@ -1,0 +1,46 @@
+                         Prefix Verb     URI Pattern                                Controller#Action
+               new_user_session GET      /users/sign_in(.:format)                   devise/sessions#new
+                   user_session POST     /users/sign_in(.:format)                   devise/sessions#create
+           destroy_user_session DELETE   /users/sign_out(.:format)                  devise/sessions#destroy
+        user_omniauth_authorize GET|POST /users/auth/:provider(.:format)            callbacks#passthru {:provider=>/google_oauth2/}
+         user_omniauth_callback GET|POST /users/auth/:action/callback(.:format)     callbacks#(?-mix:google_oauth2)
+                           root GET      /                                          welcome#index
+              data_table_events GET      /events/data_table(.:format)               events#data_table
+                         events GET      /events(.:format)                          events#index
+                                POST     /events(.:format)                          events#create
+                          event PATCH    /events/:id(.:format)                      events#update
+                                PUT      /events/:id(.:format)                      events#update
+                                DELETE   /events/:id(.:format)                      events#destroy
+              vacation_requests GET      /vacation_requests(.:format)               vacation_requests#index
+                                POST     /vacation_requests(.:format)               vacation_requests#create
+               vacation_request PATCH    /vacation_requests/:id(.:format)           vacation_requests#update
+                                PUT      /vacation_requests/:id(.:format)           vacation_requests#update
+                                DELETE   /vacation_requests/:id(.:format)           vacation_requests#destroy
+                admin_dashboard GET      /admin(.:format)                           admin/dashboard#index
+           report_admin_project GET      /admin/projects/:slug/report(.:format)     admin/projects#report {:sexcept=>[:show, :new, :update]}
+        add_user_admin_projects POST     /admin/projects/add_user(.:format)         admin/projects#add_user {:sexcept=>[:show, :new, :update]}
+     remove_user_admin_projects PATCH    /admin/projects/remove_user(.:format)      admin/projects#remove_user {:sexcept=>[:show, :new, :update]}
+                 admin_projects GET      /admin/projects(.:format)                  admin/projects#index {:sexcept=>[:show, :new, :update]}
+                                POST     /admin/projects(.:format)                  admin/projects#create {:sexcept=>[:show, :new, :update]}
+              new_admin_project GET      /admin/projects/new(.:format)              admin/projects#new {:sexcept=>[:show, :new, :update]}
+             edit_admin_project GET      /admin/projects/:slug/edit(.:format)       admin/projects#edit {:sexcept=>[:show, :new, :update]}
+                  admin_project GET      /admin/projects/:slug(.:format)            admin/projects#show {:sexcept=>[:show, :new, :update]}
+                                PATCH    /admin/projects/:slug(.:format)            admin/projects#update {:sexcept=>[:show, :new, :update]}
+                                PUT      /admin/projects/:slug(.:format)            admin/projects#update {:sexcept=>[:show, :new, :update]}
+                                DELETE   /admin/projects/:slug(.:format)            admin/projects#destroy {:sexcept=>[:show, :new, :update]}
+ accept_admin_vacation_requests POST     /admin/vacation_requests/accept(.:format)  admin/vacation_requests#accept
+decline_admin_vacation_requests POST     /admin/vacation_requests/decline(.:format) admin/vacation_requests#decline
+holiday_admin_vacation_requests POST     /admin/vacation_requests/holiday(.:format) admin/vacation_requests#holiday
+        admin_vacation_requests GET      /admin/vacation_requests(.:format)         admin/vacation_requests#index
+           add_rate_admin_users POST     /admin/users/add_rate(.:format)            admin/users#add_rate
+      remove_project_admin_user PATCH    /admin/users/:id/remove_project(.:format)  admin/users#remove_project
+           set_limit_admin_user PATCH    /admin/users/:id/set_limit(.:format)       admin/users#set_limit
+         add_project_admin_user POST     /admin/users/:id/add_project(.:format)     admin/users#add_project
+         event_table_admin_user GET      /admin/users/:id/event_table(.:format)     admin/events#event_table
+                    admin_users GET      /admin/users(.:format)                     admin/users#index
+                edit_admin_user GET      /admin/users/:id/edit(.:format)            admin/users#edit
+                     admin_user GET      /admin/users/:id(.:format)                 admin/users#show
+                                PATCH    /admin/users/:id(.:format)                 admin/users#update
+                                PUT      /admin/users/:id(.:format)                 admin/users#update
+                                DELETE   /admin/users/:id(.:format)                 admin/users#destroy
+                  admin_reports GET      /admin/reports(.:format)                   admin/reports#index
