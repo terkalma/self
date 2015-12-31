@@ -31,7 +31,6 @@ var Day = React.createClass({
 
     componentDidMount: function () {
         var self = this;
-
         $(document).on('react.event_added, react.event_updated', function() {
             self.loadEventsFromServer(self.state.activity.date);
         });
@@ -44,6 +43,10 @@ var Day = React.createClass({
     componentWillReceiveProps: function(nextProps) {
         this.replaceState(this.getInitialState());
         this.loadEventsFromServer(this.formatDate(nextProps.date));
+    },
+
+    componentDidUpdate: function() {
+        $('#day-card').delay(100).animate({"opacity": "1"}, 700);
     },
 
     render: function() {
@@ -62,7 +65,7 @@ var Day = React.createClass({
                 content = <p className="flow-text center bold">Taking it easy today!</p>
             }
 
-            return <div className="card z-depth-4">
+            return <div className="card z-depth-4" id="day-card">
                 <div className="card-content">
                     <div className="row">
                         <h4 className="center">{this.state.activity.date}</h4>

@@ -25,7 +25,6 @@ var VacationRequests = React.createClass({
 
     componentDidMount: function () {
         var self = this;
-
         $(document).on('react.vacation_added', function() {
             self.loadRequestsFromServer();
         });
@@ -34,6 +33,7 @@ var VacationRequests = React.createClass({
     componentDidUpdate: function() {
         $('ul.tabs').tabs();
         $('.vacation-modal').leanModal();
+        $('#vacation-card').delay(100).animate({"opacity": "1"}, 700);
     },
 
     componentWillMount: function() {
@@ -58,7 +58,7 @@ var VacationRequests = React.createClass({
                     return self.vacationRequestTab(status, requests[status])
                 });
 
-            return <div className="card z-depth-4">
+            return <div className="card z-depth-4" id="vacation-card">
                 <div className="card-content">
                     <div className="row">
                         <div className="col s12">
