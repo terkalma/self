@@ -18,7 +18,7 @@ var CalendarDay = React.createClass({
 
 
         if (isBlank) {
-            return React.DOM.td({ className: '' }, null, '');
+            return <td></td>
         } else if (this.props.isActive) {
             classNames = "waves-effect waves-light z-depth-1 hoverable circle red valign";
         } else if (this.props.hasWorkedAt) {

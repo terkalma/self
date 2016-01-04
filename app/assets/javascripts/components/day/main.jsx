@@ -31,7 +31,7 @@ var Day = React.createClass({
 
     componentDidMount: function () {
         var self = this;
-        $(document).on('react.event_added, react.event_updated', function() {
+        $(document).on('react.event_added react.event_updated', function() {
             self.loadEventsFromServer(self.state.activity.date);
         });
     },
@@ -46,7 +46,7 @@ var Day = React.createClass({
     },
 
     componentDidUpdate: function() {
-        $('#day-card').delay(100).animate({"opacity": "1"}, 700);
+        $('#day-card').animate({"opacity": "0"}, 0).delay(100).animate({"opacity": "1"}, 700);
     },
 
     render: function() {

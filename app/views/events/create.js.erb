@@ -1,11 +1,11 @@
 <% if @success %>
-  $(document).trigger('react.event_added');
   $('#new-event-form-container').closeModal();
+  $(document).trigger('react.event_added');
 <% else %>
   $('#new-event-form-container .modal-content')
         .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @event }) %>');
   $('#new-event-form-container select').material_select('destroy');
   $('#new-event-form-container select').material_select();
+  window.ReactRailsUJS.unmountComponents("#date-input-container");
+  window.ReactRailsUJS.mountComponents("#date-input-container");
 <% end %>
-
-window.ReactRailsUJS.mountComponents()

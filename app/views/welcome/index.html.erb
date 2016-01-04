@@ -21,8 +21,17 @@
   <div class="modal-content"></div>
 </div>
 
+<div id="feedback-form-container" class="modal">
+  <div class="modal-content">
+    <%= render partial: 'welcome/vacation_form', locals: { vacation: current_user.vacation_requests.new } %>
+  </div>
+</div>
+
 <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-  <a class="right-align btn-floating btn-large waves-effect waves-light red modal-trigger" href="#calendar-modal">
+  <a class="right-align btn-floating btn-large waves-effect waves-light red modal-trigger b1" href="#calendar-modal">
     <i class="material-icons">today</i>
+  </a>
+  <a class="right-align btn-floating btn-large waves-effect waves-light red modal-trigger b2" href="#feedback-modal">
+    <i class="material-icons">comment</i>
   </a>
 </div>

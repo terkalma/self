@@ -20,7 +20,6 @@ var VacationRequests = React.createClass({
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
-
     },
 
     componentDidMount: function () {
@@ -33,7 +32,7 @@ var VacationRequests = React.createClass({
     componentDidUpdate: function() {
         $('ul.tabs').tabs();
         $('.vacation-modal').leanModal();
-        $('#vacation-card').delay(100).animate({"opacity": "1"}, 700);
+        $('#vacation-card').animate({"opacity": "0"}, 0).delay(100).animate({"opacity": "1"}, 700);
     },
 
     componentWillMount: function() {
