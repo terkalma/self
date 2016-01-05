@@ -59,8 +59,8 @@ module Vacation
     vacation_requests.active.count > 0
   end
 
-  def vacation_days_left
-    vacation_limit - days_on_vacation_this_year
+  def vacation_days_left(year=Date.today.year)
+    vacation_limit_at(year) - days_on_vacation(year)
   end
 
   def vacation_status(date=Date.today)
@@ -74,8 +74,14 @@ module Vacation
   # Only counting payed days.
   #
   def days_on_vacation_this_year
-    from = 0.hour.ago.beginning_of_year
-    to = 0.hour.ago.end_of_year
+    days_on_vacation Date.today.year
+  end
+
+  def days_on_vacation(year)
+    date = Date.new(year, 1, 1).beginning_of_day
+
+    from = date.beginning_of_year
+    to = date.end_of_year
 
     vacation_requests.approved.paid.where('vacation_from >= ?', from).where('vacation_to <= ?', to).pluck(:length).sum
   end
