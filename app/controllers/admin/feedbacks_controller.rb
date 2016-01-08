@@ -9,7 +9,7 @@ module Admin
     def index
       respond_to do |format|
         format.json do
-          render json: FeedbackDataTable.new(view: view_context, relation: Feedback)
+          render json: FeedbackDataTable.new(view: view_context)
         end
         format.html { }
       end

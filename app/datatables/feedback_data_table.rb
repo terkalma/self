@@ -1,23 +1,22 @@
 class FeedbackDataTable < BaseDataTable
 
   def initialize(view:, relation: nil)
-    super view: view, relation:  relation || Feedback
+    super view: view, relation:  relation || Feedback.joins(:user)
   end
 
   private
   def map_resource(feedback)
     [
       feedback.comment,
-      feedback.user_id
+      feedback.user.email
     ]
   end
 
   def header
-    %w[user_id comment]
+    %w[comment users.email]
   end
 
   def default_sort_column
-    'user_id'
+    'users.email'
   end
-
 end
