@@ -33,7 +33,8 @@ class User < ActiveRecord::Base
 
   def report(project:, from:, to:)
     query = <<-SQL
-      SELECT string_agg(e.description, '\n ') as description, e.worked_at FROM events as e
+      SELECT string_agg('[' || round(e.hours + e.minutes / 60.0, 1) || '] ' || e.description, '\n ') as description
+            ,e.worked_at FROM events as e
       WHERE user_id = #{id} AND e.project_id = #{project.id.to_i}
       AND worked_at >= '#{from.beginning_of_day.strftime '%Y-%m-%d %H:%M:%S'}'
       AND worked_at <= '#{to.end_of_day.strftime '%Y-%m-%d %H:%M:%S'}'
@@ -41,7 +42,17 @@ class User < ActiveRecord::Base
       ORDER BY e.worked_at ASC
     SQL
 
-    ActiveRecord::Base.connection.execute(query).to_a.select { |e| e['description'].present? }
+    decimal_mapper = ->(d) { d[0] == '0' ? '' : ".#{d}"  }
+
+    ActiveRecord::Base.connection.execute(query).to_a.map do |day|
+      day['description'] = day['description'].split(/\n/).map do |event_description|
+        event_description.sub(/\[(\d+)\.(\d+)\]/) do
+          "[#{Regexp.last_match[1]}#{decimal_mapper.call(Regexp.last_match[2])}h]"
+        end
+      end.join('<br/>').html_safe
+
+      day
+    end || []
   end
 
   private

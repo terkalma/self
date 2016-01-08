@@ -1,6 +1,8 @@
 class UserMailer < ApplicationMailer
   default from: "no-reply@#{Figaro.env.app_title}.com"
 
+  layout 'mailer'
+
   def warning(user_id)
     @user = User.find user_id
     @preheader = "I know you're busy, but don't forget to log your hours."

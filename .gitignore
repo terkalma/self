@@ -21,6 +21,8 @@
 /config/database.yml
 /public/assets
 
+.idea/
+
 # Ignore .DS_Store
 .DS_Store
 

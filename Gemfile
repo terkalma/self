@@ -54,6 +54,7 @@ gem 'materialize-sass'
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'puma'
+  gem 'letter_opener'
 end
 
 group :test do
