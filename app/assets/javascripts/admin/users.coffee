@@ -9,5 +9,4 @@ $(document).on 'ready page:load', ->
       className: "visible-lg", "targets": [ 3, 4 ]
     ]
 
-
    $('select').select2()

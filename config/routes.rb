@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :feedbacks
+  resources :feedbacks, only:  [:create]
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
 
   root 'welcome#index'
@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/' => 'dashboard#index', as: :dashboard
+
+    resources :feedbacks, only: [:index]
 
     resources :projects, param: :slug, sexcept: [:show, :new, :update] do
       member do
