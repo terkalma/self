@@ -21,9 +21,9 @@
   <div class="modal-content"></div>
 </div>
 
-<div id="feedback-form-container" class="modal">
+<div id="feedback-modal" class="modal">
   <div class="modal-content">
-    <%= render partial: 'welcome/vacation_form', locals: { vacation: current_user.vacation_requests.new } %>
+    <%= render partial: 'feedbacks/form', locals: { feedback: Feedback.new } %>
   </div>
 </div>
 

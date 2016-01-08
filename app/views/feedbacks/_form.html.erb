@@ -1,25 +1,17 @@
-<%= form_for(@feedback) do |f| %>
-  <% if @feedback.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
+<div class="feedbacks-container">
+  <div class="row">
+    <%= form_for feedback, html: { class: 'col s12' }, remote: true do |f| %>
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.text_area :comment, class: "materialize-textarea validate #{validation_class(feedback, :comment)}" %>
+          <%= f.label 'Comment' %>
+          <%= validation_message(feedback, :comment) %>
+        </div>
+      </div>
 
-      <ul>
-      <% @feedback.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :comment %><br>
-    <%= f.text_area :comment %>
+      <div class="input-field col s3">
+        <%= f.submit 'Submit', data: { disable_with: 'Submitting...' }, class: 'btn' %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

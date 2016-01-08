@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :feedbacks, only:  [:create]
+
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
 
   root 'welcome#index'
@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   end
 
   resources :vacation_requests, only: [:create, :update, :destroy, :index]
+
+  resources :feedbacks, only: [:create]
 
   namespace :admin do
     get '/' => 'dashboard#index', as: :dashboard
