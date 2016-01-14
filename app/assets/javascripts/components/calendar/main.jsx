@@ -87,7 +87,6 @@ var Calendar = React.createClass({
                     return k;
                 }),
                 self = this;
-
             return (
                 <div className="row s12 main-container">
                     <div id="calendar-modal" className="modal">

@@ -16,6 +16,11 @@ var Event = React.createClass({
                         onClick={this.onEditModal.bind(this, this.props.event.url)}>
                         <i className="material-icons">edit</i>
                     </a>
+                    <a className="delete-event delete-btn right-align btn-floating btn waves-effect waves-light blue"
+                       href={this.props.event.event_url}
+                       data-method="delete">
+                        <i className="material-icons">delete</i>
+                    </a>
                 </div>
             </div>
         </div>
