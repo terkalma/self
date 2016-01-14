@@ -9,7 +9,6 @@ var Modal = React.createClass({
                     dataType: 'html',
                     cache: false,
                     success: function(data) {
-                        console.log(data);
                         $('#event-form-container .modal-content').html(data);
                         $('#event-form-container select').material_select('destroy');
                         $('#event-form-container select').material_select();
