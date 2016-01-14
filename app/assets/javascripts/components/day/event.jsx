@@ -17,8 +17,9 @@ var Event = React.createClass({
                         <i className="material-icons">edit</i>
                     </a>
                     <a className="delete-event delete-btn right-align btn-floating btn waves-effect waves-light blue"
-                       href={this.props.event.event_url}
-                       data-method="delete">
+                        href={this.props.event.event_url}
+                        data-method="delete"
+                        data-confirm="Are you sure?">
                         <i className="material-icons">delete</i>
                     </a>
                 </div>

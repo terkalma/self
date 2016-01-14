@@ -1,6 +1,10 @@
 var Modal = React.createClass({
-    componentDidMount: function () {
-        $('.event-modal').leanModal();
+    loadModal: function () {
+        $('.event-modal').leanModal({
+            complete: function() {
+                $('.lean-overlay').remove();
+            }
+        });
         $('.edit-event-modal').leanModal({
             ready: function() {
                 $.ajax({
@@ -17,8 +21,18 @@ var Modal = React.createClass({
                         console.error(status, err.toString());
                     }.bind(this)
                 });
+            },
+            complete: function() {
+                $('.lean-overlay').remove();
             }
         });
+    },
+
+    componentDidMount: function () {
+        this.loadModal()
+    },
+    componentDidUpdate: function () {
+        this.loadModal()
     },
 
     render: function() {
