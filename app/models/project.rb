@@ -30,7 +30,8 @@ class Project < ActiveRecord::Base
               description: e.description,
               total: e.amount,
               url: Rails.application.routes.url_helpers.edit_event_path(e),
-              event_url: Rails.application.routes.url_helpers.event_path(e)
+              event_url: Rails.application.routes.url_helpers.event_path(e),
+              id: e.id
           }
         end
 

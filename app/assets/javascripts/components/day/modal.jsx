@@ -1,11 +1,6 @@
 var Modal = React.createClass({
-    loadModal: function () {
-        $('.event-modal').leanModal({
-            complete: function() {
-                $('.lean-overlay').remove();
-            }
-        });
-        $('.edit-event-modal').leanModal({
+    loadEditEventModal: function (selector = '.card-content') {
+        $(selector).children('.edit-event-modal').leanModal({
             ready: function() {
                 $.ajax({
                     url: $('#event-form-container').data('eventPath'),
@@ -22,17 +17,30 @@ var Modal = React.createClass({
                     }.bind(this)
                 });
             },
-            complete: function() {
-                $('.lean-overlay').remove();
-            }
         });
     },
 
     componentDidMount: function () {
-        this.loadModal()
+        eventIds = [];
+        $('.event-modal').leanModal();
+        this.loadEditEventModal();
+        $( ".edit-event-modal" ).each(function() {
+            eventIds.push($( this ).parents('div').data('eventId'));
+        });
     },
+
     componentDidUpdate: function () {
-        this.loadModal()
+        var id,
+            self = this;
+        $( ".edit-event-modal" ).each(function() {
+            id = $( this ).parents('div').data('eventId');
+            if (_.indexOf(eventIds, id) == -1 ) {
+                eventIds.push(id);
+                var selector = '[data-event-id = ' + id + ']';
+                self.loadEditEventModal(selector);
+            }
+
+        });
     },
 
     render: function() {
