@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   respond_to :html
   respond_to :js, only: [:create, :update]
+  rescue_from ActionController::InvalidAuthenticityToken, with: :handle_invalid_token
 
   after_filter :publish_event_to_keen
   before_filter :load_event, only: [:update, :destroy]
@@ -8,6 +9,7 @@ class EventsController < ApplicationController
   def index
     respond_to do |format|
       format.json do
+
         render json: {
                    projects: Project.events_for_projects(user: current_user, date: @date),
                    date: @date
@@ -26,6 +28,11 @@ class EventsController < ApplicationController
       end
       format.html { redirect_to root_path }
     end
+  end
+
+  def edit
+    @event = Event.find params[:id]
+    render layout: false
   end
 
   def create
@@ -65,5 +72,9 @@ class EventsController < ApplicationController
     end
   rescue
     # don't care about issues with +Keen+
+  end
+
+  def handle_invalid_token(error)
+    render json: {error: error.message}, status: :unauthorized
   end
 end

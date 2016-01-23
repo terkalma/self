@@ -1,0 +1,17 @@
+<div class="feedbacks-container">
+  <div class="row">
+    <%= form_for feedback, html: { class: 'col s12' }, remote: true do |f| %>
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.text_area :comment, class: "materialize-textarea validate #{validation_class(feedback, :comment)}" %>
+          <%= f.label 'Comment' %>
+          <%= validation_message(feedback, :comment) %>
+        </div>
+      </div>
+
+      <div class="input-field col s3">
+        <%= f.submit 'Submit', data: { disable_with: 'Submitting...' }, class: 'btn' %>
+      </div>
+    <% end %>
+  </div>
+</div>

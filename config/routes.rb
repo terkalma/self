@@ -1,17 +1,27 @@
 Rails.application.routes.draw do
+
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
 
   root 'welcome#index'
 
-  resources :events, only: [:create, :update, :destroy, :index] do
+  resources :events, only: [:create, :edit, :update, :destroy, :index] do
     collection do
       get :data_table
     end
+
+    member do
+      get :data_table
+    end
   end
+
   resources :vacation_requests, only: [:create, :update, :destroy, :index]
+
+  resources :feedbacks, only: [:create]
 
   namespace :admin do
     get '/' => 'dashboard#index', as: :dashboard
+
+    resources :feedbacks, only: [:index]
 
     resources :projects, param: :slug, sexcept: [:show, :new, :update] do
       member do

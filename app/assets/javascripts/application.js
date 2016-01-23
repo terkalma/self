@@ -11,12 +11,15 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap-sprockets
+//= require materialize-sprockets
 //= require jquery_ujs
-//= require dataTables/jquery.dataTables
-//= require dataTables/extras/dataTables.responsive
-//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-//= require bootstrap-datepicker/core
-//= require turbolinks
-//= require select2
-//= require_tree .
+//= require react
+//= require react_ujs
+//= require underscore
+//= require_tree ./application
+
+$(document).ready(function(){
+    $(".button-collapse").sideNav();
+    $('.modal-trigger').leanModal();
+
+});

@@ -10,40 +10,18 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
- *= require bootstrap-datepicker3
- *= require dataTables/jquery.dataTables
- *= require select2
- *= require select2-bootstrap
+ *= require application/main
  */
 
-@import "bootstrap-sprockets";
-@import "bootstrap";
-
-body { padding-top: 70px; }
-
 .distancer { padding: 10px;}
-
-.dataTables_wrapper .dataTables_paginate .paginate_button { padding: 0px !important; }
-
 .margin-bottom-20 { margin-bottom: 20px; }
 .margin-top-20 { margin-top: 20px; }
 .center { text-align: center; }
 
-.list-group-item {
-  a { color: #555; &:hover { text-decoration: none; }}
-}
-
-.approve-button, .closing-button {
+.loading {
+  top: 50%;
+  left: 50%;
   position: absolute;
-  right: 15px;
-  top: 10px;
-}
-
-.approve-button { right: 55px; }
-
-p {
-  word-wrap: break-word;
-  white-space: normal;
+  z-index: 1000;
 }

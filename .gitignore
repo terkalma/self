@@ -14,6 +14,7 @@
 /log/*
 !/log/.keep
 /tmp
+/vendor/cache/*
 
 # Ignore application configuration
 /config/application.yml
@@ -24,3 +25,7 @@
 
 # Ignore .DS_Store
 .DS_Store
+
+# Directory-based project format:
+.idea/*
+

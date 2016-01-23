@@ -1,0 +1,32 @@
+<header id="header">
+  <div class="">
+    <nav>
+      <div class="nav-wrapper">
+        <%= link_to image_tag('bws_logo.png', alt: 'BWS'), root_path(date: @date), class: 'brand-logo center responsive-img', id: 'logo-container' %>
+        <% if current_user %>
+          <ul id="slide-out" class="side-nav">
+            <li>
+              <div class="row valign-wrapper">
+                <div class="col l4">
+                  <img class= "circle responsive-img valign" src="<%= current_user.profile_picture %>" alt="P.P.">
+                </div>
+                <div class="col l8 name-container">
+                  <%= current_user.first_name %>
+                </div>
+              </div>
+            </li>
+            <% if current_user.admin? %>
+              <li> <%= link_to 'Admin', admin_dashboard_path %></li>
+            <% end %>
+            <li> <%= link_to 'Log out', destroy_user_session_path, method: :delete %> </li>
+          </ul>
+        <% end %>
+        <ul class="left">
+          <li>
+            <a href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>

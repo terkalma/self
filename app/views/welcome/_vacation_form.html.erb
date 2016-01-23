@@ -1,14 +1,40 @@
-<%= bootstrap_form_for vacation, url: { controller: :vacation_requests, action: :create }, remote: true do |f| %>
-  <%= f.hidden_field :user_id %>
-  <%= f.text_field :vacation_from, class: 'datepicker' %>
-  <%= f.text_field :vacation_to, class: 'datepicker' %>
-  <%= f.text_area :reason, rows: 3 %>
-  <%= f.form_group :paid do %>
-    <%= f.check_box :paid, label: 'Paid' %>
-  <% end %>
-  <%= f.submit 'Submit', data: { disable_with: 'Submitting...' } %>
-<% end %>
+<div class="daily-events-container">
+  <div class="row">
+    <%= form_for vacation, html:{class: 'col s12'},  url: { controller: :vacation_requests, action: :create }, remote: true do |f| %>
+      <%= f.hidden_field :user_id %>
+      <div class="row">
+        <div class="input-field col s6">
+          <%= f.text_field :vacation_from, class: 'datepicker' %>
+          <%= f.label 'Vacation from' %>
+          <%= validation_message(vacation, :vacation_from) %>
+        </div>
+        <div class="input-field col s6">
+          <%= f.text_field :vacation_to, class: 'datepicker' %>
+          <%= f.label 'Vacation to' %>
+          <%= validation_message(vacation, :vacation_to) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <%= f.text_area :reason, class: "materialize-textarea" %>
+            <%= f.label 'Reason' %>
+            <div class="vacation-reason">
+              <%= validation_message(vacation, :reason) %>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s9">
+          <%= f.check_box :paid, include_hidden: false %>
+          <%= f.label :paid, class: 'label' do %>
+            Paid
+          <% end %>
+        </div>
+        <div class="input-field col s3">
+          <%= f.submit 'Submit', data: { disable_with: 'Submitting...' }, class: 'btn' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-<%= javascript_tag do %>
-  $('#new_vacation_request input.datepicker').customDatepicker({});
-<% end %>

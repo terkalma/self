@@ -1,0 +1,22 @@
+.vacation-requests-container {
+
+  .vacation-date {
+    width: 20%;
+  }
+
+  .vacation-duration {
+    width: 10%;
+  }
+
+  .vacation-pending {
+    background-color: $error-color;
+  }
+
+  .vacation-approved {
+    background-color: $success-color;
+  }
+
+  .vacation-declined {
+    background-color: $error-color;
+  }
+}

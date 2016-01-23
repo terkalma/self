@@ -1,17 +1,13 @@
 <% if @success %>
-  $('.modal.in').modal('hide');
-  $('body').removeClass('modal-open');
-  $('.modal-backdrop').remove();
-
-  $('#eventsForUser').closest('.row').replaceWith('<%= escape_javascript render(partial: 'welcome/events') %>');
+  $('#new-event-form-container').closeModal();
+  $(document).trigger('react.event_added');
+  $('#new-event-form-container .modal-content')
+        .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: current_user.events.new }) %>');
 <% else %>
-  $('.modal.in .modal-body')
+  $('#new-event-form-container .modal-content')
         .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: @event }) %>');
 <% end %>
-
-/*
- * Since we replace the element, which was responsible for the request, we are responsible for triggers.
- * In this case it's enough to just fire an ajax:complete
- */
-$(document).trigger('ajax:complete');
-
+$('#new-event-form-container select').material_select('destroy');
+$('#new-event-form-container select').material_select();
+window.ReactRailsUJS.unmountComponents("#date-input-container");
+window.ReactRailsUJS.mountComponents("#date-input-container");

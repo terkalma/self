@@ -12,6 +12,8 @@ module Oauth
         user.first_name = auth.info.first_name
         user.last_name = auth.info.last_name
         user.password = Devise.friendly_token[0,20]
+      end.tap do |user|
+        user.profile_picture = auth.info.image
       end
     end
   end

@@ -46,5 +46,6 @@ Rails.application.configure do
   # dev mailer options
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  config.react.addons = true # defaults to false
   config.action_mailer.delivery_method = :letter_opener
 end

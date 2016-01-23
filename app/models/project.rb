@@ -18,13 +18,20 @@ class Project < ActiveRecord::Base
   end
 
   class << self
+    def empty
+      OpenStruct.new(id: nil, name: 'Project N/A')
+    end
+
     def events_for_projects(user:, date:)
-      user.projects.map do |project|
+      (user.projects.all + [Project.empty]).map do |project|
         events = user.events.at(date).where(project_id: project.id).map do |e|
           {
               duration: e.duration / 3600.0,
               description: e.description,
-              total: e.amount
+              total: e.amount,
+              url: Rails.application.routes.url_helpers.edit_event_path(e),
+              event_url: Rails.application.routes.url_helpers.event_path(e),
+              id: e.id
           }
         end
 

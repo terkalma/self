@@ -6,9 +6,9 @@ gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
+gem 'underscore-rails'
 
 gem 'jquery-rails'
-gem 'turbolinks', github: 'rails/turbolinks'
 gem 'actioncable', github: 'rails/actioncable'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -23,10 +23,12 @@ gem 'figaro'
 
 gem 'therubyracer'
 
+gem 'jquery-datatables-rails', '~> 3.3.0'
+gem 'turbolinks', github: 'rails/turbolinks'
+
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'bootstrap_form'
 gem 'bootstrap-datepicker-rails'
-gem 'jquery-datatables-rails', '~> 3.3.0'
 
 gem 'friendly_id', '~> 5.1.0'
 gem 'responders'
@@ -45,6 +47,9 @@ gem 'hashie'
 gem 'axlsx_rails'
 gem 'axlsx_styler'
 gem 'daemons'
+
+gem 'react-rails', '~> 1.0'
+gem 'materialize-sass'
 
 group :development do
   gem 'web-console', '~> 2.0'
