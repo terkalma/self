@@ -1,6 +1,6 @@
 <div class="daily-events-container">
   <div class="row">
-    <%= form_for event, html:{class: 'col s12'}, namespace: event.persisted? ? "edit_event_#{event.id}" : 'new_event', remote: true do |f| %>
+    <%= form_for event, html:{class: 'col s12'}, namespace: event.persisted? ? 'e' : 'n', remote: true do |f| %>
       <div id="date-input-container">
         <%= react_component('DateInput', date: @date) %>
       </div>
@@ -41,7 +41,12 @@
           <% end %>
           <%= validation_message(event, :ot) %>
         </div>
-        <div class="input-field col s3">
+        <div class="input-field col s1">
+          <a class="right-align btn-floating btn-medium waves-effect waves-light red" id="reset-form">
+            <i class="material-icons">replay</i>
+          </a>
+        </div>
+        <div class="input-field col s2">
           <%= f.submit 'Submit', data: { disable_with: 'Submitting...' }, class: 'btn' %>
         </div>
       </div>

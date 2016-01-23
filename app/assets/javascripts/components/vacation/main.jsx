@@ -1,6 +1,7 @@
 var VacationRequests = React.createClass({
     propTypes: {
-        requestsUrl: React.PropTypes.string
+        requestsUrl: React.PropTypes.string,
+        vacationDays: React.PropTypes.number
     },
 
     getInitialState: function(){
@@ -56,7 +57,6 @@ var VacationRequests = React.createClass({
                 content = _.map(['pending', 'approved', 'declined'], function (status) {
                     return self.vacationRequestTab(status, requests[status])
                 });
-
             return <div className="card z-depth-4" id="vacation-card">
                 <div className="card-content">
                     <div className="row">
@@ -71,6 +71,7 @@ var VacationRequests = React.createClass({
                         </div>
                         {content}
                     </div>
+                    <h5>Paid vacation days left: {this.props.vacationDays}</h5>
                     <a className="absolute-btn-large btn-floating vacation-modal btn-large waves-effect waves-light blue"
                        href="#new-vacation-form-container">
                         <i className="material-icons">add</i>

@@ -50,10 +50,13 @@ var Day = React.createClass({
     },
 
     render: function() {
+
         if (this.state.activity) {
             var projects = this.state.activity.projects,
+                dayNames = ['Sunday', 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
                 hasWorkedThatDay = _.any(projects, function (project) { return project.length > 0 }),
-                content;
+                content,
+                currentDay = new Date(this.state.activity.date).getDay();
 
             if (hasWorkedThatDay) {
                 content = _.compact(_.map(projects, function(project, projectName) {
@@ -69,6 +72,7 @@ var Day = React.createClass({
                 <div className="card-content">
                     <div className="row">
                         <h4 className="center">{this.state.activity.date}</h4>
+                        <h4 className="center">{dayNames[currentDay]}</h4>
                         {content}
                     </div>
                     <a className="absolute-btn-large event-modal btn-floating btn-large waves-effect waves-light blue" href="#new-event-form-container">
