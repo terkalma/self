@@ -16,6 +16,6 @@ class UserMailer < ApplicationMailer
     @to = Date.parse to
     @preheader = "Get Paid - Report!"
 
-    mail to: @user.email, subject: 'Report - Someone pliiiiz help me with email templates and FE'
+    mail to: @user.email, subject: 'Report'
   end
 end
