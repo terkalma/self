@@ -198,6 +198,8 @@ GEM
     mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.8.0)
+    momentjs-rails (2.11.0)
+      railties (>= 3.1)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -365,6 +367,7 @@ DEPENDENCIES
   letter_opener
   mandrill-api
   materialize-sass
+  momentjs-rails
   omniauth
   omniauth-google-oauth2
   pg

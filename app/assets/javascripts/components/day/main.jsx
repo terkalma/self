@@ -56,7 +56,7 @@ var Day = React.createClass({
                 dayNames = ['Sunday', 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
                 hasWorkedThatDay = _.any(projects, function (project) { return project.length > 0 }),
                 content,
-                currentDay = new Date(this.state.activity.date).getDay();
+                currentDay = new Date(moment(this.state.activity.date)).getDay();
 
             if (hasWorkedThatDay) {
                 content = _.compact(_.map(projects, function(project, projectName) {
