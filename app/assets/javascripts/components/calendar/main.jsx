@@ -27,9 +27,10 @@ var Calendar = React.createClass({
 
     mapData: function(data) {
         if (data.current_date && typeof data.dates === 'object') {
+            var date = moment(data.current_date);
             return {
                 events: {
-                    currentDate: new Date(data.current_date),
+                    currentDate: new Date(date),
                     next: data.next,
                     previous: data.previous,
                     dates: data.dates

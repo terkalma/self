@@ -16,6 +16,7 @@
 //= require react
 //= require react_ujs
 //= require underscore
+//= require moment
 //= require_tree ./application
 
 $(document).ready(function(){

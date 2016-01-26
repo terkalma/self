@@ -51,6 +51,8 @@ gem 'daemons'
 gem 'react-rails', '~> 1.0'
 gem 'materialize-sass'
 
+gem 'momentjs-rails'
+
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'puma'
