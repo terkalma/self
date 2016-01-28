@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe VacationLimit, type: :model do
   let(:date) do
-    Time.new 2015, 05, 11 # this is a monday.
+    Time.new(Date.today.year, 05, 11).beginning_of_week
   end
 
   let(:user) do

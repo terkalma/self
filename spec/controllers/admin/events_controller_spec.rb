@@ -28,11 +28,12 @@ RSpec.describe Admin::EventsController, type: :controller do
 
       it 'should be allowed to access the table' do
         get :event_table, id: user.id, format: :json
+
         expect(response).to be_success
 
         body = JSON.parse response.body
         expect(body['recordsFiltered']).to eq 7
-        expect(body['aaData'].first.try :count).to eq 5
+        expect(body['aaData'].first.try :count).to eq 6
       end
 
       it 'should not respond to html' do

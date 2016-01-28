@@ -74,7 +74,7 @@ module Vacation
   # Only counting payed days.
   #
   def days_on_vacation_this_year
-    days_on_vacation Date.today.year
+    days_on_vacation Time.now.year
   end
 
   def days_on_vacation(year)
