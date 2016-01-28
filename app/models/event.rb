@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
 
-  enum status: [ :submitted, :generated, :accounted, :paid ]
+  enum status: [ :submitted, :generated, :accounted, :paid ].map {|status| [status, status.to_s]}.to_h
 
   validates_numericality_of :hours, greater_than_or_equal_to: 0, less_than_or_equal_to: 12
   validates_numericality_of :minutes, greater_than_or_equal_to: 0, less_than: 60
