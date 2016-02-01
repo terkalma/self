@@ -21,7 +21,13 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'dashboard#index', as: :dashboard
 
-    resources :feedbacks, only: [:index]
+    resources :feedbacks, only: [:index] do
+      member do
+        patch :dismissed
+        patch :in_progress
+        patch :resolved
+      end
+    end
 
     resources :projects, param: :slug, sexcept: [:show, :new, :update] do
       member do

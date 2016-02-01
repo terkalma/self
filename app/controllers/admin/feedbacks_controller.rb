@@ -14,5 +14,26 @@ module Admin
         format.html { }
       end
     end
+
+    def dismissed
+      @feedback = Feedback.find params[:id]
+      @feedback.dismissed!
+
+      redirect_to admin_feedbacks_path
+    end
+
+    def in_progress
+      @feedback = Feedback.find params[:id]
+      @feedback.in_progress!
+
+      redirect_to admin_feedbacks_path
+    end
+
+    def resolved
+      @feedback = Feedback.find params[:id]
+      @feedback.resolved!
+
+      redirect_to admin_feedbacks_path
+    end
   end
 end
