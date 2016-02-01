@@ -2,7 +2,7 @@
 # Simple implementation for jquery Datable (https://datatables.net)
 #
 class BaseDataTable
-  delegate :params, :link_to, :number_to_currency, to: :@view
+  delegate :params, :link_to, :button_to, :number_to_currency, to: :@view
 
   def initialize(view:, relation: nil)
     @view = view
