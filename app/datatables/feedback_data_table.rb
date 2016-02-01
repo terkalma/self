@@ -10,10 +10,8 @@ class FeedbackDataTable < BaseDataTable
     [
       feedback.comment,
       feedback.user.email,
-      feedback.status.to_s.capitalize.sub('_', ' '),
-      (%w(dismissed resolved).include? feedback.status) ? '' : button_to('Dismiss', dismissed_admin_feedback_path(feedback), method: :patch ),
-      choose_button(feedback)
-    ]
+      feedback.status.to_s.humanize
+    ] + build_buttons(feedback)
   end
 
   def header
@@ -24,14 +22,16 @@ class FeedbackDataTable < BaseDataTable
     'users.email'
   end
 
-  def choose_button(feedback)
-    case feedback.status
-      when 'pending'
-        button_to('In progress', in_progress_admin_feedback_path(feedback), method: :patch )
-      when 'in_progress'
-        button_to('Resolved', resolved_admin_feedback_path(feedback), method: :patch )
-      else
-        ''
-    end
+  def build_buttons(feedback)
+    first_button = (%w(dismissed resolved).include? feedback.status) ? '' : button_to('Dismiss', dismissed_admin_feedback_path(feedback), method: :patch )
+    second_button = case feedback.status
+                      when 'pending'
+                        button_to('In progress', in_progress_admin_feedback_path(feedback), method: :patch )
+                      when 'in_progress'
+                        button_to('Resolved', resolved_admin_feedback_path(feedback), method: :patch )
+                      else
+                        ''
+                    end
+    [first_button, second_button]
   end
 end
