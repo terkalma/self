@@ -16,6 +16,11 @@
 
       <tbody>
       </tbody>
+      <tfoot>
+      <div id="statusFilter" class="col-md-5 col-xs-6">
+        Show <%= select_tag "statusFilter", options_for_select([:all, :pending, :in_progress, :resolved, :dismissed ].map {|status| [status.to_s.humanize, status]}.to_h) %> feedbacks
+      </div>
+      </tfoot>
     </table>
   </div>
 </div>
