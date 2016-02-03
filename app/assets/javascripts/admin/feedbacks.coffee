@@ -9,7 +9,7 @@ ready = ->
     autoWidth: false
     order: [[ 1, 'desc' ]]
     fnServerParams: (aoData) ->
-      aoData.statusFilter = statusFilter.val()
+      aoData.status_filter = statusFilter.val()
 
   statusFilter.on "change", ->
     table.fnDraw()
