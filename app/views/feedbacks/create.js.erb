@@ -1,5 +1,7 @@
 <% if @success %>
   $('#feedback-modal').closeModal();
+  $('#feedback-modal .modal-content')
+    .html('<%= escape_javascript render(partial: 'feedbacks/form', locals: { feedback: current_user.feedbacks.new }) %>');
 <% else %>
   $('#feedback-modal .modal-content').html("<%= escape_javascript render(partial: 'feedbacks/form', locals: { feedback: @feedback }) %>");
 <% end %>
