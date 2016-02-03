@@ -13,10 +13,11 @@
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s6" >
-          <%= f.number_field :hours, min: 0, max: 12, step: 1, class: "validate #{validation_class(event, :hours)}" %>
-          <%= f.label 'Hours' %>
+        <div class="input-field col s6">
+        <p class="range-field">
+          <%= f.range_field :hours, :in => 0..12, :step => '1', class: "validate #{validation_class(event, :hours)}" %>          
           <%= validation_message(event, :hours) %>
+          </p>
         </div>
 
         <div class="input-field col s6">
@@ -53,4 +54,5 @@
     <% end %>
   </div>
 </div>
+
 
