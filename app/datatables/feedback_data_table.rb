@@ -23,12 +23,12 @@ class FeedbackDataTable < BaseDataTable
   end
 
   def build_buttons(feedback)
-    first_button = (%w(dismissed resolved).include? feedback.status) ? '' : button_to('Dismiss', dismissed_admin_feedback_path(feedback), method: :patch )
+    first_button = (%w(dismissed resolved).include? feedback.status) ? '' : button_to('Dismiss', dismissed_admin_feedback_path(feedback), remote: true, method: :patch, data: { confirm: "Are you sure?" } )
     second_button = case feedback.status
                       when 'pending'
-                        button_to('In progress', in_progress_admin_feedback_path(feedback), method: :patch )
+                        button_to('In progress', in_progress_admin_feedback_path(feedback), remote: true, method: :patch, data: { confirm: "Are you sure?" } )
                       when 'in_progress'
-                        button_to('Resolved', resolved_admin_feedback_path(feedback), method: :patch )
+                        button_to('Resolved', resolved_admin_feedback_path(feedback), remote: true, method: :patch, data: { confirm: "Are you sure?" } )
                       else
                         ''
                     end
