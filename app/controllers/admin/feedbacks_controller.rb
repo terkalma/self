@@ -7,9 +7,11 @@ module Admin
     add_breadcrumb 'Feedbacks', :admin_feedbacks_path
 
     def index
+      relation = params[:status_filter] == 'all' ? Feedback.joins(:user) : Feedback.joins(:user).where(status: params[:status_filter])
+
       respond_to do |format|
         format.json do
-          render json: FeedbackDataTable.new(view: view_context)
+          render json: FeedbackDataTable.new(view: view_context, relation: relation)
         end
         format.html { }
       end

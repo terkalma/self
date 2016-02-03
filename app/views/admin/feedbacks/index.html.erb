@@ -16,6 +16,11 @@
 
       <tbody>
       </tbody>
+      <tfoot>
+      <div id="statusFilter" class="col-md-5 col-xs-6">
+        Show <%= select_tag "statusFilter", options_for_select(Feedback.statuses.merge({'all' => 'all'}).map {|s| [s.first.humanize, s.first]}.to_h, :all) %> feedbacks
+      </div>
+      </tfoot>
     </table>
   </div>
 </div>
