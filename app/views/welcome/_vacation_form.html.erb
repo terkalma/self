@@ -1,7 +1,6 @@
 <div class="daily-events-container">
   <div class="row">
     <%= form_for vacation, html:{class: 'col s12'}, namespace: vacation.persisted? ? 'e' : 'n', remote: true do |f| %>
-      <%= f.hidden_field :user_id %>
       <div class="row">
         <div class="input-field col s6">
           <%= f.text_field :vacation_from, class: 'datepicker' %>

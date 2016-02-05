@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_invalid_token
 
   after_filter :publish_event_to_keen
-  before_filter :load_event, only: [:update, :destroy]
+  before_filter :load_event, only: [:update, :destroy, :edit]
 
   def index
     respond_to do |format|
@@ -23,7 +23,7 @@ class EventsController < ApplicationController
   def data_table
     respond_to do |format|
       format.json do
-        collection = current_user.events.joins 'LEFT JOIN projects ON projects.id = events.project_id'
+        collection = scope.joins 'LEFT JOIN projects ON projects.id = events.project_id'
         render json: EventDataTable.new(view: view_context, relation: collection)
       end
       format.html { redirect_to root_path }
@@ -31,12 +31,11 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find params[:id]
     render layout: false
   end
 
   def create
-    @event = Event.new permitted_params
+    @event = scope.new permitted_params
     @success = @event.save
     @date = @event.worked_at
     respond_with @event, location: -> { root_path(date: permitted_params[:worked_at]) }
@@ -59,11 +58,15 @@ class EventsController < ApplicationController
 
   private
   def load_event
-    @event = Event.find params[:id]
+    @event = scope.find params[:id]
+  end
+
+  def scope
+    current_user.events
   end
 
   def permitted_params
-    params.require(:event).permit :hours, :minutes, :description, :project_id, :user_id, :worked_at, :ot
+    params.require(:event).permit :hours, :minutes, :description, :project_id, :worked_at, :ot
   end
 
   def publish_event_to_keen

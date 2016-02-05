@@ -4,7 +4,6 @@
       <div id="date-input-container">
         <%= react_component('DateInput', date: @date) %>
       </div>
-      <%= f.hidden_field :user_id %>
       <div class="row">
         <div class="input-field col s12">
           <%= f.text_area :description, class: "materialize-textarea validate #{validation_class(event, :description)}" %>
