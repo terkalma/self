@@ -20,7 +20,6 @@
             <%= validation_message(event, :hours) %>
           </p>
         </div>
-
         <div class="input-field col s6">
           <p class="range-field">
             <%= f.range_field :minutes, :in => 0..60, :step => '15', class: "validate #{validation_class(event, :minutes)}" %>
@@ -29,7 +28,6 @@
           </p>
         </div>
       </div>
-
       <div class="row">
         <div class="input-field col s6">
           <%= f.collection_select :project_id, current_user.projects, :id, :name, {}, {class: "validate #{validation_class(event, :project_id)}"} %>
