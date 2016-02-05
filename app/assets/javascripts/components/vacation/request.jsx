@@ -6,7 +6,9 @@ var Request = React.createClass({
 
     render: function() {
         var editButton,
-            deleteButton;
+            deleteButton,
+            cardClass = this.props.className + " card";
+        
         if (this.props.request.status == "pending") {
             editButton = <a className="edit-vacation-modal absolute-btn right-align btn-floating btn waves-effect waves-light blue"
                             href="#vacation-form-container"
@@ -24,7 +26,7 @@ var Request = React.createClass({
             editButton = '';
             deleteButton = '';
         }
-        return <div className="vacation {this.props.class} card">
+        return <div className={cardClass}>
             <div className="card-content" data-vacation-id={this.props.request.id}>
                 <h5>
                     {this.props.request.vacation_from} - {this.props.request.vacation_to} ({this.props.request.length} days)
