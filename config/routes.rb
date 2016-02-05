@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :vacation_requests, only: [:create, :update, :destroy, :index]
+  resources :vacation_requests, only: [:create, :edit, :update, :destroy, :index]
 
   resources :feedbacks, only: [:create]
 
