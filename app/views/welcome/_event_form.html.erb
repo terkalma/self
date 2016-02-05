@@ -16,17 +16,18 @@
         <div class="input-field col s6">
           <p class="range-field">
             <%= f.range_field :hours, :in => 0..12, :step => '1', class: "validate #{validation_class(event, :hours)}" %>
+            <%= f.label 'Hours' %>
             <%= validation_message(event, :hours) %>
           </p>
         </div>
-
         <div class="input-field col s6">
-          <%= f.select :minutes, (0...60).step(15).to_a, {}, {class: "validate #{validation_class(event, :minutes)}"} %>
-          <%= f.label 'Minutes' %>
-          <%= validation_message(event, :minutes) %>
+          <p class="range-field">
+            <%= f.range_field :minutes, :in => 0..60, :step => '15', class: "validate #{validation_class(event, :minutes)}" %>
+            <%= f.label 'Minutes' %>
+            <%= validation_message(event, :minutes) %>
+          </p>
         </div>
       </div>
-
       <div class="row">
         <div class="input-field col s6">
           <%= f.collection_select :project_id, current_user.projects, :id, :name, {}, {class: "validate #{validation_class(event, :project_id)}"} %>
@@ -54,4 +55,5 @@
     <% end %>
   </div>
 </div>
+
 
