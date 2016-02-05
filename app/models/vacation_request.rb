@@ -40,7 +40,10 @@ class VacationRequest < ActiveRecord::Base
         vacation_from: vacation_from,
         vacation_to: vacation_to,
         reason: reason,
-        status: status
+        status: status,
+        url: Rails.application.routes.url_helpers.edit_vacation_request_path(id),
+        vacation_url: Rails.application.routes.url_helpers.vacation_request_path(id),
+        id: id
     }
   end
 

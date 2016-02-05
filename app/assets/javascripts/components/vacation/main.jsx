@@ -77,6 +77,7 @@ var VacationRequests = React.createClass({
                         <i className="material-icons">add</i>
                     </a>
                 </div>
+                <VacationModal/>
             </div>
         } else {
             return <Loading/>;

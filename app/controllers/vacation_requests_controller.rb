@@ -1,6 +1,6 @@
 class VacationRequestsController < ApplicationController
   respond_to :html
-  respond_to :js, only: [:create]
+  respond_to :js, only: [:create, :update]
 
   def index
     respond_to do |format|
@@ -19,6 +19,18 @@ class VacationRequestsController < ApplicationController
   def create
     @vacation_request = VacationRequest.new create_vacation_params
     @success = @vacation_request.save
+    AdminMailer.vacation_request(@vacation_request.id).deliver_later if @success
+    respond_with @vacation_request, location: -> { root_path date: @date }
+  end
+
+  def edit
+    @vacation_request = VacationRequest.find params[:id]
+    render layout: false
+  end
+
+  def update
+    @vacation_request = VacationRequest.find params[:id]
+    @success = @vacation_request.update create_vacation_params
     AdminMailer.vacation_request(@vacation_request.id).deliver_later if @success
     respond_with @vacation_request, location: -> { root_path date: @date }
   end
