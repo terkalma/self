@@ -1,8 +1,14 @@
-server Figaro.env.deploy.host, roles: [:web, :app, :db], primary: true
+require 'figaro'
+require 'byebug'
+
+Figaro.application = Figaro::Application.new environment: 'development', path: "#{`pwd`.strip}/config/application.yml"
+Figaro.load
+
+server Figaro.env.host, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'https://github.com/terkalma/self'
-set :application,     Figaro.env.deploy.app_name
-set :user,            Figaro.env.deploy.user
+set :application,     Figaro.env.app_name
+set :user,            Figaro.env.deploy_user
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 
@@ -29,7 +35,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-# set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml config/application.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :puma do
