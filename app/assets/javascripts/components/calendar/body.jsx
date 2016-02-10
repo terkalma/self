@@ -1,7 +1,7 @@
 var CalendarBody = React.createClass({
     propTypes: {
         dataTable: React.PropTypes.array,
-        hasWorkedAt: React.PropTypes.array,
+        dayTypes: React.PropTypes.array,
         onDayClicked: React.PropTypes.func,
         currentDate: React.PropTypes.instanceOf(Date)
     },
@@ -23,7 +23,7 @@ var CalendarBody = React.createClass({
 
                         return <CalendarDay
                             key={calendar_day_key}
-                            hasWorkedAt={self.props.hasWorkedAt[cell - 1]}
+                            dayType={self.props.dayTypes[cell - 1]}
                             isActive={(cell == currentDay)}
                             onDayClicked={self.props.onDayClicked}
                             index={cell}/>

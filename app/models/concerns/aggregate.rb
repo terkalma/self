@@ -45,9 +45,8 @@ module Aggregate
                     .where(user: user)
       dates = Hash.new
 
-      (date.beginning_of_month..date.end_of_month).each { |d| dates[d] = false }
-      events.pluck(:worked_at).uniq.each { |e| dates[e] = true }
-
+      (date.beginning_of_month..date.end_of_month).each { |d| dates[d] = 'inactive' }
+      events.pluck(:worked_at,:gefroren).uniq.each { |e| e[1] ? dates[e[0]] = 'vacation' : dates[e[0]] = 'work'  }
       {
           current_date: date,
           dates: dates

@@ -28,6 +28,7 @@ class Project < ActiveRecord::Base
           {
               duration: e.duration / 3600.0,
               description: e.description,
+              vacation: e.gefroren,
               total: e.amount,
               url: Rails.application.routes.url_helpers.edit_event_path(e),
               event_url: Rails.application.routes.url_helpers.event_path(e),

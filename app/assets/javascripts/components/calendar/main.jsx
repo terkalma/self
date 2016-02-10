@@ -84,7 +84,7 @@ var Calendar = React.createClass({
                 currentDate = this.state.events.currentDate,
                 currentMonth = currentDate.getMonth(),
                 currentYear = currentDate.getFullYear(),
-                hasWorkedAt = _.map(this.state.events.dates, function (k, _) {
+                dayTypes = _.map(this.state.events.dates, function (k, _) {
                     return k;
                 }),
                 self = this;
@@ -102,7 +102,7 @@ var Calendar = React.createClass({
                                 <CalendarBody
                                     key='calendar-body'
                                     currentDate={currentDate}
-                                    hasWorkedAt={hasWorkedAt}
+                                    dayTypes={dayTypes}
                                     onDayClicked={self.dayClicked}
                                     dataTable={dataTable}/>
                             </table>
