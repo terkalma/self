@@ -2,7 +2,7 @@ module Admin
   class UsersController < BaseController
 
     respond_to :html
-    respond_to :js, only: [ :add_rate, :add_project ]
+    respond_to :js, only: [ :add_rate, :add_project, :update_project ]
 
     add_breadcrumb 'Admin', :admin_dashboard_path
     add_breadcrumb 'Users', :admin_users_path
@@ -48,6 +48,11 @@ module Admin
       @user_project = @user.user_projects.new add_project_params
       @success = @user_project.save
       respond_with @user_project, location: -> { edit_admin_user_path @user_project.user }
+    end
+
+    def update_project
+      @project = Project.where(id: params[:project_id]).first
+      add_rate
     end
 
     def remove_project

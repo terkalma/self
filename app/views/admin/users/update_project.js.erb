@@ -1,0 +1,7 @@
+  var modal_id = "#addProjectUpdate"+<%= @project.id %>;
+<% if @success %>
+  window.location = window.location;
+<% else %>
+  $(modal_id).find('.modal-body')
+      .html('<%= escape_javascript render(locals: {form_params: {project: @project}}, partial: 'edit_project_form') %>');
+<% end %>

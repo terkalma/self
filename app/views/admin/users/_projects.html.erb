@@ -5,9 +5,9 @@
   <% end %>
 <% end %>
 
-<% content_for :custom_modal_id, 'addProject' %>
+<% content_for :custom_modal_id, 'addProject', flush: true  %>
 
-<% content_for :custom_modal do %>
+<% content_for :custom_modal, nil, flush: true do %>
   <%= render partial: 'application/modal',
              locals: { resource_name: 'Project', resource_id: 'Project', body: 'project_form', form_params: project_form_params } %>
 <% end %>
