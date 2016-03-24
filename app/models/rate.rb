@@ -22,6 +22,16 @@ class Rate < ActiveRecord::Base
               end
   end
 
+  class << self
+    def next(rate)
+      new(
+          available_from: rate.available_until || Date.today,
+          hourly_rate: rate.hourly_rate,
+          hourly_rate_ot: rate.hourly_rate_ot
+      )
+    end
+  end
+
   private
   def update_events
     # bypass validation in order modify frozen events too.

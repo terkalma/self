@@ -10,7 +10,13 @@
     <% content_for :custom_modal_id, "addProjectUpdate#{project.id}", flush: true %>
 
     <% content_for :custom_modal, nil, flush: true do %>
-        <%= render partial: 'application/modal', locals: {form_params: {project: project}, resource_name: "ProjectUpdate#{project.id}", resource_id: "ProjectUpdate#{project.id}", body: 'edit_project_form' } %>
+        <%= render partial: 'application/modal', locals: {
+                                                       form_params: {
+                                                               project: project, user_project: user_project
+                                                       },
+                                                       resource_name: "ProjectUpdate#{project.id}",
+                                                       resource_id: "ProjectUpdate#{project.id}",
+                                                       body: 'edit_project_form' } %>
     <% end %>
 
     <div class="col-xs-2">

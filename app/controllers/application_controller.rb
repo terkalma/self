@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
 
   private
   def set_date
+    current_user
     @date = Date.strptime(params[:date]) rescue Date.today
   end
 end

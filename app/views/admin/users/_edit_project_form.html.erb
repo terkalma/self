@@ -1,4 +1,4 @@
-<%= bootstrap_form_for project_rate_update(project_id: project.id) , url: { action: :update_project, params: { id: @user.id, project_id: project.id }, }, remote: true do |f| %>
+<%= bootstrap_form_for @rate || user_project.rates.next(user_project.current_rate) , url: { action: :update_project }, remote: true do |f| %>
 
   <h4>Edit rates for project: <%= project.name %></h4>
     <%= f.hidden_field :payable_id %>

@@ -51,8 +51,10 @@ module Admin
     end
 
     def update_project
-      @project = Project.where(id: params[:project_id]).first
-      add_rate
+      @user_project = UserProject.find add_rate_params[:payable_id]
+      @rate = Rate.new add_rate_params
+      @success = @rate.save
+      respond_with @rate, location: edit_admin_user_path(params[:id])
     end
 
     def remove_project
