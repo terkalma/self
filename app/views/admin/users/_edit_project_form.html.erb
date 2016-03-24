@@ -1,0 +1,16 @@
+<%= bootstrap_form_for project_rate_update(project_id: project.id) , url: { action: :update_project, params: { id: @user.id, project_id: project.id }, }, remote: true do |f| %>
+
+  <h4>Edit rates for project: <%= project.name %></h4>
+    <%= f.hidden_field :payable_id %>
+    <%= f.hidden_field :payable_type %>
+    <%= f.number_field :hourly_rate, step: :any %>
+    <%= f.number_field :hourly_rate_ot, step: :any %>
+    <%= f.text_field :available_from, class: 'datepicker' %>
+    <%= f.text_field :available_until, class: 'datepicker' %>
+
+    <%= f.submit 'Submit', data: { disable_with: 'Submitting...' } %>
+<% end %>
+
+<%= javascript_tag do %>
+    $('input.datepicker').customDatepicker({'orientation': 'bottom auto'});
+<% end %>

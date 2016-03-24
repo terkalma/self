@@ -29,6 +29,7 @@ module Admin::ProjectsHelper
     if user_project.payable?
       ret.hourly_rate = user_project.current_rate.hourly_rate
       ret.hourly_rate_ot = user_project.current_rate.hourly_rate_ot
+      ret.available_from = user_project.current_rate.available_from
     end
 
     @rates[user_project.id] = ret

@@ -54,6 +54,7 @@ Rails.application.routes.draw do
       end
 
       member do
+        post :update_project
         patch :remove_project
         patch :set_limit
         post :add_project
