@@ -9,7 +9,7 @@ module ApplicationCable
 
     protected
     def set_current_user
-      current_user = User.find_by(id: cookies.signed[:user_id])
+      User.find_by(id: cookies.signed[:user_id])
     end
   end
 end

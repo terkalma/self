@@ -1,6 +1,6 @@
 module Admin
   class BaseController < ApplicationController
-    before_filter :authenticate_admin
+    before_action :authenticate_admin
     layout 'layouts/admin'
 
     def authenticate_admin

@@ -5,8 +5,8 @@ module DateParser
 
   included do
     attr_reader :date, :from_date, :to_date
-    before_filter :parse_dates
-    before_filter :date
+    before_action :parse_dates
+    before_action :date
 
     helper_method :date, :from_date, :to_date
   end

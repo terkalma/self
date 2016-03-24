@@ -3,8 +3,8 @@ class EventsController < ApplicationController
   respond_to :js, only: [:create, :update]
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_invalid_token
 
-  after_filter :publish_event_to_keen
-  before_filter :load_event, only: [:update, :destroy, :edit]
+  after_action :publish_event_to_keen
+  before_action :load_event, only: [:update, :destroy, :edit]
 
   def index
     cookies.signed[:user_id] = current_user.id

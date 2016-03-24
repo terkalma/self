@@ -2,7 +2,7 @@ class VacationRequestsController < ApplicationController
   respond_to :html
   respond_to :js, only: [:create, :update]
 
-  before_filter :load_request, only: [:edit, :update, :destroy]
+  before_action :load_request, only: [:edit, :update, :destroy]
 
   def index
     respond_to do |format|

@@ -1,3 +1,25 @@
+module A
+  def approved!
+    return if approved?
+
+    transaction do
+      super
+      paid? && (vacation_from..vacation_to).each do |worked_at|
+
+        if (1..5).include? worked_at.wday
+          Event.create(
+              worked_at: worked_at,
+              user_id: user_id,
+              hours: 8,
+              description: "#{human_type} vacation",
+              gefroren: true
+          )
+        end
+      end
+    end
+  end
+end
+
 class VacationRequest < ActiveRecord::Base
   belongs_to :user
   belongs_to :admin, class_name: 'User'
@@ -14,14 +36,13 @@ class VacationRequest < ActiveRecord::Base
   scope :unpaid, -> { where paid: false }
 
   include VacationEvaluation
+  prepend A
 
   before_validation :compute_length
   validates_presence_of :vacation_to, :vacation_from
   validates_presence_of :reason
   validate :not_empty, :non_overlapping
   validate :vacation_limit, :vacation_dates_in_same_year, if: :paid?
-
-  alias_method_chain :approved!, :event_creation
 
   def human_type
     paid? ? 'Paid' : 'Unpaid'

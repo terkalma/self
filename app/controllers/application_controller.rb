@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!
-  before_filter :set_date
+  before_action :set_date
 
   def publish_keen(collection: , event:)
     server_info = { host: request.host }

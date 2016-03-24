@@ -2,7 +2,7 @@ module Admin
   class VacationRequestsController < BaseController
     include DateParser
     around_filter :evaluate_vacation_request, only: [:accept, :decline]
-    before_filter :initialize_holiday, only: [:holiday, :index]
+    before_action :initialize_holiday, only: [:holiday, :index]
 
     add_breadcrumb 'Admin', :admin_dashboard_path
     add_breadcrumb 'Vacations', :admin_vacation_requests_path

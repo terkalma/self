@@ -6,7 +6,7 @@ module Admin
     add_breadcrumb 'Admin', :admin_dashboard_path
     add_breadcrumb 'Projects', :admin_projects_path
 
-    before_filter :load_project, only: [:edit, :report, :remove_user]
+    before_action :load_project, only: [:edit, :report, :remove_user]
 
     include DateParser
 

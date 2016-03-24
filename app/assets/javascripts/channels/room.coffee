@@ -1,7 +1,8 @@
 App.room = App.cable.subscriptions.create "RoomChannel",
   connected: ->
     # Called when the subscription is ready for use on the server
-    $('#messages').scrollTop($('#messages')[0].scrollHeight);
+    if $('#messages').length > 0
+      $('#messages').scrollTop($('#messages')[0].scrollHeight);
 
   disconnected: ->
     # Called when the subscription has been terminated by the server
@@ -17,7 +18,10 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     @perform 'speak', message: message
 
   $(document).on 'keypress', '[data-behavior~=room_speaker]', (event) ->
-    if event.keyCode is 13 # return = send
-      App.room.speak event.target.value
-      event.target.value = ""
-      event.preventDefault()
+    if event.keyCode is 13
+      if event.target.value.length > 0
+        App.room.speak event.target.value
+        event.target.value = ""
+        event.preventDefault()
+      else
+        false

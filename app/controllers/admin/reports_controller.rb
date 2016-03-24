@@ -1,6 +1,6 @@
 module Admin
   class ReportsController < BaseController
-    before_filter :set_dates
+    before_action :set_dates
 
     def index
       relation = Event.between(@from, @to).joins(:user).group('users.id')

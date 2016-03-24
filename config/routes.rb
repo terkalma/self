@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   resources :feedbacks, only: [:create]
 
-  resources :rooms, only: [:show]
+  resources :rooms, only: [:index]
 
   mount ActionCable.server => '/cable'
 
