@@ -1,7 +1,8 @@
 var Day = React.createClass({
     propTypes: {
         date: React.PropTypes.instanceOf(Date),
-        eventsUrl: React.PropTypes.string
+        eventsUrl: React.PropTypes.string,
+        onChangeDay: React.PropTypes.func
     },
 
     getInitialState: function(){
@@ -49,8 +50,13 @@ var Day = React.createClass({
         $('#day-card').animate({"opacity": "0"}, 0).delay(100).animate({"opacity": "1"}, 700);
     },
 
-    render: function() {
+    loadNewDay: function(value) {
+        var newDay = new Date(this.props.date);
+        newDay.setDate(newDay.getDate() + value);
+        this.props.onChangeDay(newDay);
+    },
 
+    render: function() {
         if (this.state.activity) {
             var projects = this.state.activity.projects,
                 dayNames = ['Sunday', 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
@@ -70,6 +76,14 @@ var Day = React.createClass({
 
             return <div className="card z-depth-4" id="day-card">
                 <div className="card-content">
+                    <div className="row">
+                        <a className="btn-floating btn waves-effect waves-light blue" onClick={()=>this.loadNewDay(-1)}>
+                            <i className="material-icons">fast_rewind</i>
+                        </a>
+                        <a className="btn-floating btn waves-effect waves-light blue right" onClick={()=>this.loadNewDay(+1)}>
+                            <i className="material-icons">fast_forward</i>
+                        </a>
+                    </div>
                     <div className="row">
                         <h4 className="center">{this.state.activity.date}</h4>
                         <h4 className="center">{dayNames[currentDay]}</h4>
