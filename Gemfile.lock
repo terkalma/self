@@ -132,7 +132,6 @@ GEM
       eventmachine (>= 1.0.0.beta.4)
     erubis (2.7.0)
     eventmachine (1.0.9.1)
-    excon (0.45.4)
     execjs (2.6.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -179,9 +178,6 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mandrill-api (1.0.53)
-      excon (>= 0.16.0, < 1.0)
-      json (>= 1.7.7, < 2.0)
     materialize-sass (0.97.5)
       sass (~> 3.3)
     method_source (0.8.2)
@@ -362,7 +358,6 @@ DEPENDENCIES
   jquery-rails
   keen
   letter_opener
-  mandrill-api
   materialize-sass
   momentjs-rails
   omniauth

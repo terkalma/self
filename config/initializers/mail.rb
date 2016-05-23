@@ -1,9 +1,7 @@
 ActionMailer::Base.smtp_settings = {
-    address: 'smtp.mandrillapp.com',
+    address: Figaro.env.SMTP_SERVER,
     port: 587,
-    enable_starttls_auto: true,
-    user_name: Figaro.env.MANDRILL_USERNAME,
-    password: Figaro.env.MANDRILL_PASSWORD
+    enable_starttls_auto: true
 }
 
 ActionMailer::Base.delivery_method = :smtp
