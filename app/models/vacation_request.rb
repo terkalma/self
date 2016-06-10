@@ -1,4 +1,4 @@
-module A
+module Approval
   def approved!
     return if approved?
 
@@ -36,7 +36,7 @@ class VacationRequest < ActiveRecord::Base
   scope :unpaid, -> { where paid: false }
 
   include VacationEvaluation
-  prepend A
+  prepend Approval
 
   before_validation :compute_length
   validates_presence_of :vacation_to, :vacation_from

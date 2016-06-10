@@ -1,5 +1,6 @@
 require 'figaro'
 require 'byebug'
+require 'capistrano/delayed_job'
 
 Figaro.application = Figaro::Application.new environment: 'development', path: "#{`pwd`.strip}/config/application.yml"
 Figaro.load
@@ -36,6 +37,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 
 ## Linked Files & Directories (Default None):
 set :linked_files, %w{config/database.yml config/application.yml}
+set :linked_dirs, %w(tmp/pids)
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :puma do

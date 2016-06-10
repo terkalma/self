@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160314171331) do
+ActiveRecord::Schema.define(version: 20160610032739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,15 +155,15 @@ ActiveRecord::Schema.define(version: 20160314171331) do
   add_index "vacation_limits", ["user_id"], name: "index_vacation_limits_on_user_id", using: :btree
 
   create_table "vacation_requests", force: :cascade do |t|
-    t.date     "vacation_from",                null: false
-    t.date     "vacation_to",                  null: false
+    t.date     "vacation_from",                 null: false
+    t.date     "vacation_to",                   null: false
     t.integer  "user_id"
     t.integer  "status",        default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "length",        default: 0
-    t.boolean  "paid",          default: true
-    t.text     "reason",                       null: false
+    t.boolean  "paid",          default: false
+    t.text     "reason",                        null: false
     t.integer  "admin_id"
   end
 
