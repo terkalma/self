@@ -49,6 +49,7 @@ gem 'react-rails', '~> 1.0'
 gem 'materialize-sass'
 
 gem 'momentjs-rails'
+gem 'rest-client', '~> 2.0'
 
 group :development do
   gem 'web-console', '~> 2.0'

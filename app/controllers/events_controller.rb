@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   respond_to :js, only: [:create, :update]
   rescue_from ActionController::InvalidAuthenticityToken, with: :handle_invalid_token
 
-  after_action :publish_event_to_keen
+  after_action :publish_event_to_screenr
   before_action :load_event, only: [:update, :destroy, :edit]
 
   def index
@@ -70,9 +70,9 @@ class EventsController < ApplicationController
     params.require(:event).permit :hours, :minutes, :description, :project_id, :worked_at, :ot
   end
 
-  def publish_event_to_keen
+  def publish_event_to_screenr
     if @event && (@event.persisted? || @event.destroyed?)
-      publish_keen collection: :events, event: @event.to_keen( action: params[:action])
+      publish_screenr collection: :event, event: @event.to_screenr( action: params[:action])
     end
   rescue
     # don't care about issues with +Keen+

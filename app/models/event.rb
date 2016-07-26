@@ -27,10 +27,10 @@ class Event < ActiveRecord::Base
     user_project.rate_at(worked_at) || user.rate_at(worked_at) rescue user.rate_at(worked_at)
   end
 
-  def to_keen(options={})
+  def to_screenr(options={})
     options.merge(
-        user: user.to_keen,
-        project: project.to_keen,
+        user: user.email,
+        project: project.name,
         hours: hours,
         minutes: minutes,
         worked_at: worked_at,

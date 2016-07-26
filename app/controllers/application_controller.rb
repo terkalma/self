@@ -14,6 +14,11 @@ class ApplicationController < ActionController::Base
     # don't care about +Keen+ errors
   end
 
+  def publish_screenr(collection: , event:)
+    server_info = { host: request.host }
+    Analytics::Screenr.new.publish collection, { server: server_info }.merge(event)
+  end
+
   private
   def set_date
     current_user
