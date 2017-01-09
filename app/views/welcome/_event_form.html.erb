@@ -6,21 +6,22 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <%= f.text_area :description, class: "materialize-textarea validate" %>
+          <%= f.text_area :description, class: "materialize-textarea validate #{validation_class(event, :description)}" %>
           <%= f.label 'Description' %>
+          <%= validation_message(event, :description) %>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
           <p class="range-field">
-            <%= f.range_field :hours, :in => 0..12, :step => '1', class: "validate #{validation_class(event, :hours)}" %>
+            <%= f.number_field :hours, min: 0, max: 12, step: 1, class: "validate #{validation_class(event, :hours)}" %>
             <%= f.label 'Hours' %>
             <%= validation_message(event, :hours) %>
           </p>
         </div>
         <div class="input-field col s6">
           <p class="range-field">
-            <%= f.range_field :minutes, :in => 0..45, :step => '15', class: "validate #{validation_class(event, :minutes)}" %>
+            <%= f.number_field :minutes, min: 0, max: 45, step: 15, class: "validate #{validation_class(event, :minutes)}" %>
             <%= f.label 'Minutes' %>
             <%= validation_message(event, :minutes) %>
           </p>

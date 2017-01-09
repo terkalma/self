@@ -17,6 +17,7 @@ var Calendar = React.createClass({
             success: function(data) {
                 this.setState(this.mapData(data));
                 $(document).trigger('react.date-changed', {date: data.current_date});
+
             }.bind(this),
             error: function(xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -38,6 +39,13 @@ var Calendar = React.createClass({
             };
         } else {
             return { events: null };
+        }
+    },
+
+    componentDidUpdate: function() {
+        if (!$('#calendar-modal').hasClass('.modal-rendered')) {
+            $('#calendar-modal').modal();
+            $('#calendar-modal').addClass('.modal-rendered')
         }
     },
 
