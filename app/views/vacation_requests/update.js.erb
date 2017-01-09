@@ -1,5 +1,5 @@
 <% if @success %>
-  $('#vacation-form-container').closeModal();
+  $('#vacation-form-container').modal('close');
   $(document).trigger('react.vacation_added');
 <% else %>
   $('#vacation-form-container .modal-content')

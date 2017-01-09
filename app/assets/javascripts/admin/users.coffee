@@ -1,4 +1,4 @@
-$(document).on 'ready page:load', ->
+$(document).on 'turbolinks:load', ->
   $('#userEventsTable').dataTable
     processing: true
     serverSide: true

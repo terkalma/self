@@ -32,7 +32,7 @@ var VacationRequests = React.createClass({
 
     componentDidUpdate: function() {
         $('ul.tabs').tabs();
-        $('.vacation-modal').leanModal();
+        $('.vacation-modal').modal();
         $('#vacation-card').animate({"opacity": "0"}, 0).delay(100).animate({"opacity": "1"}, 700);
     },
 

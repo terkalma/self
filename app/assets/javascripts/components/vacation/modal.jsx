@@ -1,6 +1,6 @@
 var VacationModal = React.createClass({
     loadEditVacationModal: function (selector = '.card-content') {
-        $(selector).children('.edit-vacation-modal').leanModal({
+        $(selector).children('.edit-vacation-modal').modal({
             ready: function() {
                 $.ajax({
                     url: $('#vacation-form-container').data('vacationRequestPath'),

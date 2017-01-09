@@ -63,7 +63,7 @@ module Admin
     rescue
       flash[:alert] = 'Unable to remove project'
     ensure
-      redirect_to action: :edit, id: params[:id]
+      redirect_to edit_admin_user_path(params[:id])
     end
 
     private

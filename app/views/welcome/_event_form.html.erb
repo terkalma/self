@@ -6,9 +6,8 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <%= f.text_area :description, class: "materialize-textarea validate #{validation_class(event, :description)}" %>
+          <%= f.text_area :description, class: "materialize-textarea validate" %>
           <%= f.label 'Description' %>
-          <%= validation_message(event, :description) %>
         </div>
       </div>
       <div class="row">

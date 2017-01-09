@@ -2,6 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on 'ready page:load', ->
+$(document).on 'turbolinks:load', ->
   $('.vacation-filter .datepicker').customDatepicker {}
   $('.holiday-form .datepicker').customDatepicker {}

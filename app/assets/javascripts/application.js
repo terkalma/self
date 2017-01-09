@@ -11,16 +11,16 @@
 // about supported directives.
 //
 //= require jquery
-//= require materialize-sprockets
 //= require jquery_ujs
 //= require react
 //= require react_ujs
 //= require underscore
 //= require moment
+//= require materialize-sprockets
 //= require_tree ./application
 
 $(document).ready(function(){
     $(".button-collapse").sideNav();
-    $('.modal-trigger').leanModal();
-
+    $('.modal').modal();
+    $(document).trigger('turbolinks:load');
 });

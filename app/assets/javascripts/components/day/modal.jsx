@@ -1,6 +1,6 @@
 var Modal = React.createClass({
     loadEditEventModal: function (selector = '.card-content') {
-        $(selector).children('.edit-event-modal').leanModal({
+        $(selector).children('.edit-event-modal').modal({
             ready: function() {
                 $.ajax({
                     url: $('#event-form-container').data('eventPath'),
@@ -22,7 +22,7 @@ var Modal = React.createClass({
 
     componentDidMount: function () {
         eventIds = [];
-        $('.event-modal').leanModal();
+        $('.event-modal').modal();
         this.loadEditEventModal();
         $( ".edit-event-modal" ).each(function() {
             eventIds.push($( this ).parents('div').data('eventId'));

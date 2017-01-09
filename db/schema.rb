@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -31,13 +30,12 @@ ActiveRecord::Schema.define(version: 20160610032739) do
     t.string   "remote_address"
     t.string   "request_uuid"
     t.datetime "created_at"
+    t.index ["associated_id", "associated_type"], name: "associated_index", using: :btree
+    t.index ["auditable_id", "auditable_type"], name: "auditable_index", using: :btree
+    t.index ["created_at"], name: "index_audits_on_created_at", using: :btree
+    t.index ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
+    t.index ["user_id", "user_type"], name: "user_index", using: :btree
   end
-
-  add_index "audits", ["associated_id", "associated_type"], name: "associated_index", using: :btree
-  add_index "audits", ["auditable_id", "auditable_type"], name: "auditable_index", using: :btree
-  add_index "audits", ["created_at"], name: "index_audits_on_created_at", using: :btree
-  add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
-  add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -51,9 +49,8 @@ ActiveRecord::Schema.define(version: 20160610032739) do
     t.string   "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.text     "description"
@@ -61,7 +58,7 @@ ActiveRecord::Schema.define(version: 20160610032739) do
     t.integer  "minutes",                              default: 0,            null: false
     t.datetime "created_at",                                                  null: false
     t.datetime "updated_at",                                                  null: false
-    t.date     "worked_at",                            default: '2015-03-18', null: false
+    t.date     "worked_at",                            default: '2017-01-09', null: false
     t.integer  "user_id"
     t.integer  "project_id"
     t.decimal  "amount",      precision: 14, scale: 6, default: "0.0"
@@ -76,9 +73,8 @@ ActiveRecord::Schema.define(version: 20160610032739) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "status",     default: "pending"
+    t.index ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
   end
-
-  add_index "feedbacks", ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.text     "content"
@@ -92,10 +88,9 @@ ActiveRecord::Schema.define(version: 20160610032739) do
     t.string   "slug",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_projects_on_name", using: :btree
+    t.index ["slug"], name: "index_projects_on_slug", using: :btree
   end
-
-  add_index "projects", ["name"], name: "index_projects_on_name", using: :btree
-  add_index "projects", ["slug"], name: "index_projects_on_slug", using: :btree
 
   create_table "rates", force: :cascade do |t|
     t.decimal  "hourly_rate",     precision: 12, scale: 4
@@ -106,20 +101,18 @@ ActiveRecord::Schema.define(version: 20160610032739) do
     t.date     "available_until"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["payable_id"], name: "index_rates_on_payable_id", using: :btree
   end
-
-  add_index "rates", ["payable_id"], name: "index_rates_on_payable_id", using: :btree
 
   create_table "user_projects", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_user_projects_on_project_id", using: :btree
+    t.index ["user_id", "project_id"], name: "index_user_projects_on_user_id_and_project_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_user_projects_on_user_id", using: :btree
   end
-
-  add_index "user_projects", ["project_id"], name: "index_user_projects_on_project_id", using: :btree
-  add_index "user_projects", ["user_id", "project_id"], name: "index_user_projects_on_user_id_and_project_id", unique: true, using: :btree
-  add_index "user_projects", ["user_id"], name: "index_user_projects_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",               default: "",    null: false
@@ -139,9 +132,8 @@ ActiveRecord::Schema.define(version: 20160610032739) do
     t.boolean  "admin",               default: false, null: false
     t.integer  "vacation_limit",      default: 10,    null: false
     t.string   "profile_picture"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   create_table "vacation_limits", force: :cascade do |t|
     t.integer  "year",       null: false
@@ -149,10 +141,9 @@ ActiveRecord::Schema.define(version: 20160610032739) do
     t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "year"], name: "index_vacation_limits_on_user_id_and_year", unique: true, using: :btree
+    t.index ["user_id"], name: "index_vacation_limits_on_user_id", using: :btree
   end
-
-  add_index "vacation_limits", ["user_id", "year"], name: "index_vacation_limits_on_user_id_and_year", unique: true, using: :btree
-  add_index "vacation_limits", ["user_id"], name: "index_vacation_limits_on_user_id", using: :btree
 
   create_table "vacation_requests", force: :cascade do |t|
     t.date     "vacation_from",                 null: false

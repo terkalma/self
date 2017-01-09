@@ -16,7 +16,7 @@ module Admin
 
       respond_to do |format|
         format.js {}
-        format.html { redirect_to action: :index }
+        format.html { redirect_to admin_vacation_requests }
       end
     end
 

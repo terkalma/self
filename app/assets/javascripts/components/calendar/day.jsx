@@ -7,7 +7,7 @@ var CalendarDay = React.createClass({
     },
 
     onDayClicked: function() {
-        $('#calendar-modal').closeModal();
+        $('#calendar-modal').modal('close');
         this.props.onDayClicked(this.props.index);
     },
 

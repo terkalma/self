@@ -1,6 +1,6 @@
 <% if @success %>
   $(document).trigger('react.vacation_added');
-  $('#new-vacation-form-container').closeModal();
+  $('#new-vacation-form-container').modal('close');
 <% else %>
   $('#new-vacation-form-container .modal-content')
         .html('<%= escape_javascript render(partial: 'welcome/vacation_form', locals: { vacation: @vacation_request }) %>');

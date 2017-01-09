@@ -1,5 +1,5 @@
 <% if @success %>
-  $('#event-form-container').closeModal();
+  $('#event-form-container').modal('close');
   $(document).trigger('react.event_updated');
 <% else %>
   $('#event-form-container .modal-content')

@@ -33,5 +33,4 @@ ready = ->
   fromDate.customDatepicker {}
   toDate.customDatepicker {}
 
-$(document).ready ready
-$(document).on 'page:load', ready
+$(document).on 'turbolinks:load', ready

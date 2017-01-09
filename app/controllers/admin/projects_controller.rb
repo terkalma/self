@@ -23,7 +23,7 @@ module Admin
     def report
       respond_to do |format|
         format.html do
-          redirect_to action: :edit, slug: @project.slug
+          redirect_to edit_admin_project_path(@project.slug)
         end
 
         format.js {}
@@ -52,7 +52,7 @@ module Admin
     rescue
       flash[:alert] = 'Unable to remove the person from the project'
     ensure
-      redirect_to action: :edit, id: params[:slug]
+      redirect_to edit_admin_project_path(params[:slug])
     end
 
     private

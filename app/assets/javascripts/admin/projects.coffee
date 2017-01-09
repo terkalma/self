@@ -23,5 +23,4 @@ ready = ->
   $(document).on 'submit', '.report-container form', ->
     $(this).find('input').prop 'disabled', true
 
-$(document).ready ready
-$(document).on 'page:load', ready
+$(document).on 'turbolinks:load', ready

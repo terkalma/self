@@ -1,5 +1,5 @@
 <% if @success %>
-  $('#new-event-form-container').closeModal();
+  $('#new-event-form-container').modal('close');
   $(document).trigger('react.event_added');
   $('#new-event-form-container .modal-content')
         .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: current_user.events.new }) %>');
