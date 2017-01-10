@@ -1,6 +1,5 @@
 require 'figaro'
 require 'byebug'
-require 'capistrano/delayed_job'
 
 Figaro.application = Figaro::Application.new environment: 'development', path: "#{`pwd`.strip}/config/application.yml"
 Figaro.load
