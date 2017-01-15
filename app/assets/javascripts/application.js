@@ -23,4 +23,6 @@ $(document).ready(function(){
     $(".button-collapse").sideNav();
     $('.modal').modal();
     $(document).trigger('turbolinks:load');
+
+    Materialize.toast($('.bg-success, .bg-danger').html(), 5000);
 });
