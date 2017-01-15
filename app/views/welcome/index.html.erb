@@ -11,7 +11,7 @@
   $( document ).ready(function() {
     $(document).on('click', '#n_new_event  #reset-form', function () {
       $('#new-event-form-container .modal-content')
-          .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: current_user.events.new }) %>');
+          .html('<%= escape_javascript render(partial: 'welcome/event_form', locals: { event: current_user.events.new(hours: 8) }) %>');
       $('#new-event-form-container select').material_select('destroy');
       $('#new-event-form-container select').material_select();
       window.ReactRailsUJS.unmountComponents("#date-input-container");
