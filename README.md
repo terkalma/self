@@ -9,3 +9,6 @@
 ##### Database
 
 `cp config/database.yml.sample config/database.yml`
+
+##### Deploy Notes
+

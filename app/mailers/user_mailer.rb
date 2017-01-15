@@ -1,6 +1,4 @@
 class UserMailer < ApplicationMailer
-  default from: "no-reply@#{Figaro.env.app_title}.com"
-
   layout 'mailer'
 
   def warning(user_id)

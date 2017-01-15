@@ -75,6 +75,7 @@ group :development do
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma',   require: false
   gem 'capistrano3-delayed-job', '~> 1.0'
+  gem 'capistrano-upload-config'
 end
 
 gem 'puma'
