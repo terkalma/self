@@ -2,6 +2,24 @@ var Request = React.createClass({
     onEditModal: function(url) {
         $('#vacation-form-container').data('vacationRequestPath', url);
         $('#vacation-form-container .modal-content').html('');
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'html',
+            cache: false,
+            success: function(data) {
+                $('#vacation-form-container .modal-content').html(data);
+                $('.datepicker').pickadate({
+                    selectMonths: true,
+                    selectYears: 2,
+                    onStart: function() {
+                        $('.picker').appendTo('body')}
+                });
+            },
+            error: function(xhr, status, err) {
+                console.error(status, err.toString());
+            }.bind(this)
+        });
     },
 
     render: function() {

@@ -1,7 +1,20 @@
 var Event = React.createClass({
     onEditModal: function(url) {
-        $('#event-form-container').data('eventPath', url);
-        $('#event-form-container .modal-content').html('');
+        // Side effect, this should not be happening here
+        $.ajax({
+            url: url,
+            method: 'GET',
+            dataType: 'html',
+            cache: false,
+            success: function(data) {
+                $('#event-form-container .modal-content').html(data);
+                $('#event-form-container select').material_select('destroy');
+                $('#event-form-container select').material_select();
+            },
+            error: function(xhr, status, err) {
+                console.error(status, err.toString());
+            }.bind(this)
+        });
     },
 
 	render: function() {

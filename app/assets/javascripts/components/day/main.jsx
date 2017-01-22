@@ -79,7 +79,6 @@ var Day = React.createClass({
                         <i className="material-icons">add</i>
                     </a>
                 </div>
-                <Modal/>
             </div>
         }
         else {

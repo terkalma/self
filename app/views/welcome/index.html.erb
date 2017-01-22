@@ -17,6 +17,7 @@
       window.ReactRailsUJS.unmountComponents("#date-input-container");
       window.ReactRailsUJS.mountComponents("#date-input-container");
     });
+
     $(document).on('click', "form[id^='e_edit_event']  #reset-form", function () {
       var url = ($( "form[id^='e_edit_event']").attr('action')) + '/edit';
       $('#event-form-container').data('eventPath', url);
