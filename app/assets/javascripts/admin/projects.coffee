@@ -8,7 +8,13 @@ $(document).on 'change', '#userRateToggle', (e) ->
 
 
 ready = ->
-  $('#projectsTable').dataTable
+  try
+    window.projectsTable.detach();
+  catch err
+    console.log err
+
+
+  window.projectsTable = $('#projectsTable').dataTable
     processing: true
     serverSide: true
     ajax: $('#projectsTable').data 'source'

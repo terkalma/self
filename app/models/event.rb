@@ -27,19 +27,6 @@ class Event < ActiveRecord::Base
     user_project.rate_at(worked_at) || user.rate_at(worked_at) rescue user.rate_at(worked_at)
   end
 
-  def to_screenr(options={})
-    options.merge(
-        user: user.email,
-        project: project.name,
-        hours: hours,
-        minutes: minutes,
-        worked_at: worked_at,
-        overtime: ot,
-        description: description,
-        amount: amount
-    )
-  end
-
   def destroy
     raise "Can't destroy frozen event. Are you doing funky stuff?" if gefroren?
     super

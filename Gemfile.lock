@@ -44,6 +44,7 @@ GEM
     arel (7.1.4)
     autoprefixer-rails (6.6.1)
       execjs
+    awesome_print (1.8.0)
     axlsx (2.0.1)
       htmlentities (~> 4.3.1)
       nokogiri (>= 1.4.1)
@@ -343,6 +344,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   axlsx_rails
   axlsx_styler
   bootstrap-datepicker-rails
