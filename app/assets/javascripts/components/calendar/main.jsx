@@ -86,6 +86,12 @@ var Calendar = React.createClass({
         this.loadDataFromServer(newSelectedDateUrl);
     },
 
+    changeDay: function(newDate) {
+        var currentDate = this.state.events.currentDate,
+            newSelectedDateUrl = "/?date="+newDate.getFullYear()+'-'+(newDate.getMonth()+1)+'-'+newDate.getDate();
+        this.loadDataFromServer(newSelectedDateUrl);
+    },
+
     render: function(){
         if (this.state.events) {
             var dataTable = this.generateDataTable(),
@@ -119,7 +125,8 @@ var Calendar = React.createClass({
                     <div className="col s12">
                         <Day
                             date={this.state.events.currentDate}
-                            eventsUrl={this.props.eventsUrl}/>
+                            eventsUrl={this.props.eventsUrl}
+                            onChangeDay={self.changeDay}/>
                     </div>
                 </div>
             )
